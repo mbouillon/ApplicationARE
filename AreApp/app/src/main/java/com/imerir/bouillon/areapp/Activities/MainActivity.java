@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
+    //Methode deconnexion permettant de se deconnecter de l'app et oublie le compte sauvegardé
     private void deconnexion(){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         preferences.edit().putBoolean("isConnected", false).commit();
