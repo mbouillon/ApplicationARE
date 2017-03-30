@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <tabs>
+        <tab
+            id="@+id/tab_offers"
+            icon="@drawable/ic_file_document_black_24dp"
+            title="Offres"
+            barColorWhenSelected="#FFFFFF" />
+        <tab
+            id="@+id/tab_documents"
+            icon="@drawable/ic_archive_black_24dp"
+            title="Documents"
+            barColorWhenSelected="#FFFFFF"/>
+        <tab
+            id="@+id/tab_profile"
+            icon="@drawable/ic_account_black_24dp"
+            title="Profil"
+            barColorWhenSelected="#FFFFFF"/>
+    </tabs>
+</PreferenceScreen>
+
