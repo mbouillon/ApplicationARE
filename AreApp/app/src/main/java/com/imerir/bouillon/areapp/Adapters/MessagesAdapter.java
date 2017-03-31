@@ -83,11 +83,12 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
 
             user = WebServiceUserClient.getInstance().getUserById(message.getPublisherId());
             PublishName.setText("Publié par : "+ user.getNom() + " " + user.getPrenom());
-            Message.setText( message.getMessage());
+            //TODO crash quand on affiche le texte du message
+            //Message.setText( message.getMessage());
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v){
-                    listener.onMessageClicked(mMessage);
+                    //listener.onMessageClicked(mMessage);
                 }
             });
         }

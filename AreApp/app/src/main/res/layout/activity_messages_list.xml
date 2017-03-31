@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity_main"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/activity_document_upload_file">
+
+    <include layout="@layout/custom_toolbar"
+        android:id="@+id/customToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </include>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/messagesList"
@@ -11,4 +19,4 @@
     </android.support.v7.widget.RecyclerView>
 
 
-</RelativeLayout>
+</LinearLayout>

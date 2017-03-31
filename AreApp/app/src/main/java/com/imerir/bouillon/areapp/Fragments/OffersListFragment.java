@@ -9,12 +9,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.imerir.bouillon.areapp.Activities.LoginActivity;
 import com.imerir.bouillon.areapp.Activities.MainActivity;
 import com.imerir.bouillon.areapp.Activities.MessagesListActivity;
 import com.imerir.bouillon.areapp.Activities.RegisterResponsableActivity;
+import com.imerir.bouillon.areapp.Adapters.MessagesAdapter;
 import com.imerir.bouillon.areapp.Adapters.OffersListAdapter;
 import com.imerir.bouillon.areapp.Clients.WebServiceMessageClient;
 import com.imerir.bouillon.areapp.Clients.WebServiceOfferClient;
@@ -36,6 +38,7 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
     }
 
     private TextView tvMessage;
+    private ImageView ImageMessage;
     RecyclerView offersList;
     private TextView publisherName;
 
@@ -58,8 +61,16 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
         tvMessage = (TextView) view.findViewById(R.id.MessageAccueil);
         WebServiceOfferClient.getInstance().getOffers();
         publisherName = (TextView) view.findViewById(R.id.PublishName);
+        ImageMessage = (ImageView) view.findViewById(R.id.ImageMessage);
 
         tvMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent messagesListIntent = new Intent(getActivity(), MessagesListActivity.class);
+                startActivity(messagesListIntent);
+            }
+        });
+        ImageMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent messagesListIntent = new Intent(getActivity(), MessagesListActivity.class);
@@ -100,7 +111,7 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
         tvMessage.setText(message.getMessage());
 
         //TODO test why crash sometimes
-        publisherName.setText("Publié par : " + user.getNom() + " " + user.getPrenom());
+        //publisherName.setText("Publié par : " + user.getNom() + " " + user.getPrenom());
     }
 
 
