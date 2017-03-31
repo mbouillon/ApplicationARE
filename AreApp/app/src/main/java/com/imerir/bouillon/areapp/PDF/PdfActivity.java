@@ -51,7 +51,6 @@ public class PdfActivity extends AppCompatActivity {
 
         document = WebServiceDocumentClient.getInstance().getDocument(getIntent().getIntExtra("document_id", 0));
 
-
         //Toolbar + action flêche retour
         mToolbar = (Toolbar) findViewById(R.id.customToolbar);
         setSupportActionBar(mToolbar);
@@ -235,5 +234,36 @@ public class PdfActivity extends AppCompatActivity {
             }
             return false;
         }
+    }
+
+    //Assosie le menu au menu_ducument_pdf
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_document_pdf, menu);
+        return true;
+    }
+
+    //Assigne chaque item du menu a sont action
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.download:
+                // TODO download le pdf en cours
+                //Version web
+                Toast.makeText(getApplicationContext(), "Download...", Toast.LENGTH_LONG).show();
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://mod.ctpmperpignan.com/pdf/pdf_lignes/Ligne15.pdf"));
+                //Uri.parse("http://10.0.2.2:5000/DocUps/" + document.getDocId()));
+                startActivity(browserIntent);
+                return true;
+            case R.id.deleteDocument:
+                // TODO Pouvoir supprimer le pdf en cours
+                //deleteDocument();
+                //Toast.makeText(getApplicationContext(), "Delete...", Toast.LENGTH_LONG).show();
+                //super.onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
