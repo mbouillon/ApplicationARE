@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:id="@+id/activity_offer_detail">
 
@@ -13,117 +14,221 @@
         android:layout_height="wrap_content">
     </include>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="Titre"
-                android:id="@+id/Titre"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/Durée"
-                tools:text="Duree" 
-                android:paddingTop="4dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/NomEntreprise"
-                android:paddingTop="4dp"
-                tools:text="Entreprise" />
-            <TextView
-                android:paddingTop="4dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="Placement"
-                android:id="@+id/Lieu"/>
-        </LinearLayout>
-        
-        <LinearLayout
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginBottom="16dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                tools:text="Contact Name"
-                android:id="@+id/NomContact" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                tools:text="Mail"
-                android:id="@+id/Mail"
-                android:paddingTop="4dp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="4dp"
-                android:layout_gravity="right"
-                tools:text="Telephone"
-                />
-        </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:id="@+id/tvTitre"
+                        tools:text="DEV APPLE"/>
+
+                    <TextView
+                        android:id="@+id/tvNomContact"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        tools:text="Contact Name"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp"
+                    android:weightSum="2">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:id="@+id/tvDuree"
+                        tools:text="10 mois"/>
+
+                    <TextView
+                        android:id="@+id/tvMail"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        tools:text="Email"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp"
+                    android:weightSum="2">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/tvNomEntreprise"
+                        android:textStyle="bold"
+                        tools:text="SARL GRABOLOSA"/>
+
+                    <TextView
+                        android:id="@+id/tvTelephone"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        tools:text="Telephone"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp"
+                    android:weightSum="2">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:id="@+id/tvLieu"
+                        android:text="PERPIGNAN, FRANCE"/>
+
+                    <TextView
+                        android:id="@+id/vide"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        tools:text="Californie"/>
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
     </LinearLayout>
 
-    <android.support.v7.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp">
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="Details : "/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="Details : Llorem ipsum dolor irae es la cucracha de la blablabajdsihfuishqiuohfiusqhuiofhsduihiqohfuihqsuiodhfduiqsohihdsuihdqsfjdnhlhuidqshuifhuioqdshuifqshduifdhquifhoiudqhoifhdushfouiqsdhduiofhquifdh"
-/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="4dp"
-                android:textStyle="bold"
-                android:text="Details visibles par les responsables : "/>
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Lloreyusdghyuqgdyugudigyqsgdyugqsyudgiqsugdyuqsydgqsyudgyuqsgyudgyugqdyugduiqgdyuqgydgquydgyqdisgsdyuqgyuqdsgyudqgiuqdsgsdqygqsdyugsdqygsdqigqsdygdyqsugqsdyigqsd"
-                android:id="@+id/DetailsResponsables"/>
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:textStyle="bold"
+                    android:text="Details : "/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:id="@+id/tvDetails"
+                    tools:text="Details : Llorem ipsum dolor irae es la cucracha de la blablabajdsihfuishqiuohfiusqhuiofhsduihiqohfuihqsuiodhfduiqsohihdsuihdqsfjdnhlhuidqshuifhuioqdshuifqshduifdhquifhoiudqhoifhdushfouiqsdhduiofhquifdh" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="4dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textStyle="bold"
+                    android:text="Details visibles par les responsables : "/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    tools:text="Lloreyusdghyuqgdyugudigyqsgdyugqsyudgiqsugdyuqsydgqsyudgyuqsgyudgyugqdyugduiqgdyuqgydgquydgyqdisgsdyuqgyuqdsgyudqgiuqdsgsdqygqsdyugsdqygsdqigqsdygdyqsugqsdyigqsd"
+                    android:id="@+id/tvDetailsResponsables"/>
 
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="16dp">
+        android:layout_marginTop="16dp">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/callBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                app:layout_anchorGravity="start"
+                app:fabSize="normal"
+                android:layout_marginEnd="24dp"/>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/mailBtn"
+                android:layout_width="wrap_content"
+                android:layout_gravity="end"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_height="match_parent"
+                app:layout_anchor="@id/tvTelephone"
+                app:layout_anchorGravity="end"
+                app:fabSize="normal" />
+
+        </android.support.v7.widget.CardView>
+
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:weightSum="2">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textAlignment="textEnd"
+            android:text="Publié le :"/>
+
+        <TextView
+            android:id="@+id/tvPublishOffre"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textStart"
+            android:gravity="start"
+            tools:text="03/03/2017"/>
+    </LinearLayout>
 </LinearLayout>
+

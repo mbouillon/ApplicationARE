@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.imerir.bouillon.areapp.Activities.LoginActivity;
 import com.imerir.bouillon.areapp.Activities.MainActivity;
 import com.imerir.bouillon.areapp.Activities.MessagesListActivity;
+import com.imerir.bouillon.areapp.Activities.OfferDetailActivity;
 import com.imerir.bouillon.areapp.Activities.RegisterResponsableActivity;
 import com.imerir.bouillon.areapp.Adapters.MessagesAdapter;
 import com.imerir.bouillon.areapp.Adapters.OffersListAdapter;
@@ -90,7 +91,9 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onOfferClicked(Offer offre) {
-
+        Intent intent = new Intent(getActivity(), OfferDetailActivity.class);
+        intent.putExtra("offre_id", offre.getOfferID());
+        startActivity(intent);
     }
 
 
