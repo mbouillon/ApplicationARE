@@ -27,7 +27,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activities.MainActivity$PdfActivity" />
-        <activity android:name=".Activities.UploadFileActivity" />
         <activity android:name=".Activities.LoginActivity" />
         <activity android:name=".Activities.RegisterStudentActivity" />
         <activity android:name=".Activities.RegisterResponsableActivity" />
