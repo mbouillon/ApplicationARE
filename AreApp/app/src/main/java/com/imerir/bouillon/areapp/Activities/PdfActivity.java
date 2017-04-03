@@ -1,4 +1,4 @@
-package com.imerir.bouillon.areapp.PDF;
+package com.imerir.bouillon.areapp.Activities;
 
 import android.Manifest;
 import android.annotation.TargetApi;

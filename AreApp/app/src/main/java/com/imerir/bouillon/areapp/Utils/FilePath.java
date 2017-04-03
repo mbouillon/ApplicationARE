@@ -1,4 +1,4 @@
-package com.imerir.bouillon.areapp.DocumentUploadFile;
+package com.imerir.bouillon.areapp.Utils;
 
 import android.content.ContentUris;
 import android.content.Context;

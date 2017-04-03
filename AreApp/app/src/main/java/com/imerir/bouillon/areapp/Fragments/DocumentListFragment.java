@@ -9,10 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.imerir.bouillon.areapp.PDF.PdfActivity;
+import com.imerir.bouillon.areapp.Activities.MainActivity;
 import com.imerir.bouillon.areapp.Adapters.DocumentAdapter;
 import com.imerir.bouillon.areapp.Clients.WebServiceDocumentClient;
-import com.imerir.bouillon.areapp.DocumentUploadFile.UploadFileActivity;
+import com.imerir.bouillon.areapp.Activities.UploadFileActivity;
 import com.imerir.bouillon.areapp.Models.Document;
 import com.imerir.bouillon.areapp.R;
 
@@ -64,7 +64,7 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
 
     @Override
     public void onDocumentClicked(Document document) {
-        Intent intent = new Intent(getActivity(), PdfActivity.class);
+        Intent intent = new Intent(getActivity(), MainActivity.PdfActivity.class);
         intent.putExtra("document_id", document.getDocId());
         startActivity(intent);
     }

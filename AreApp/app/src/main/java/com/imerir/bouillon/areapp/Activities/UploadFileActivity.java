@@ -1,4 +1,4 @@
-package com.imerir.bouillon.areapp.DocumentUploadFile;
+package com.imerir.bouillon.areapp.Activities;
 
 import android.Manifest;
 import android.app.Activity;
@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.imerir.bouillon.areapp.Utils.FilePath;
 import com.imerir.bouillon.areapp.R;
 
 import java.io.DataOutputStream;
@@ -36,7 +37,7 @@ import java.net.URL;
 
 public class UploadFileActivity extends AppCompatActivity implements View.OnClickListener {
 
-    //Permission de lire et ecrire
+    //Permissions de lire et ecrire
     private static final int ENABLE_READ_EXTERNAL_STORAGE_REQUEST_ID = 1;
     private static final int ENABLE_WRITE_EXTERNAL_STORAGE_REQUEST_ID = 2;
 

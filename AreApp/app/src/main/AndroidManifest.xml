@@ -11,7 +11,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".App"
+        android:name=".Utils.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -26,8 +26,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PDF.PdfActivity" />
-        <activity android:name=".DocumentUploadFile.UploadFileActivity" />
+        <activity android:name=".Activities.MainActivity$PdfActivity" />
+        <activity android:name=".Activities.UploadFileActivity" />
         <activity android:name=".Activities.LoginActivity" />
         <activity android:name=".Activities.RegisterStudentActivity" />
         <activity android:name=".Activities.RegisterResponsableActivity" />

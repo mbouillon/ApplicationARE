@@ -114,7 +114,7 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
         tvMessage.setText(message.getMessage());
 
         //TODO test why crash sometimes
-        //publisherName.setText("Publié par : " + user.getNom() + " " + user.getPrenom());
+        publisherName.setText("Publié par : " + user.getNom() + " " + user.getPrenom());
     }
 
 

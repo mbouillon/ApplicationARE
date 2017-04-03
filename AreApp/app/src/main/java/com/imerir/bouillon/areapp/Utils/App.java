@@ -1,4 +1,4 @@
-package com.imerir.bouillon.areapp;
+package com.imerir.bouillon.areapp.Utils;
 
 import android.app.Application;
 
