@@ -85,12 +85,6 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
             PublishName.setText("Publié par : "+ user.getNom() + " " + user.getPrenom());
             //TODO crash quand on affiche le texte du message
             //Message.setText( message.getMessage());
-            cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v){
-                    //listener.onMessageClicked(mMessage);
-                }
-            });
         }
     }
 

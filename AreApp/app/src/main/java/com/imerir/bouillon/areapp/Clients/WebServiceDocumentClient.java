@@ -50,7 +50,7 @@ public class WebServiceDocumentClient {
 
     public void requestDocuments(final OnDocumentsListListener listener) {
 
-        String apiUrl = "http://10.0.2.2:5000/mobile/DocumentList/";
+        String apiUrl = "https://desolate-hollows-18116.herokuapp.com/mobile/DocumentList/";
         JsonObjectRequest request = new JsonObjectRequest(
                 apiUrl, null,
                 new Response.Listener<JSONObject>() {

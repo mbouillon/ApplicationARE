@@ -45,7 +45,7 @@ public class WebServiceMessageClient {
     }
 
     public void requestMessages(final OnMessagesListListener listener){
-        String apiUrl = "http://10.0.2.2:5000/mobile/LastMessage/";
+        String apiUrl = "https://desolate-hollows-18116.herokuapp.com/mobile/LastMessage/";
         JsonObjectRequest request = new JsonObjectRequest(
                 apiUrl, null,
                 new Response.Listener<JSONObject>() {
@@ -78,7 +78,7 @@ public class WebServiceMessageClient {
     }
 
     public void requestAllMessages(final OnMessagesListListener listener){
-        String apiUrl = "http://10.0.2.2:5000/mobile/MessagesList/";
+        String apiUrl = "https://desolate-hollows-18116.herokuapp.com/mobile/MessagesList/";
         JsonObjectRequest request = new JsonObjectRequest(
                 apiUrl, null,
                 new Response.Listener<JSONObject>() {

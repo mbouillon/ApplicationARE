@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -43,6 +44,7 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
     RecyclerView offersList;
     private TextView publisherName;
     WelcomeMessage message;
+    private CardView cardView;
 
 
     User user;
@@ -61,28 +63,25 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
 
 
         WebServiceOfferClient.getInstance().requestOffers(this);
+
+        //Correction du bug lié au commit eda353f
         try {
             Thread.sleep(200);
             WebServiceMessageClient.getInstance().requestMessages(this);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         offersList  =   (RecyclerView) view.findViewById(R.id.offersList);
         offersList.setLayoutManager(new LinearLayoutManager(getContext()));
         tvMessage = (TextView) view.findViewById(R.id.MessageAccueil);
         WebServiceOfferClient.getInstance().getOffers();
         publisherName = (TextView) view.findViewById(R.id.PublishName);
         ImageMessage = (ImageView) view.findViewById(R.id.ImageMessage);
+        cardView = (CardView) view.findViewById(R.id.cardView);
 
-        //TODO VIRER CETTE MERDE ET LE METTRE QUAND ON CLIQUE SUR LA CARD VIEW PUTAIN REMY REFLECHIS
-        tvMessage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent messagesListIntent = new Intent(getActivity(), MessagesListActivity.class);
-                startActivity(messagesListIntent);
-            }
-        });
-        ImageMessage.setOnClickListener(new View.OnClickListener() {
+        //Clic sur l'espace message affiche la liste de tous les messages publiés
+        cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent messagesListIntent = new Intent(getActivity(), MessagesListActivity.class);
@@ -121,7 +120,6 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
         user = WebServiceUserClient.getInstance().getUserById(message.getPublisherId());
         tvMessage.setText(message.getMessage());
 
-        //TODO test why crash sometimes
         publisherName.setText("Publié par : " + user.getNom() + " " + user.getPrenom());
 
     }
