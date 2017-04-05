@@ -26,8 +26,10 @@ import com.mikepenz.iconics.IconicsDrawable;
 
 public class OfferDetailActivity extends AppCompatActivity implements View.OnClickListener {
 
+    //Permission appel telephone
     private final static int CALL_PHONE_PERMISSION = 1;
 
+    //Declatation des widgets
     private Toolbar mToolbar;
 
     TextView Titre, Duree, NomEntreprise, Lieu, NomContact, Mail, Telephone, DatePublish;
@@ -57,6 +59,7 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
             }
         });
 
+        //Cast des widgets
         Titre =   (TextView) findViewById(R.id.tvTitre);
         Duree =   (TextView) findViewById(R.id.tvDuree);
         NomEntreprise =   (TextView) findViewById(R.id.tvNomEntreprise);
@@ -69,6 +72,7 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
         Details =   (TextView) findViewById(R.id.tvDetails);
         DetailsResponsables =   (TextView) findViewById(R.id.tvDetailsResponsables);
 
+        //Recuperation des données de l'offre cliquée + Affichage sur le widget
         Titre.setText(offer.getTitre());
         Duree.setText(offer.getDureeContrat());
         NomEntreprise.setText(offer.getNomEntreprise());
@@ -81,9 +85,9 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
         Details.setText(offer.getDetails());
         DetailsResponsables.setText(offer.getDetailsResponsables());
 
+        //Boutons flottats + Cast + Définition de l'icône.
         callBtn = (FloatingActionButton) findViewById(R.id.callBtn);
         mailBtn = (FloatingActionButton) findViewById(R.id.mailBtn);
-
         callBtn.setImageDrawable(new IconicsDrawable(this)
                 .icon(GoogleMaterial.Icon.gmd_phone)
                 .color(Color.WHITE)
@@ -93,15 +97,17 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
                 .color(Color.WHITE)
                 .sizeDp(24));
 
+        //Listenner attend le click
         callBtn.setOnClickListener(this);
         mailBtn.setOnClickListener(this);
     }
 
+    //On Click des deux boutons flottants
     @Override
     public void onClick(View v) {
         if(v==callBtn) {
             if(ContextCompat.checkSelfPermission(this,
-                    Manifest.permission.CALL_PHONE)== PackageManager.PERMISSION_GRANTED) {
+                    Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
                 showCallDialog();
             }
             else {
@@ -110,6 +116,7 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
                         CALL_PHONE_PERMISSION);
             }
         }
+        //TODO Changer pour envoyer le message direct sans ouvrir une app externe ou permettre l'ouverture depuis toutes les app mail dispo
         else if(v==mailBtn) {
             Intent intent = getPackageManager().getLaunchIntentForPackage("com.android.email");
             startActivity(intent);
@@ -139,6 +146,7 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
                 }).show();
     }
 
+    //Demande la permission d'utiliser le telephone
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
@@ -147,9 +155,7 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
                     showCallDialog();
-
                 }
             }
             break;

@@ -42,11 +42,15 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
     private ImageView ImageMessage;
     RecyclerView offersList;
     private TextView publisherName;
+    WelcomeMessage message;
 
 
     User user;
 
     com.github.clans.fab.FloatingActionMenu famAddOffer;
+    com.github.clans.fab.FloatingActionButton fabAddOffer;
+    com.github.clans.fab.FloatingActionButton fabAddMessage;
+
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -55,8 +59,14 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
 
         WebServiceUserClient.getInstance().requestUsers(this);
 
+
         WebServiceOfferClient.getInstance().requestOffers(this);
-        WebServiceMessageClient.getInstance().requestMessages(this);
+        try {
+            Thread.sleep(200);
+            WebServiceMessageClient.getInstance().requestMessages(this);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         offersList  =   (RecyclerView) view.findViewById(R.id.offersList);
         offersList.setLayoutManager(new LinearLayoutManager(getContext()));
         tvMessage = (TextView) view.findViewById(R.id.MessageAccueil);
@@ -64,6 +74,7 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
         publisherName = (TextView) view.findViewById(R.id.PublishName);
         ImageMessage = (ImageView) view.findViewById(R.id.ImageMessage);
 
+        //TODO VIRER CETTE MERDE ET LE METTRE QUAND ON CLIQUE SUR LA CARD VIEW PUTAIN REMY REFLECHIS
         tvMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,10 +89,7 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
                 startActivity(messagesListIntent);
             }
         });
-
-
     }
-
 
 
     @Override
@@ -109,14 +117,14 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onMessagesReceived(ArrayList<WelcomeMessage> messages) {
-        WelcomeMessage message = messages.get(0);
+        message = messages.get(0);
         user = WebServiceUserClient.getInstance().getUserById(message.getPublisherId());
         tvMessage.setText(message.getMessage());
 
         //TODO test why crash sometimes
-        //publisherName.setText("Publié par : " + user.getNom() + " " + user.getPrenom());
-    }
+        publisherName.setText("Publié par : " + user.getNom() + " " + user.getPrenom());
 
+    }
 
     @Override
     public void onOffersFailed(String error) {

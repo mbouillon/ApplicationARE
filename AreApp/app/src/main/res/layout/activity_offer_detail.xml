@@ -103,6 +103,7 @@
                     android:orientation="horizontal"
                     android:layout_marginTop="8dp"
                     android:weightSum="2">
+
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -111,13 +112,7 @@
                         android:id="@+id/tvLieu"
                         android:text="PERPIGNAN, FRANCE"/>
 
-                    <TextView
-                        android:id="@+id/vide"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        tools:text="Californie"/>
+
                 </LinearLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -176,33 +171,23 @@
         android:orientation="horizontal"
         android:layout_marginTop="16dp">
 
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/callBtn"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                app:layout_anchorGravity="start"
                 app:fabSize="normal"
                 android:layout_marginEnd="24dp"/>
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/mailBtn"
                 android:layout_width="wrap_content"
-                android:layout_gravity="end"
+                android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:layout_height="match_parent"
-                app:layout_anchor="@id/tvTelephone"
-                app:layout_anchorGravity="end"
+                android:gravity="end"
                 app:fabSize="normal" />
-
-        </android.support.v7.widget.CardView>
-
 
     </LinearLayout>
 
@@ -212,23 +197,15 @@
         android:orientation="horizontal"
         android:layout_marginTop="8dp"
         android:weightSum="2">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textStyle="bold"
-            android:textAlignment="textEnd"
-            android:text="Publié le :"/>
 
         <TextView
             android:id="@+id/tvPublishOffre"
-            android:layout_width="wrap_content"
-            android:layout_marginStart="5dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textAlignment="textStart"
-            android:gravity="start"
-            tools:text="03/03/2017"/>
+            tools:text="03/03/2017"
+            android:gravity="center"
+            />
     </LinearLayout>
 </LinearLayout>
 

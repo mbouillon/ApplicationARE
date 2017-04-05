@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.android.volley.ServerError;
 import com.imerir.bouillon.areapp.Activities.MainActivity;
+import com.imerir.bouillon.areapp.Activities.PdfActivity;
 import com.imerir.bouillon.areapp.Adapters.DocumentAdapter;
 import com.imerir.bouillon.areapp.Clients.WebServiceDocumentClient;
 import com.imerir.bouillon.areapp.Models.Document;
@@ -96,7 +97,7 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
 
     @Override
     public void onDocumentClicked(Document document) {
-        Intent intent = new Intent(getActivity(), MainActivity.PdfActivity.class);
+        Intent intent = new Intent(getActivity(), PdfActivity.class);
         intent.putExtra("document_id", document.getDocId());
         startActivity(intent);
     }
