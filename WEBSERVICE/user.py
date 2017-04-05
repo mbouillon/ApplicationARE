@@ -198,12 +198,12 @@ def addUser():
         data = request.get_json()
         #Recuperation des variables dans le dictionnaire
         Type = bool(data.get("type"))
-        Nom = str(data.get("Nom"))
-        Prenom = str(data.get("Prenom"))
-        Mail = str(data.get("Mail"))
-        Telephone = str(data.get("Telephone"))
-        Formation = int(data.get("Formation"))
-        Password = str(data.get("Password"))
+        Nom = str(data.get("nom"))
+        Prenom = str(data.get("prenom"))
+        Mail = str(data.get("mail"))
+        Telephone = str(data.get("telephone"))
+        Formation = int(data.get("formation"))
+        Password = str(data.get("password"))
     except ValueError as e:
         print(u"Erreur lors de la recuperation du JSON")
     #Sécurisation du mot de passe hashage en md5

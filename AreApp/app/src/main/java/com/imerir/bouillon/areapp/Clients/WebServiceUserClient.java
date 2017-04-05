@@ -95,9 +95,9 @@ public class WebServiceUserClient {
     public void POSTUser(User user) {
         final HashMap<String, String> params = new HashMap<String, String>();
         String apiUrl = "http://10.0.2.2:5000/mobile/User/";
-
         Gson gson = new Gson();
         final String json = gson.toJson(user);
+
 
         RequestQueue queue = Volley.newRequestQueue(context);
 
@@ -119,8 +119,12 @@ public class WebServiceUserClient {
 
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                params.put("content-type", "application/json");
                 return super.getParams();
+            }
+
+            public String getBodyContentType()
+            {
+                return "application/json";
             }
         };
         queue.add(stringRequest);

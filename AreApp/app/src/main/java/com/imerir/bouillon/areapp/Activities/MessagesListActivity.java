@@ -43,7 +43,7 @@ public class MessagesListActivity extends AppCompatActivity implements WebServic
         mToolbar = (Toolbar) findViewById(R.id.customToolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Ancien Messages");
+        getSupportActionBar().setTitle("Anciens Messages Publiés");
         mToolbar.setTitleTextColor(Color.WHITE);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
