@@ -110,7 +110,7 @@ public class RegisterResponsableActivity extends AppCompatActivity implements Vi
                 ((!etConfirmMail.getText().toString().equals(""))) &
                 ((!etPassword.getText().toString().equals(""))) &
                 ((!etConfirmPassword.getText().toString().equals("")))) {
-                    Log.d("Ok", "okok");
+                    Log.d("Ok", "Champs remplis");
             //Verifie que le mail et pwd sois identique
             //TODO Vérifier les champs séparement
                 if (((etMail.getText().toString()).equals(etConfirmMail.getText().toString())) &&

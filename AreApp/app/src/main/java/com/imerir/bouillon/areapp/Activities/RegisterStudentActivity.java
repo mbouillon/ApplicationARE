@@ -109,31 +109,46 @@ public class RegisterStudentActivity extends AppCompatActivity implements View.O
                 //Requete JSON
                 JSONObject jsonObject = new JSONObject();
                 try {
-                    jsonObject.put("Nom",etName.getText().toString());
-                    jsonObject.put("Prenom",etfName.getText().toString());
-                    jsonObject.put("Mail",etMail.getText().toString());
-                    jsonObject.put("Password",etPassword.getText().toString());
-                    jsonObject.put("Telephone",etPhoneNumber.getText().toString());
-                    jsonObject.put("Type",1);
+                    jsonObject.put("Nom", etName.getText().toString());
+                    jsonObject.put("Prenom", etfName.getText().toString());
+                    jsonObject.put("Mail", etMail.getText().toString());
+                    jsonObject.put("Password", etPassword.getText().toString());
+                    jsonObject.put("Telephone", etPhoneNumber.getText().toString());
+                    jsonObject.put("Type", 1);
                     jsonObject.put("Formation", formation);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
-                //Verifie que le mail et pwd sois identique
-                if(((etMail.getText().toString()).equals(etConfirmMail.getText().toString())) && ((etPassword.getText().toString()).equals(etConfirmPassword.getText().toString()))){
-                    User user = new User(jsonObject);
-                    //WebServiceUserClient.getInstance().POSTUser(user);
-                    Log.d("Ok", "Compte créé avec succès.");
-                    Toast.makeText(getApplication(), "Compte créé avec succès.", Toast.LENGTH_SHORT).show();
-                    return;
-                }else {
-                    Log.d("Erreur", "Password & Mail" );
-                    Toast.makeText(getApplication(), "Erreur : Mot de passe ou Email", Toast.LENGTH_SHORT).show();
+                //TODO Vérifier si imerir.com
+                //TODO Ne pas afficher un toast dans les erreurs de champs mais afficher le champ en rouge
+
+                //vérification si les champs sont remplis
+                if (((!etName.getText().toString().equals(""))) &
+                        ((!etfName.getText().toString().equals(""))) &
+                        ((!etPhoneNumber.getText().toString().equals(""))) &
+                        ((!etMail.getText().toString().equals(""))) &
+                        ((!etConfirmMail.getText().toString().equals(""))) &
+                        ((!etPassword.getText().toString().equals(""))) &
+                        ((!etConfirmPassword.getText().toString().equals("")))) {
+                    Log.d("Ok", "Champs remplis");
+
+                    //Verifie que le mail et pwd sois identique
+                    if (((etMail.getText().toString()).equals(etConfirmMail.getText().toString())) && ((etPassword.getText().toString()).equals(etConfirmPassword.getText().toString()))) {
+                        User user = new User(jsonObject);
+                        //poste le user dans la base de données
+                        WebServiceUserClient.getInstance().POSTUser(user);
+                        Log.d("Ok", "Compte créé avec succès.");
+                        Toast.makeText(getApplication(), "Compte créé avec succès.", Toast.LENGTH_SHORT).show();
+                        return;
+                    } else {
+                        Log.d("Erreur", "Password & Mail");
+                        Toast.makeText(getApplication(), "Erreur : Mot de passe ou Email", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Log.d("Ok", "Champs invalides");
+                    Toast.makeText(getApplication(), "Erreur : Tous les champs sont obligatoires", Toast.LENGTH_SHORT).show();
                 }
-
-                //TODO VERIFICATION ALL CHAMP
-
             }
         });
 
