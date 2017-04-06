@@ -1,5 +1,6 @@
 package com.imerir.bouillon.areapp.Fragments;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.imerir.bouillon.areapp.Activities.LoginActivity;
 import com.imerir.bouillon.areapp.Activities.MainActivity;
@@ -46,8 +48,10 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
     WelcomeMessage message;
     private CardView cardView;
 
-
     User user;
+
+    ProgressDialog loadingDialog;
+
 
     com.github.clans.fab.FloatingActionMenu famAddOffer;
     com.github.clans.fab.FloatingActionButton fabAddOffer;
@@ -57,11 +61,9 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        showLoadingDialog();
 
         WebServiceUserClient.getInstance().requestUsers(this);
-
-
         WebServiceOfferClient.getInstance().requestOffers(this);
 
         //Correction du bug lié au commit eda353f
@@ -112,6 +114,7 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
     @Override
     public void onOffersReceived(ArrayList<Offer> offers) {
         offersList.setAdapter(new OffersListAdapter(offers,this));
+        loadingDialog.dismiss();
     }
 
     @Override
@@ -137,5 +140,17 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
     @Override
     public void onUsersFailed(String error) {
 
+    }
+
+    public void showLoadingDialog(){
+        try{
+            loadingDialog = ProgressDialog.show(getActivity(),
+                    "Veuillez patienter",
+                    "Chargement en cours...",
+                    true,
+                    false);
+        }catch (Exception e){
+            Toast.makeText(getActivity(), "Network Problem", Toast.LENGTH_LONG).show();
+        }
     }
 }

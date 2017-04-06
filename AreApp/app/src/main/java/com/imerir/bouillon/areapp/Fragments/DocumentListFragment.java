@@ -54,12 +54,14 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
     RecyclerView recyclerView;
     com.github.clans.fab.FloatingActionButton fbaAddDocument;
     ProgressDialog dialog;
+    ProgressDialog loadingDialog;
 
     ArrayList<Document> _document;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        showLoadingDialog();
 
         _document = new ArrayList<Document>();
 
@@ -105,6 +107,7 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
     @Override
     public void onDocumentsReceived(ArrayList<Document> Documents) {
         recyclerView.setAdapter(new DocumentAdapter(Documents,this));
+        loadingDialog.dismiss();
     }
 
     @Override
@@ -236,6 +239,17 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
             }
             dialog.dismiss();
             return serverResponseCode;
+        }
+    }
+    public void showLoadingDialog(){
+        try{
+            loadingDialog = ProgressDialog.show(getActivity(),
+                    "Veuillez patienter",
+                    "Chargement en cours...",
+                    true,
+                    false);
+        }catch (Exception e){
+            Toast.makeText(getActivity(), "Network Problem", Toast.LENGTH_LONG).show();
         }
     }
 }

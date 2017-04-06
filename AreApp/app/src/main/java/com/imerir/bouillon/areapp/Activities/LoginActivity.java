@@ -1,5 +1,6 @@
 package com.imerir.bouillon.areapp.Activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     com.github.clans.fab.FloatingActionButton fbaStudent, fbaResponsable;
     EditText mail, password;
     Button connexion;
+    ProgressDialog loadingDialogData;
 
     private Response.Listener listener;
 
@@ -40,6 +42,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         setTitle("Connexion");
         super.onCreate(savedInstanceState);
+        showLoadingDialogData();
         setContentView(R.layout.activity_login);
 
         WebServiceUserClient.createInstance(this);
@@ -96,7 +99,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             preferences.edit().putBoolean("type", user.getType()).commit();
             finish();
         }
-        else {Toast.makeText(this, "Erreur, identifiants incorrects", Toast.LENGTH_SHORT).show();}
+        else {
+            Toast.makeText(this, "Erreur, identifiants incorrects", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private boolean checkUser(String mail, String password) {
@@ -122,10 +127,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onUsersReceived(ArrayList<User> users) {
+        loadingDialogData.dismiss();
         _user = users;
     }
 
     @Override
     public void onUsersFailed(String error) {
+    }
+
+    public void showLoadingDialogData(){
+        try{
+            loadingDialogData = ProgressDialog.show(this,
+                    "Veuillez patienter",
+                    "Connexion en cours...",
+                    true,
+                    false);
+        }catch (Exception e){
+            Toast.makeText(this, "Network Problem", Toast.LENGTH_LONG).show();
+        }
     }
 }
