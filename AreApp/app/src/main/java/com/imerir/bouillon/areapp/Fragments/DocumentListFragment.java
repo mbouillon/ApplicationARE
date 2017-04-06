@@ -32,6 +32,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by maxime on 09/03/2017.
@@ -106,6 +107,7 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
 
     @Override
     public void onDocumentsReceived(ArrayList<Document> Documents) {
+        Collections.reverse(Documents);
         recyclerView.setAdapter(new DocumentAdapter(Documents,this));
         loadingDialog.dismiss();
     }

@@ -31,6 +31,7 @@ import com.imerir.bouillon.areapp.Models.WelcomeMessage;
 import com.imerir.bouillon.areapp.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class OffersListFragment extends Fragment implements View.OnClickListener, WebServiceOfferClient.OnOffersListListener,WebServiceMessageClient.OnMessagesListListener, OffersListAdapter.OnOfferClickListener, WebServiceUserClient.OnUsersListListener {
@@ -113,6 +114,7 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onOffersReceived(ArrayList<Offer> offers) {
+        Collections.reverse(offers);
         offersList.setAdapter(new OffersListAdapter(offers,this));
         loadingDialog.dismiss();
     }

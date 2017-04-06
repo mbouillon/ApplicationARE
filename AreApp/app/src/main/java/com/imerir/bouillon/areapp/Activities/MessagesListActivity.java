@@ -14,6 +14,7 @@ import com.imerir.bouillon.areapp.Models.WelcomeMessage;
 import com.imerir.bouillon.areapp.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MessagesListActivity extends AppCompatActivity implements WebServiceMessageClient.OnMessagesListListener {
 
@@ -55,6 +56,7 @@ public class MessagesListActivity extends AppCompatActivity implements WebServic
 
     @Override
     public void onMessagesReceived(ArrayList<WelcomeMessage> messages) {
+        Collections.reverse(messages);
         recyclerView.setAdapter(new MessagesAdapter(messages, this));
     }
 

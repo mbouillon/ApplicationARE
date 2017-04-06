@@ -23,7 +23,6 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
 
     private ArrayList<WelcomeMessage> message;
     CardView cardView;
-    private OnMessageClickListener listener;
     User user;
 
     public MessagesAdapter(ArrayList<WelcomeMessage> messages, MessagesListActivity listener) {
@@ -74,7 +73,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
             super(itemView);
             cardView    = (CardView) itemView.findViewById(R.id.cardView);
             PublishName = (TextView) itemView.findViewById(R.id.PublishName);
-            Message = (TextView) itemView.findViewById(R.id.Message);
+            Message = (TextView) itemView.findViewById(R.id.MessageAccueil);
 
         }
 
@@ -84,7 +83,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
             user = WebServiceUserClient.getInstance().getUserById(message.getPublisherId());
             PublishName.setText("Publié par : "+ user.getNom() + " " + user.getPrenom());
             //TODO crash quand on affiche le texte du message
-            //Message.setText( message.getMessage());
+            Message.setText( message.getMessage());
         }
     }
 
