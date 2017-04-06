@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -67,38 +68,73 @@ public class RegisterResponsableActivity extends AppCompatActivity implements Vi
         etAcessCode = (EditText) findViewById(R.id.etAcessCodeR);
         bRegister = (Button) findViewById(R.id.bRegisterR);
 
-
         bRegister.setOnClickListener(this);
 
+        //TODO Delete after tests
+        etName.setText("Name");
+        etfName.setText("FName");
+        etMail.setText("Name60000@imerir.com");
+        etConfirmMail.setText("Name60000@imerir.com");
+        etPhoneNumber.setText("0657463678");
+        etPassword.setText("azerty");
+        etConfirmPassword.setText("azerty");
+        etAcessCode.setText("1234");
     }
-
 
     @Override
     public void onClick(View view) {
+        //Requete JSON
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("Nom",etName.getText().toString());
-            jsonObject.put("Prenom",etfName.getText().toString());
-            jsonObject.put("Mail",etMail.getText().toString());
-            jsonObject.put("Password",etPassword.getText().toString());
-            jsonObject.put("Telephone",etPhoneNumber.getText().toString());
-            jsonObject.put("Type",1);
+            jsonObject.put("Nom", etName.getText().toString());
+            jsonObject.put("Prenom", etfName.getText().toString());
+            jsonObject.put("Mail", etMail.getText().toString());
+            jsonObject.put("Password", etPassword.getText().toString());
+            jsonObject.put("Telephone", etPhoneNumber.getText().toString());
+            jsonObject.put("Type", 1);
             jsonObject.put("Formation", 0);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
 
-        //Todo verify mail et pw
+        //TODO Vérifier si imerir.com
+        //TODO Ne pas afficher un toast dans les erreurs de champs mais afficher le champ en rouge
 
-
-        //TODO Test this
-        User user = new User(jsonObject);
-        if(etAcessCode.getText().toString().equals("1234"))
-            WebServiceUserClient.getInstance().POSTUser(user);
-        else
-            Toast.makeText(this, "Code d'accès incorrect", Toast.LENGTH_SHORT).show();
-
+        //vérification si les champs sont remplis
+        if (((!etName.getText().toString().equals(""))) &
+                ((!etfName.getText().toString().equals(""))) &
+                ((!etPhoneNumber.getText().toString().equals(""))) &
+                ((!etAcessCode.getText().toString().equals(""))) &
+                ((!etMail.getText().toString().equals(""))) &
+                ((!etConfirmMail.getText().toString().equals(""))) &
+                ((!etPassword.getText().toString().equals(""))) &
+                ((!etConfirmPassword.getText().toString().equals("")))) {
+                    Log.d("Ok", "okok");
+            //Verifie que le mail et pwd sois identique
+            //TODO Vérifier les champs séparement
+                if (((etMail.getText().toString()).equals(etConfirmMail.getText().toString())) &&
+                        ((etPassword.getText().toString()).equals(etConfirmPassword.getText().toString()))) {
+                    //Vérifie le code d'accès
+                    //TODO générer un code à l'aide du service web à la demande de l'adminitrateur PLUS TARD BEAUCOUP PLUS TARD
+                    if (etAcessCode.getText().toString().equals("1234")) {
+                        User user = new User(jsonObject);
+                        //poste le user dans la base de données
+                        WebServiceUserClient.getInstance().POSTUser(user);
+                        Log.d("Ok", "Compte créé avec succès");
+                        Toast.makeText(this, "Compte créé avec succès.", Toast.LENGTH_SHORT).show();
+                        return;
+                    } else
+                        Log.d("Erreur", "Code incorrect");
+                        Toast.makeText(this, "Code d'accès incorrect", Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.d("Erreur", "Password & Mail");
+                    Toast.makeText(this, "Erreur : Le mot de passe ou l'adresse mail doit être identiques", Toast.LENGTH_SHORT).show();
+                }}
+        else {
+            Log.d("Ok", "Champs invalides");
+            Toast.makeText(this, "Erreur : Tous les champs sont obligatoires", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
