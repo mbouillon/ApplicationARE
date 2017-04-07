@@ -146,6 +146,8 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
         }
     }
 
+    //TODO Déplacer vers WebServiceDocumentClient attention une methode doit fermer sa gueule #Micfer
+    //TODO Aucun toast etc....
     //Android télécharger le fichier sur le serveur
     public int uploadFile(final String selectedFilePath){
 
@@ -221,7 +223,7 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
                     Toast.makeText(getActivity(),"Chargement du fichier terminé.",Toast.LENGTH_SHORT).show();
                 }
 
-                //Fermer les flux d'entrée et de sortie
+                //Fermeture les flux d'entrée et de sortie
                 fileInputStream.close();
                 dataOutputStream.flush();
                 dataOutputStream.close();

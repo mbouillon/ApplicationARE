@@ -35,7 +35,7 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
     TextView Titre, Duree, NomEntreprise, Lieu, NomContact, Mail, Telephone, DatePublish;
     TextView Details, DetailsResponsables;
 
-    FloatingActionButton callBtn, mailBtn;
+    com.github.clans.fab.FloatingActionButton callBtn, mailBtn;
 
     Offer offer;
 
@@ -80,14 +80,14 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
         NomContact.setText(offer.getNomContact());
         Mail.setText(offer.getMailContact());
         Telephone.setText(offer.getTelephoneContact());
-        DatePublish.setText(offer.getDatePublicaiton());
+        DatePublish.setText("Publiée le : " + offer.getDatePublicaiton());
 
         Details.setText(offer.getDetails());
         DetailsResponsables.setText(offer.getDetailsResponsables());
 
         //Boutons flottats + Cast + Définition de l'icône.
-        callBtn = (FloatingActionButton) findViewById(R.id.callBtn);
-        mailBtn = (FloatingActionButton) findViewById(R.id.mailBtn);
+        callBtn = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.callBtn);
+        mailBtn = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.mailBtn);
         callBtn.setImageDrawable(new IconicsDrawable(this)
                 .icon(GoogleMaterial.Icon.gmd_phone)
                 .color(Color.WHITE)
