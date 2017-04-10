@@ -2,12 +2,16 @@ package com.imerir.bouillon.areapp.Fragments;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +40,6 @@ import java.util.Collections;
 
 public class OffersListFragment extends Fragment implements View.OnClickListener, WebServiceOfferClient.OnOffersListListener,WebServiceMessageClient.OnMessagesListListener, OffersListAdapter.OnOfferClickListener, WebServiceUserClient.OnUsersListListener {
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_offers_list, null);
@@ -50,9 +53,10 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
     private CardView cardView;
 
     User user;
-
+    //Gestion de la Progress Bar des données
     ProgressDialog loadingDialog;
-
+    private int progressStatus = 0;
+    private Handler handler = new Handler();
 
     com.github.clans.fab.FloatingActionMenu famAddOffer;
     com.github.clans.fab.FloatingActionButton fabAddOffer;
@@ -62,6 +66,7 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        //Affiche un temps de chargement
         showLoadingDialog();
 
         WebServiceUserClient.getInstance().requestUsers(this);
@@ -75,7 +80,7 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
             e.printStackTrace();
         }
 
-        offersList  =   (RecyclerView) view.findViewById(R.id.offersList);
+        offersList = (RecyclerView) view.findViewById(R.id.offersList);
         offersList.setLayoutManager(new LinearLayoutManager(getContext()));
         tvMessage = (TextView) view.findViewById(R.id.MessageAccueil);
         WebServiceOfferClient.getInstance().getOffers();
@@ -116,7 +121,9 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
     public void onOffersReceived(ArrayList<Offer> offers) {
         Collections.reverse(offers);
         offersList.setAdapter(new OffersListAdapter(offers,this));
+        //Si récuperation des offres alors on renvoi la boîte de dialogue de progression
         loadingDialog.dismiss();
+
     }
 
     @Override
@@ -125,7 +132,7 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
         user = WebServiceUserClient.getInstance().getUserById(message.getPublisherId());
         tvMessage.setText(message.getMessage());
 
-        publisherName.setText("Publié par : " + user.getNom() + " " + user.getPrenom());
+//        publisherName.setText("Publié par : " + user.getNom() + " " + user.getPrenom());
 
     }
 
@@ -146,13 +153,39 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
 
     public void showLoadingDialog(){
         try{
-            loadingDialog = ProgressDialog.show(getActivity(),
-                    "Veuillez patienter",
-                    "Chargement en cours...",
-                    true,
-                    false);
+            //Création d'un ProgressDialog et l'afficher
+            loadingDialog = ProgressDialog.show(getActivity(), "Veuillez patienter", "Chargement en cours...", true, false);
+            //Création d'un Thread
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while (progressStatus < 100) {
+                        // Mise à jour l'état de progression
+                        progressStatus += 1;
+                        // Essayez de suspendre le Thread pendant x secondes
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        // Mise à jour la barre de progression fictive
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Mise à jour de l'état de progression
+                                loadingDialog.setProgress(progressStatus);
+                                // Si l'exécution de la tâche est terminée
+                                if (progressStatus == 100) {
+                                    //Renvoi la boîte de dialogue de progression
+                                    loadingDialog.dismiss();
+                                }
+                            }
+                        });
+                    }
+                }
+            }).start(); // Démarrez l'opération
         }catch (Exception e){
-            Toast.makeText(getActivity(), "Network Problem", Toast.LENGTH_LONG).show();
+
         }
     }
 }

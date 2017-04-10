@@ -1,11 +1,14 @@
 package com.imerir.bouillon.areapp.Activities;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,7 +28,8 @@ import static com.imerir.bouillon.areapp.Utils.App.md5;
  * Created by maxime on 07/03/2017.
  */
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener, WebServiceUserClient.OnUsersListListener{
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, WebServiceUserClient.OnUsersListListener {
+
 
     private ArrayList<User> _user;
     User user;
@@ -34,16 +38,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     com.github.clans.fab.FloatingActionButton fbaStudent, fbaResponsable;
     EditText mail, password;
     Button connexion;
-    ProgressDialog loadingDialogData;
-
+    //Gestion de la Progress Bar
+    ProgressDialog loadingDialog;
+    private int progressStatus = 0;
+    private Handler handler = new Handler();
     private Response.Listener listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTitle("Connexion");
         super.onCreate(savedInstanceState);
-        showLoadingDialogData();
         setContentView(R.layout.activity_login);
+        setTitle("Connexion");
+
+        //Affiche un temps de chargement
+        showLoadingDialogData();
 
         WebServiceUserClient.createInstance(this);
 
@@ -86,7 +94,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         String _mail = mail.getText().toString();
         String _password = password.getText().toString();
-        if(checkUser(_mail, _password)){
+        if (checkUser(_mail, _password)) {
             Intent mainActivityIntent = new Intent(this, MainActivity.class);
             startActivity(mainActivityIntent);
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -98,8 +106,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             preferences.edit().putString("password", _password).commit();
             preferences.edit().putBoolean("type", user.getType()).commit();
             finish();
-        }
-        else {
+        } else {
             Toast.makeText(this, "Erreur, identifiants incorrects", Toast.LENGTH_SHORT).show();
         }
     }
@@ -122,28 +129,55 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         } catch (Exception e) {
             Toast.makeText(this, "Erreur, Vous ne possedez pas de compte", Toast.LENGTH_SHORT).show();
         }
-        return response ;
+        return response;
     }
 
     @Override
     public void onUsersReceived(ArrayList<User> users) {
-        loadingDialogData.dismiss();
+        //Si récuperation les USERS alors on renvoi la boîte de dialogue de progression
         _user = users;
+        loadingDialog.dismiss();
     }
 
     @Override
     public void onUsersFailed(String error) {
     }
 
-    public void showLoadingDialogData(){
-        try{
-            loadingDialogData = ProgressDialog.show(this,
-                    "Veuillez patienter",
-                    "Connexion en cours...",
-                    true,
-                    false);
-        }catch (Exception e){
-            Toast.makeText(this, "Network Problem", Toast.LENGTH_LONG).show();
+    public void showLoadingDialogData() {
+        try {
+            //Création d'un ProgressDialog et l'afficher
+            loadingDialog = ProgressDialog.show(this, "Veuillez patienter", "Chargement en cours...", true, false);
+            //Création d'un Thread
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while (progressStatus < 100) {
+                        // Mise à jour l'état de progression
+                        progressStatus += 1;
+                        // Essayez de suspendre le Thread pendant x secondes
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        // Mise à jour la barre de progression fictive
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Mise à jour de l'état de progression
+                                loadingDialog.setProgress(progressStatus);
+                                // Si l'exécution de la tâche est terminée
+                                if (progressStatus == 100) {
+                                    //Renvoi la boîte de dialogue de progression
+                                    loadingDialog.dismiss();
+                                }
+                            }
+                        });
+                    }
+                }
+            }).start(); // Démarrez l'opération
+        } catch (Exception e) {
+
         }
     }
 }

@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -40,6 +41,8 @@ import java.util.Collections;
 
 public class DocumentListFragment extends Fragment implements View.OnClickListener, WebServiceDocumentClient.OnDocumentsListListener, DocumentAdapter.OnDocumentClickListener {
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_document, null);
@@ -54,14 +57,20 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
 
     RecyclerView recyclerView;
     com.github.clans.fab.FloatingActionButton fbaAddDocument;
+    //Progress Bar du chargement d'un document
     ProgressDialog dialog;
+
+    //Gestion de la Progress Bar des données
     ProgressDialog loadingDialog;
+    private int progressStatus = 0;
+    private Handler handler = new Handler();
 
     ArrayList<Document> _document;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        //Affiche un temps de chargement
         showLoadingDialog();
 
         _document = new ArrayList<Document>();
@@ -109,6 +118,7 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
     public void onDocumentsReceived(ArrayList<Document> Documents) {
         Collections.reverse(Documents);
         recyclerView.setAdapter(new DocumentAdapter(Documents,this));
+        //Si récuperation des offres alors on renvoi la boîte de dialogue de progression
         loadingDialog.dismiss();
     }
 
@@ -247,13 +257,39 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
     }
     public void showLoadingDialog(){
         try{
-            loadingDialog = ProgressDialog.show(getActivity(),
-                    "Veuillez patienter",
-                    "Chargement en cours...",
-                    true,
-                    false);
+            //Création d'un ProgressDialog et l'afficher
+            loadingDialog = ProgressDialog.show(getActivity(), "Veuillez patienter", "Chargement en cours...", true, false);
+            //Création d'un Thread
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while (progressStatus < 100) {
+                        // Mise à jour l'état de progression
+                        progressStatus += 1;
+                        // Essayez de suspendre le Thread pendant x secondes
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        // Mise à jour la barre de progression fictive
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Mise à jour de l'état de progression
+                                loadingDialog.setProgress(progressStatus);
+                                // Si l'exécution de la tâche est terminée
+                                if (progressStatus == 100) {
+                                    //Renvoi la boîte de dialogue de progression
+                                    loadingDialog.dismiss();
+                                }
+                            }
+                        });
+                    }
+                }
+            }).start(); // Démarrez l'opération
         }catch (Exception e){
-            Toast.makeText(getActivity(), "Network Problem", Toast.LENGTH_LONG).show();
+
         }
     }
 }
