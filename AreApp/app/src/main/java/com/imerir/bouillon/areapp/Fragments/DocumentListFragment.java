@@ -2,7 +2,10 @@ package com.imerir.bouillon.areapp.Fragments;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -41,8 +44,6 @@ import java.util.Collections;
 
 public class DocumentListFragment extends Fragment implements View.OnClickListener, WebServiceDocumentClient.OnDocumentsListListener, DocumentAdapter.OnDocumentClickListener {
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_document, null);
@@ -57,21 +58,26 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
 
     RecyclerView recyclerView;
     com.github.clans.fab.FloatingActionButton fbaAddDocument;
-    //Progress Bar du chargement d'un document
+
+    //Progress Bar du chargement d'un document pdf
     ProgressDialog dialog;
 
     //Gestion de la Progress Bar des données
     ProgressDialog loadingDialog;
     private int progressStatus = 0;
     private Handler handler = new Handler();
+    int internet;
 
     ArrayList<Document> _document;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //Affiche un temps de chargement
-        showLoadingDialog();
+
+        ///Si internet est activé alors on affiche un temps de chargement pour dl les données
+        if (checkConnectivity() == 1){
+            showLoadingDialog();
+        }
 
         _document = new ArrayList<Document>();
 
@@ -97,6 +103,7 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
 
     }
 
+    //Permet de parcourir sont téléphone a la recherhce d'un document
     private void showFileChooser() {
         Intent intent = new Intent();
         //Définit le fichier de sélection sur tous les types de fichiers
@@ -118,7 +125,7 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
     public void onDocumentsReceived(ArrayList<Document> Documents) {
         Collections.reverse(Documents);
         recyclerView.setAdapter(new DocumentAdapter(Documents,this));
-        //Si récuperation des offres alors on renvoi la boîte de dialogue de progression
+        //Récuperation des DOCUMENT, puis on renvoi la boîte de dialogue de progression
         loadingDialog.dismiss();
     }
 
@@ -154,6 +161,65 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
                 }
             }
         }
+    }
+
+    //Gestion du Progress Dialog
+    public void showLoadingDialog(){
+        try{
+            //Création d'un ProgressDialog et l'afficher
+            loadingDialog = ProgressDialog.show(getActivity(), "Veuillez patienter", "Chargement en cours...", true, false);
+            //Création d'un Thread
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while (progressStatus < 100) {
+                        // Mise à jour l'état de progression
+                        progressStatus += 1;
+                        // Essayez de suspendre le Thread pendant x secondes
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        // Mise à jour la barre de progression fictive
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Mise à jour de l'état de progression
+                                loadingDialog.setProgress(progressStatus);
+                                // Si l'exécution de la tâche est terminée
+                                if (progressStatus == 100) {
+                                    //Renvoi la boîte de dialogue de progression
+                                    loadingDialog.dismiss();
+                                }
+                            }
+                        });
+                    }
+                }
+            }).start(); // Démarrez l'opération
+        }catch (Exception e){
+
+        }
+    }
+
+    private int checkConnectivity() {
+        boolean enabled = true;
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = connectivityManager.getActiveNetworkInfo();
+        //Vérification si le téléphone est connecté a un réseau mobile, wifi ou pas
+        if ((info == null || !info.isConnected() || !info.isAvailable())) {
+            //Aucune connexion internet
+            internet = 0;
+            Log.d("Internet", "OFF");
+            Toast.makeText(getActivity(), "Connexion internet perdu.", Toast.LENGTH_SHORT).show();
+            enabled = false;
+        } else {
+            //Le réseau est connecté
+            Log.d("Internet", "ON");
+            internet = 1;
+        }
+        return internet;
     }
 
     //TODO Déplacer vers WebServiceDocumentClient attention une methode doit fermer sa gueule #Micfer
@@ -253,43 +319,6 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
             }
             dialog.dismiss();
             return serverResponseCode;
-        }
-    }
-    public void showLoadingDialog(){
-        try{
-            //Création d'un ProgressDialog et l'afficher
-            loadingDialog = ProgressDialog.show(getActivity(), "Veuillez patienter", "Chargement en cours...", true, false);
-            //Création d'un Thread
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    while (progressStatus < 100) {
-                        // Mise à jour l'état de progression
-                        progressStatus += 1;
-                        // Essayez de suspendre le Thread pendant x secondes
-                        try {
-                            Thread.sleep(100);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        // Mise à jour la barre de progression fictive
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                // Mise à jour de l'état de progression
-                                loadingDialog.setProgress(progressStatus);
-                                // Si l'exécution de la tâche est terminée
-                                if (progressStatus == 100) {
-                                    //Renvoi la boîte de dialogue de progression
-                                    loadingDialog.dismiss();
-                                }
-                            }
-                        });
-                    }
-                }
-            }).start(); // Démarrez l'opération
-        }catch (Exception e){
-
         }
     }
 }

@@ -1,14 +1,19 @@
 package com.imerir.bouillon.areapp.Activities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.imerir.bouillon.areapp.Adapters.MessagesAdapter;
@@ -26,22 +31,25 @@ public class MessagesListActivity extends AppCompatActivity implements WebServic
 
     ArrayList<WelcomeMessage> _message;
 
-    private Toolbar mToolbar;
-
     //Gestion de la Progress Bar
     ProgressDialog loadingDialog;
     private int progressStatus = 0;
     private Handler handler = new Handler();
     private Response.Listener listener;
+    int internet;
 
+    //Toolbar
+    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages_list);
 
-        //Affiche un temps de chargement
-        showLoadingDialogData();
+        //Si internet est activé alors on affiche un temps de chargement pour dl les données
+        if (checkConnectivity() == 1){
+            showLoadingDialog();
+        }
 
         _message = new ArrayList<WelcomeMessage>();
 
@@ -69,6 +77,7 @@ public class MessagesListActivity extends AppCompatActivity implements WebServic
     public void onMessagesReceived(ArrayList<WelcomeMessage> messages) {
         Collections.reverse(messages);
         recyclerView.setAdapter(new MessagesAdapter(messages, this));
+        //Récuperation des MESSAGES, puis on renvoi la boîte de dialogue de progression
         loadingDialog.dismiss();
     }
 
@@ -77,7 +86,8 @@ public class MessagesListActivity extends AppCompatActivity implements WebServic
 
     }
 
-    public void showLoadingDialogData() {
+    //Gestion du Progress Dialog
+    public void showLoadingDialog() {
         try {
             //Création d'un ProgressDialog et l'afficher
             loadingDialog = ProgressDialog.show(this, "Veuillez patienter", "Chargement en cours...", true, false);
@@ -113,5 +123,25 @@ public class MessagesListActivity extends AppCompatActivity implements WebServic
         } catch (Exception e) {
 
         }
+    }
+
+    //Verification de la connexion internet du téléphone
+    private int checkConnectivity() {
+        boolean enabled = true;
+        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = connectivityManager.getActiveNetworkInfo();
+        //Vérification si le téléphone est connecté a un réseau mobile, wifi ou pas
+        if ((info == null || !info.isConnected() || !info.isAvailable())) {
+            //Aucune connexion internet
+            internet = 0;
+            Log.d("Internet", "OFF");
+            Toast.makeText(getApplicationContext(), "Connexion internet perdu.", Toast.LENGTH_SHORT).show();
+            enabled = false;
+        } else {
+            //Le réseau est connecté
+            Log.d("Internet", "ON");
+            internet = 1;
+        }
+        return internet;
     }
 }

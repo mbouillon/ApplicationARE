@@ -1,9 +1,12 @@
 package com.imerir.bouillon.areapp.Fragments;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -57,6 +60,7 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
     ProgressDialog loadingDialog;
     private int progressStatus = 0;
     private Handler handler = new Handler();
+    int internet;
 
     com.github.clans.fab.FloatingActionMenu famAddOffer;
     com.github.clans.fab.FloatingActionButton fabAddOffer;
@@ -66,8 +70,11 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //Affiche un temps de chargement
-        showLoadingDialog();
+
+        //Si internet activé Affiche un temps de chargement pour dl les données
+        if (checkConnectivity() == 1){
+            showLoadingDialog();
+        }
 
         WebServiceUserClient.getInstance().requestUsers(this);
         WebServiceOfferClient.getInstance().requestOffers(this);
@@ -121,7 +128,7 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
     public void onOffersReceived(ArrayList<Offer> offers) {
         Collections.reverse(offers);
         offersList.setAdapter(new OffersListAdapter(offers,this));
-        //Si récuperation des offres alors on renvoi la boîte de dialogue de progression
+        //Récuperation des OFFRES, puis on renvoi la boîte de dialogue de progression
         loadingDialog.dismiss();
 
     }
@@ -131,8 +138,7 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
         message = messages.get(0);
         user = WebServiceUserClient.getInstance().getUserById(message.getPublisherId());
         tvMessage.setText(message.getMessage());
-
-//        publisherName.setText("Publié par : " + user.getNom() + " " + user.getPrenom());
+        publisherName.setText("Publié par : " + user.getNom() + " " + user.getPrenom());
 
     }
 
@@ -151,6 +157,7 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
 
     }
 
+    //Gestion du Progress Dialog
     public void showLoadingDialog(){
         try{
             //Création d'un ProgressDialog et l'afficher
@@ -187,5 +194,25 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
         }catch (Exception e){
 
         }
+    }
+
+    //Verification de la connexion internet du téléphone
+    private int checkConnectivity() {
+        boolean enabled = true;
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = connectivityManager.getActiveNetworkInfo();
+        //Vérification si le téléphone est connecté a un réseau mobile, wifi ou pas
+        if ((info == null || !info.isConnected() || !info.isAvailable())) {
+            //Aucune connexion internet
+            internet = 0;
+            Log.d("Internet", "OFF");
+            Toast.makeText(getActivity(), "Connexion internet perdu.", Toast.LENGTH_SHORT).show();
+            enabled = false;
+        } else {
+            //Le réseau est connecté
+            Log.d("Internet", "ON");
+            internet = 1;
+        }
+        return internet;
     }
 }
