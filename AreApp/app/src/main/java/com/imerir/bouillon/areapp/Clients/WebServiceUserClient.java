@@ -90,8 +90,6 @@ public class WebServiceUserClient {
         queue.add(request);
     }
 
-
-    //TODO Test this method
     public void POSTUser(User user) {
         final HashMap<String, String> params = new HashMap<String, String>();
         String apiUrl = "https://desolate-hollows-18116.herokuapp.com/mobile/User/";

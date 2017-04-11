@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_add_message"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.imerir.bouillon.areapp.Activities.AddMessageActivity">
+
+    <include layout="@layout/custom_toolbar"
+        android:id="@+id/customToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </include>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/IndicAction"
+        android:padding="8dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textColor="@color/colorPrimary"
+        android:text="Veuillez entrer ci-dessous votre message"
+        android:layout_below="@id/customToolbar"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:inputType="textMultiLine"
+        android:layout_below="@+id/nbCarRestants"
+        android:id="@+id/etMessage"
+        android:hint="Saissisez votre message ici..."
+        android:maxLength="255"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:id="@+id/nbCarRestants"
+        android:gravity="center"
+        android:layout_below="@+id/IndicAction"
+        tools:text="xx caractères restants"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Publier le message"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/btnPublierMessage"
+        android:textColor="#fff"
+        android:backgroundTint="@color/darkred" />
+</RelativeLayout>

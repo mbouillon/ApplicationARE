@@ -58,13 +58,12 @@ public class RegisterStudentActivity extends AppCompatActivity implements View.O
         setSupportActionBar(mToolbar);
 
         final ActionBar ab = getSupportActionBar();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ab.setDisplayShowTitleEnabled(false);
-
         mToolbar.inflateMenu(R.menu.main_menu);
-        mToolbar.setTitle("Inscription Etudiant Imerir");
+        mToolbar.setTitle("Inscription étudiant IMERIR ");
         mToolbar.setTitleTextColor(Color.WHITE);
 
-        mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_keyboard_backspace_white_24dp));
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

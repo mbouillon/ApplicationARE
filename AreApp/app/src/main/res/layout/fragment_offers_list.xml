@@ -112,7 +112,7 @@
             fab:menu_showShadow="true">
 
             <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/fbaAddDocument"
+                android:id="@+id/fbaAddOffer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_file_document_white_18dp"
@@ -120,7 +120,7 @@
                 fab:fab_size="mini" />
 
             <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/fbaAddOffer"
+                android:id="@+id/fbaAddMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_message_text_white_18dp"

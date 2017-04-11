@@ -149,19 +149,16 @@
 
         <Button
             android:text="S'inscrire"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="16dp"
             android:id="@+id/bRegisterR"
-            android:gravity="center"
             android:textColor="#fff"
-            android:background="@color/darkred"
-            android:layout_below="@+id/radioButtonGroup"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true" />
+            android:backgroundTint="@color/darkred"
+            android:layout_below="@+id/radioButtonGroup" />
 
     </RelativeLayout>
-</RelativeLayout>
+</RelativeLayout>s
 
 
 </FrameLayout>

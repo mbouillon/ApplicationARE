@@ -59,7 +59,9 @@
         android:id="@+id/bConnexionLogin"
         android:layout_below="@+id/etPasswordLogin"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:backgroundTint="@color/colorAccent"
+        android:textColor="#fff"/>
 
     <CheckBox
         android:text="Se souvenir de mon adresse mail."
@@ -126,7 +128,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_school_white_24dp"
-            fab:fab_label="Incription Etudiant IMERIR"
+            fab:fab_label="Inscription Etudiant IMERIR"
             fab:fab_size="mini" />
 
         <com.github.clans.fab.FloatingActionButton

@@ -31,7 +31,8 @@
         <activity android:name=".Activities.RegisterStudentActivity" />
         <activity android:name=".Activities.RegisterResponsableActivity" />
         <activity android:name=".Activities.MessagesListActivity" />
-        <activity android:name=".Activities.OfferDetailActivity"></activity>
+        <activity android:name=".Activities.OfferDetailActivity" />
+        <activity android:name=".Activities.AddMessageActivity"></activity>
     </application>
 
 </manifest>

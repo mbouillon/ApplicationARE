@@ -108,6 +108,7 @@
     <TextView
         android:text="Contactez un administrateur pour obtenir votre code d'accès"
         android:layout_width="wrap_content"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:id="@+id/Message"
         android:layout_below="@+id/etAcessCodeR"
@@ -135,7 +136,10 @@
         android:layout_below="@+id/Message"
         android:layout_alignParentStart="true"
         android:layout_marginTop="14dp"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:textColor="#fff"
+        android:backgroundTint="@color/darkred"
+        />
 </RelativeLayout>
 
 </RelativeLayout>

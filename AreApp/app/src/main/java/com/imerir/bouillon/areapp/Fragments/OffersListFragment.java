@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.imerir.bouillon.areapp.Activities.AddMessageActivity;
 import com.imerir.bouillon.areapp.Activities.LoginActivity;
 import com.imerir.bouillon.areapp.Activities.MainActivity;
 import com.imerir.bouillon.areapp.Activities.MessagesListActivity;
@@ -62,7 +63,6 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
     private Handler handler = new Handler();
     int internet;
 
-    com.github.clans.fab.FloatingActionMenu famAddOffer;
     com.github.clans.fab.FloatingActionButton fabAddOffer;
     com.github.clans.fab.FloatingActionButton fabAddMessage;
 
@@ -94,6 +94,15 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
         publisherName = (TextView) view.findViewById(R.id.PublishName);
         ImageMessage = (ImageView) view.findViewById(R.id.ImageMessage);
         cardView = (CardView) view.findViewById(R.id.cardView);
+        fabAddMessage = (com.github.clans.fab.FloatingActionButton) view.findViewById(R.id.fbaAddMessage);
+
+        fabAddMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AddMessageActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //Clic sur l'espace message affiche la liste de tous les messages publiés
         cardView.setOnClickListener(new View.OnClickListener() {
