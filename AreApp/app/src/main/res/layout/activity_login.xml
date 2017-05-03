@@ -73,18 +73,6 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true" />
 
-    <TextView
-        android:text="Si vous rencontrez des problèmes de connexion appuyer sur le bouton synchroniser pour recharger les données."
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textColor="@color/blue"
-        android:visibility="invisible"
-        android:id="@+id/tvAstuce"
-        android:layout_below="@+id/cbRemember"
-        android:layout_alignParentStart="true"
-        android:layout_alignBottom="@+id/fbaMenu" />
-
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/fbaMenu"
         android:layout_width="wrap_content"

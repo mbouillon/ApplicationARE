@@ -51,7 +51,8 @@ public class WebServiceMessageClient {
     }
 
     public void requestMessages(final OnMessagesListListener listener){
-        String apiUrl = "https://desolate-hollows-18116.herokuapp.com/mobile/LastMessage/";
+        //String apiUrl = "https://desolate-hollows-18116.herokuapp.com/mobile/LastMessage/";
+        String apiUrl = "http://10.0.2.2:5000/mobile/LastMessage";
         JsonObjectRequest request = new JsonObjectRequest(
                 apiUrl, null,
                 new Response.Listener<JSONObject>() {
@@ -84,7 +85,8 @@ public class WebServiceMessageClient {
     }
 
     public void requestAllMessages(final OnMessagesListListener listener){
-        String apiUrl = "https://desolate-hollows-18116.herokuapp.com/mobile/MessagesList/";
+        //String apiUrl = "https://desolate-hollows-18116.herokuapp.com/mobile/MessagesList/";
+        String apiUrl = "http://10.0.2.2:5000/mobile/MessagesList";
         JsonObjectRequest request = new JsonObjectRequest(
                 apiUrl, null,
                 new Response.Listener<JSONObject>() {
@@ -119,7 +121,8 @@ public class WebServiceMessageClient {
     //Methode de post de message
     public void POSTMessage(WelcomeMessage message) {
         final HashMap<String, String> params = new HashMap<String, String>();
-        String apiUrl = "https://desolate-hollows-18116.herokuapp.com/mobile/Message/";
+        //String apiUrl = "https://desolate-hollows-18116.herokuapp.com/mobile/Message/";
+        String apiUrl = "http://10.0.2.2:5000/mobile/Message/";
         Gson gson = new Gson();
         final String json = gson.toJson(message);
         RequestQueue queue = Volley.newRequestQueue(context);

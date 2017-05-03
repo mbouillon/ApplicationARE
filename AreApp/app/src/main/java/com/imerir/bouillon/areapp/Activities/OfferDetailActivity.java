@@ -1,6 +1,7 @@
 package com.imerir.bouillon.areapp.Activities;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -32,7 +33,7 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
     //Declatation des widgets
     private Toolbar mToolbar;
 
-    TextView Titre, Duree, NomEntreprise, Lieu, NomContact, Mail, Telephone, DatePublish;
+    TextView Titre, Duree, NomEntreprise, Lieu, NomContact, Mail, Telephone, DatePublish, Contrat;
     TextView Details, DetailsResponsables;
 
     com.github.clans.fab.FloatingActionButton callBtn, mailBtn;
@@ -68,6 +69,7 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
         Mail =   (TextView) findViewById(R.id.tvMail);
         Telephone =   (TextView) findViewById(R.id.tvTelephone);
         DatePublish = (TextView) findViewById(R.id.tvPublishOffre);
+        Contrat = (TextView) findViewById(R.id.tvContrat);
 
         Details =   (TextView) findViewById(R.id.tvDetails);
         DetailsResponsables =   (TextView) findViewById(R.id.tvDetailsResponsables);
@@ -81,11 +83,21 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
         Mail.setText(offer.getMailContact());
         Telephone.setText(offer.getTelephoneContact());
         DatePublish.setText("Publiée le : " + offer.getDatePublicaiton());
+        switch (offer.getTypeContrat()){
+            case 1:
+                Contrat.setText("Stage");
+                break;
+            case 2:
+                Contrat.setText("Apprentissage");
+                break;
+            default:
+                Contrat.setText("Contrat Non Connu");
+        }
 
         Details.setText(offer.getDetails());
         DetailsResponsables.setText(offer.getDetailsResponsables());
 
-        //Boutons flottats + Cast + Définition de l'icône.
+        //Boutons flottants + Cast + Définition de l'icône.
         callBtn = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.callBtn);
         mailBtn = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.mailBtn);
         callBtn.setImageDrawable(new IconicsDrawable(this)

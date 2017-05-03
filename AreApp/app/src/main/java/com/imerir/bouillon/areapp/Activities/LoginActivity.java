@@ -93,7 +93,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         password = (EditText) findViewById(R.id.etPasswordLogin);
         cbRemember = (CheckBox) findViewById(R.id.cbRemember);
         connexion = (Button) findViewById(R.id.bConnexionLogin);
-        tvAstuce = (TextView) findViewById(R.id.tvAstuce);
         floatingActionMenu = (FloatingActionMenu) findViewById(R.id.fbaMenu);
         fbaResponsable = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.fbaResponsable);
         fbaStudent = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.fbaEtudiant);
@@ -167,6 +166,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             preferences.edit().putString("mail", _mail).commit();
             preferences.edit().putString("password", _password).commit();
             preferences.edit().putBoolean("type", user.getType()).commit();
+            preferences.edit().putInt("id", user.getId()).commit();
             finish();
 
         } else  {
@@ -177,8 +177,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Toast.makeText(this, "Erreur, identifiants incorrects", Toast.LENGTH_SHORT).show();
             }
         }
-        //Affiche un message après avoir cliquer sur le bouton "CONNEXION"
-        tvAstuce.setVisibility(View.VISIBLE);
     }
 
     private boolean checkUser(String mail, String password) {

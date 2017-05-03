@@ -50,7 +50,8 @@ public class WebServiceOfferClient {
     }
 
     public void requestOffers(final OnOffersListListener listener) {
-        String apiUrl = "https://desolate-hollows-18116.herokuapp.com/mobile/OffersListLinkedWithContact/";
+        //String apiUrl = "https://desolate-hollows-18116.herokuapp.com/mobile/OffersListLinkedWithContact/";
+        String apiUrl = "http://10.0.2.2:5000/mobile/OffersListLinkedWithContact/";
         JsonObjectRequest request = new JsonObjectRequest(
                 apiUrl, null,
                 new Response.Listener<JSONObject>() {

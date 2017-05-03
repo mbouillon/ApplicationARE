@@ -1,5 +1,6 @@
 package com.imerir.bouillon.areapp.Activities;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -11,9 +12,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.imerir.bouillon.areapp.Clients.WebServiceMessageClient;
+import com.imerir.bouillon.areapp.Models.WelcomeMessage;
 import com.imerir.bouillon.areapp.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 public class AddMessageActivity extends AppCompatActivity implements TextWatcher{
@@ -48,9 +54,6 @@ public class AddMessageActivity extends AppCompatActivity implements TextWatcher
         });
 
 
-
-
-
         //Cast des widgets
         nbCarRestants = (TextView) findViewById(R.id.nbCarRestants);
         sendMessage = (Button) findViewById(R.id.btnPublierMessage);
@@ -59,6 +62,33 @@ public class AddMessageActivity extends AppCompatActivity implements TextWatcher
         nbCarRestants.setText("255 Caractères restants...");
         //Attache le listener TextWatcher sur l'EditText
         etMessage.addTextChangedListener(this);
+
+        //Au click du bouton
+        sendMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Construction du json pour le post avec les données dans le champs
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("Message", etMessage.getText().toString());
+                    jsonObject.put("PublisherId", 1);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                //Gestion du cas champ vide non rempli
+                if(etMessage.getText().toString().equals("")) Toast.makeText(getBaseContext(), "Saissisez un message avant de l'envoyer merci.", Toast.LENGTH_SHORT).show();
+                else
+                {
+                    WelcomeMessage wm = new WelcomeMessage(jsonObject);
+                    WebServiceMessageClient.getInstance().POSTMessage(wm);
+                    Intent MainActivityIntent = new Intent(getBaseContext(), MainActivity.class);
+                    startActivity(MainActivityIntent);
+                    finish();
+                }
+
+            }
+        });
 
     }
 
@@ -83,4 +113,5 @@ public class AddMessageActivity extends AppCompatActivity implements TextWatcher
     public void onTextChanged(CharSequence s, int start, int before, int count) {
 
     }
+
 }

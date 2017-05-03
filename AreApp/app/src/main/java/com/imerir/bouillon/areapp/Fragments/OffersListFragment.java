@@ -81,7 +81,7 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
 
         //Correction du bug lié au commit eda353f
         try {
-            Thread.sleep(200);
+            Thread.sleep(500);
             WebServiceMessageClient.getInstance().requestMessages(this);
         } catch (InterruptedException e) {
             e.printStackTrace();
