@@ -167,6 +167,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             preferences.edit().putString("password", _password).commit();
             preferences.edit().putBoolean("type", user.getType()).commit();
             preferences.edit().putInt("id", user.getId()).commit();
+            preferences.edit().putInt("formation", user.getFormation()).commit();
             finish();
 
         } else  {
