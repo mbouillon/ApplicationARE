@@ -1,7 +1,9 @@
 package com.imerir.bouillon.areapp.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -71,7 +73,8 @@ public class AddMessageActivity extends AppCompatActivity implements TextWatcher
                 JSONObject jsonObject = new JSONObject();
                 try {
                     jsonObject.put("Message", etMessage.getText().toString());
-                    jsonObject.put("PublisherId", 1);
+                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                    jsonObject.put("PublisherId", preferences.getInt("id", 0));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -86,7 +89,6 @@ public class AddMessageActivity extends AppCompatActivity implements TextWatcher
                     startActivity(MainActivityIntent);
                     finish();
                 }
-
             }
         });
 
