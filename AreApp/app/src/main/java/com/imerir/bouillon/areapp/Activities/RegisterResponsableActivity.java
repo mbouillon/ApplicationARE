@@ -99,7 +99,6 @@ public class RegisterResponsableActivity extends AppCompatActivity implements Vi
 
         //TODO Vérifier si imerir.com
         //TODO Ne pas afficher un toast dans les erreurs de champs mais afficher le champ en rouge
-
         //vérification si les champs sont remplis
         if (((!etName.getText().toString().equals(""))) &
                 ((!etfName.getText().toString().equals(""))) &
@@ -122,7 +121,7 @@ public class RegisterResponsableActivity extends AppCompatActivity implements Vi
                         WebServiceUserClient.getInstance().POSTUser(user);
                         Log.d("Ok", "Compte créé avec succès");
                         Toast.makeText(this, "Compte créé avec succès.", Toast.LENGTH_SHORT).show();
-                        return;
+                        finish();
                     } else
                         Log.d("Erreur", "Code incorrect");
                         Toast.makeText(this, "Code d'accès incorrect", Toast.LENGTH_SHORT).show();

@@ -132,14 +132,14 @@ public class RegisterStudentActivity extends AppCompatActivity implements View.O
                         ((!etConfirmPassword.getText().toString().equals("")))) {
                     Log.d("Ok", "Champs remplis");
 
-                    //Verifie que le mail et pwd sois identique
+                    //Verifie que le mail et pwd soies identique
                     if (((etMail.getText().toString()).equals(etConfirmMail.getText().toString())) && ((etPassword.getText().toString()).equals(etConfirmPassword.getText().toString()))) {
                         User user = new User(jsonObject);
                         //poste le user dans la base de données
                         WebServiceUserClient.getInstance().POSTUser(user);
                         Log.d("Ok", "Compte créé avec succès.");
                         Toast.makeText(getApplication(), "Compte créé avec succès.", Toast.LENGTH_SHORT).show();
-                        return;
+                        finish();
                     } else {
                         Log.d("Erreur", "Password & Mail");
                         Toast.makeText(getApplication(), "Erreur : Mot de passe ou Email", Toast.LENGTH_SHORT).show();

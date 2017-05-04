@@ -1,7 +1,14 @@
 package com.imerir.bouillon.areapp.Utils;
 
 import android.app.Application;
+import android.content.Context;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.imerir.bouillon.areapp.Clients.WebServiceDocumentClient;
 import com.imerir.bouillon.areapp.Clients.WebServiceMessageClient;
 import com.imerir.bouillon.areapp.Clients.WebServiceOfferClient;
@@ -52,5 +59,26 @@ public class App extends Application {
             e.printStackTrace();
         }
         return response;
+    }
+
+
+    public static void sendMailIsValid(String userMail, Context context){
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String url ="http://10.0.2.2:5000/sendCheckMail/" +  userMail  ;
+
+// Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+// Add the request to the RequestQueue.
+        queue.add(stringRequest);
     }
 }

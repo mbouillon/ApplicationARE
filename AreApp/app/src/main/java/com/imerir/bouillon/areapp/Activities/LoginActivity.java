@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -37,6 +38,7 @@ import com.imerir.bouillon.areapp.R;
 import java.util.ArrayList;
 
 import static com.imerir.bouillon.areapp.Utils.App.md5;
+import static com.imerir.bouillon.areapp.Utils.App.sendMailIsValid;
 
 /**
  * Created by maxime on 07/03/2017.
@@ -50,8 +52,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     com.github.clans.fab.FloatingActionMenu floatingActionMenu;
     com.github.clans.fab.FloatingActionButton fbaStudent, fbaResponsable;
     EditText mail, password;
-    TextView tvAstuce;
-    Button connexion;
+    CardView accountNotValid;
+    Button connexion, sendMail;
 
     //Gestion de la Progress Bar
     ProgressDialog loadingDialog;
@@ -96,6 +98,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         floatingActionMenu = (FloatingActionMenu) findViewById(R.id.fbaMenu);
         fbaResponsable = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.fbaResponsable);
         fbaStudent = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.fbaEtudiant);
+        sendMail = (Button) findViewById(R.id.btnSendMail);
+        accountNotValid = (CardView) findViewById(R.id.compteNonValide);
+
 
         WebServiceUserClient.getInstance().requestUsers(this);
 
@@ -120,6 +125,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         });
 
+        //Bouton de renvoi de mail de validation
+        sendMail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendMailIsValid(mail.getText().toString(), getBaseContext());
+                accountNotValid.setVisibility(View.INVISIBLE);
+            }
+        });
+
         //Création des préférences à sauvegarder
         loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
         loginPrefsEditor = loginPreferences.edit();
@@ -129,9 +143,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             cbRemember.setChecked(true);
         }
 
-        //TODO Delete after tests
-        //mail.setText("maxime.bouillon@imerir.com");
-        //password.setText("maxime");
     }
 
     @Override
@@ -155,20 +166,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 loginPrefsEditor.commit();
             }
 
-            Intent mainActivityIntent = new Intent(this, MainActivity.class);
-            startActivity(mainActivityIntent);
+            if(user.isValid()) {
+                Intent mainActivityIntent = new Intent(this, MainActivity.class);
+                startActivity(mainActivityIntent);
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+                preferences.edit().putBoolean("isConnected", true).commit();
+                preferences.edit().putString("mail", _mail).commit();
+                preferences.edit().putString("password", _password).commit();
+                preferences.edit().putBoolean("type", user.getType()).commit();
+                preferences.edit().putInt("id", user.getId()).commit();
+                preferences.edit().putInt("formation", user.getFormation()).commit();
+                finish();
+            }
+            else{
+                accountNotValid.setVisibility(View.VISIBLE);
+            }
 
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-            preferences.edit().putBoolean("isConnected", true).commit();
-            //TODO Implements this for connexion
-            //Enregistrez l'utilisateur ... et le type à envoyer des requêtes au serveur avec cet identifiant
-            //Et enregistrez le type d'utilisateur pour déterminer si l'application est utilisée par un responsable ou un étudiant
-            preferences.edit().putString("mail", _mail).commit();
-            preferences.edit().putString("password", _password).commit();
-            preferences.edit().putBoolean("type", user.getType()).commit();
-            preferences.edit().putInt("id", user.getId()).commit();
-            preferences.edit().putInt("formation", user.getFormation()).commit();
-            finish();
+
+
+
 
         } else  {
             //Vérifie la présence de réseau
@@ -226,7 +242,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         return true;
     }
 
-    //Assigne chaque item du menu a sont action
+    //Assigne chaque item du menu a son action
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
@@ -279,7 +295,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    //Verification de la connexion internet du téléphone
+    //Verification de la connexion internet
     private int checkConnectivity() {
         boolean enabled = true;
         ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
