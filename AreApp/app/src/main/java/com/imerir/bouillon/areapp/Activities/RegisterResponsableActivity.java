@@ -1,5 +1,6 @@
 package com.imerir.bouillon.areapp.Activities;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -82,7 +83,7 @@ public class RegisterResponsableActivity extends AppCompatActivity implements Vi
 
     @Override
     public void onClick(View view) {
-        //Requete JSON
+        //Creation de l'objet JSON qui va servir a construire notre objet User
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("Nom", etName.getText().toString());
@@ -121,6 +122,8 @@ public class RegisterResponsableActivity extends AppCompatActivity implements Vi
                         WebServiceUserClient.getInstance().POSTUser(user);
                         Log.d("Ok", "Compte créé avec succès");
                         Toast.makeText(this, "Compte créé avec succès.", Toast.LENGTH_SHORT).show();
+                        Intent LoginActivityIntent = new Intent(getBaseContext(), LoginActivity.class);
+                        startActivity(LoginActivityIntent);
                         finish();
                     } else
                         Log.d("Erreur", "Code incorrect");

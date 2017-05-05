@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:name=".Utils.App"
@@ -32,7 +33,8 @@
         <activity android:name=".Activities.RegisterResponsableActivity" />
         <activity android:name=".Activities.MessagesListActivity" />
         <activity android:name=".Activities.OfferDetailActivity" />
-        <activity android:name=".Activities.AddMessageActivity"></activity>
+        <activity android:name=".Activities.AddMessageActivity" />
+        <activity android:name=".Activities.AddOfferActivity"></activity>
     </application>
 
 </manifest>

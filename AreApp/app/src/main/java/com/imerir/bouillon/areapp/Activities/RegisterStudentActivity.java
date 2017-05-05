@@ -1,5 +1,6 @@
 package com.imerir.bouillon.areapp.Activities;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.opengl.EGLSurface;
 import android.os.Bundle;
@@ -139,6 +140,8 @@ public class RegisterStudentActivity extends AppCompatActivity implements View.O
                         WebServiceUserClient.getInstance().POSTUser(user);
                         Log.d("Ok", "Compte créé avec succès.");
                         Toast.makeText(getApplication(), "Compte créé avec succès.", Toast.LENGTH_SHORT).show();
+                        Intent LoginActivityIntent = new Intent(getBaseContext(), LoginActivity.class);
+                        startActivity(LoginActivityIntent);
                         finish();
                     } else {
                         Log.d("Erreur", "Password & Mail");

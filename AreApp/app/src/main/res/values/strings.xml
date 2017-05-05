@@ -4,4 +4,19 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_login">LoginActivity</string>
+
+    <string-array name="liste_contrats">
+        <item>Type de contrat</item>
+        <item>Stage</item>
+        <item>Apprentissage</item>
+        <item>Type non connu</item>
+    </string-array>
+    
+    <string-array name="liste_formations">
+        <item>Formation</item>
+        <item>CDPIR</item>
+        <item>CDSM</item>
+        <item>UPVD</item>
+    </string-array>
+
 </resources>

@@ -1,7 +1,10 @@
 package com.imerir.bouillon.areapp.Utils;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Application;
 import android.content.Context;
+import android.content.DialogInterface;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -65,20 +68,17 @@ public class App extends Application {
     public static void sendMailIsValid(String userMail, Context context){
         RequestQueue queue = Volley.newRequestQueue(context);
         String url ="http://10.0.2.2:5000/sendCheckMail/" +  userMail  ;
-
-// Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
             }
         });
-// Add the request to the RequestQueue.
         queue.add(stringRequest);
     }
+
 }

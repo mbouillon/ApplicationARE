@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.imerir.bouillon.areapp.Activities.AddMessageActivity;
+import com.imerir.bouillon.areapp.Activities.AddOfferActivity;
 import com.imerir.bouillon.areapp.Activities.LoginActivity;
 import com.imerir.bouillon.areapp.Activities.MainActivity;
 import com.imerir.bouillon.areapp.Activities.MessagesListActivity;
@@ -95,11 +96,19 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
         ImageMessage = (ImageView) view.findViewById(R.id.ImageMessage);
         cardView = (CardView) view.findViewById(R.id.cardView);
         fabAddMessage = (com.github.clans.fab.FloatingActionButton) view.findViewById(R.id.fbaAddMessage);
-
+        fabAddOffer = (com.github.clans.fab.FloatingActionButton) view.findViewById(R.id.fbaAddOffer);
         fabAddMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), AddMessageActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        fabAddOffer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AddOfferActivity.class);
                 startActivity(intent);
             }
         });

@@ -85,6 +85,7 @@ public class AddMessageActivity extends AppCompatActivity implements TextWatcher
                 {
                     WelcomeMessage wm = new WelcomeMessage(jsonObject);
                     WebServiceMessageClient.getInstance().POSTMessage(wm);
+                    Toast.makeText(getApplicationContext(), "Le message a bien été ajouté", Toast.LENGTH_LONG).show();
                     Intent MainActivityIntent = new Intent(getBaseContext(), MainActivity.class);
                     startActivity(MainActivityIntent);
                     finish();

@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.imerir.bouillon.areapp.Clients.WebServiceOfferClient;
 import com.imerir.bouillon.areapp.Models.Offer;
@@ -186,11 +187,12 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.deleteOffer:
-                //Pouvoir supprimer l'offre en cours
-                //deleteOffer();
-                //Toast.makeText(getApplicationContext(), "Suppression...", Toast.LENGTH_LONG).show();
-                //super.onBackPressed();
-                return true;
+                //Envoie la requete de suppression + Destruction de l'activité + Rechargement de la main activity
+                WebServiceOfferClient.getInstance().DELETEOffer(offer.getOfferID());
+                Toast.makeText(getApplicationContext(), "L'offre " + offer.getTitre() + " a bien été supprimée", Toast.LENGTH_LONG).show();
+                Intent MainActivityIntent = new Intent(getBaseContext(), MainActivity.class);
+                startActivity(MainActivityIntent);
+                finish();
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -48,6 +48,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private ArrayList<User> _user;
     User user;
+    private boolean cr = false;
 
     com.github.clans.fab.FloatingActionMenu floatingActionMenu;
     com.github.clans.fab.FloatingActionButton fbaStudent, fbaResponsable;
@@ -125,12 +126,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         });
 
+
+
         //Bouton de renvoi de mail de validation
         sendMail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendMailIsValid(mail.getText().toString(), getBaseContext());
-                accountNotValid.setVisibility(View.INVISIBLE);
+                //gestion du cas ou l'email renseigné dans le champ est faux ou n'existe pas dans la BDD
+                for(int i=0; i < _user.size(); i++ ){
+                    if(mail.getText().toString().equals(_user.get(i).getMail())){
+                        sendMailIsValid(mail.getText().toString(), getBaseContext());
+                        accountNotValid.setVisibility(View.INVISIBLE);
+                        cr = true;
+                    }
+                }
+                if(!cr)
+                    Toast.makeText(getBaseContext(), "Erreur votre compte n'existe pas ou le champ mail est mal renseigné, corrigez le champ et retentez ", Toast.LENGTH_LONG).show();
+
             }
         });
 
