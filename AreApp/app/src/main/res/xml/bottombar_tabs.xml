@@ -5,17 +5,17 @@
         <tab
             id="@+id/tab_offers"
             icon="@drawable/ic_file_document_black_24dp"
-            title="Offres"
+            title="@string/tab_offer"
             barColorWhenSelected="#FFFFFF" />
         <tab
             id="@+id/tab_documents"
             icon="@drawable/ic_archive_black_24dp"
-            title="Documents"
+            title="@string/tab_document"
             barColorWhenSelected="#FFFFFF"/>
         <tab
             id="@+id/tab_profile"
             icon="@drawable/ic_account_black_24dp"
-            title="Profil"
+            title="@string/tab_profil"
             barColorWhenSelected="#FFFFFF"/>
     </tabs>
 </PreferenceScreen>

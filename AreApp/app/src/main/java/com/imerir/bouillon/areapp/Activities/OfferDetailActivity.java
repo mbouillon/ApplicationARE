@@ -187,14 +187,30 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.deleteOffer:
-                //Envoie la requete de suppression + Destruction de l'activité + Rechargement de la main activity
-                WebServiceOfferClient.getInstance().DELETEOffer(offer.getOfferID());
-                Toast.makeText(getApplicationContext(), "L'offre " + offer.getTitre() + " a bien été supprimée", Toast.LENGTH_LONG).show();
-                Intent MainActivityIntent = new Intent(getBaseContext(), MainActivity.class);
-                startActivity(MainActivityIntent);
-                finish();
+                new AlertDialog.Builder(this)
+                        .setTitle("Supprimer l'offre")
+                        .setMessage("Êtes-vous sûr de vouloir supprimer cette entrée?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                            //Envoie la requete de suppression + Destruction de l'activité + Rechargement de la main activity
+                            WebServiceOfferClient.getInstance().DELETEOffer(offer.getOfferID());
+                            Toast.makeText(getApplicationContext(), "L'offre " + offer.getTitre() + " a bien été supprimée", Toast.LENGTH_LONG).show();
+                            Intent MainActivityIntent = new Intent(getBaseContext(), MainActivity.class);
+                            startActivity(MainActivityIntent);
+                            finish();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
 }

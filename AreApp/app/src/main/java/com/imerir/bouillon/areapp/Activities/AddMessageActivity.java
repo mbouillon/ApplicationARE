@@ -46,7 +46,7 @@ public class AddMessageActivity extends AppCompatActivity implements TextWatcher
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ab.setDisplayShowTitleEnabled(false);
         mToolbar.inflateMenu(R.menu.main_menu);
-        mToolbar.setTitle("Ajouter un message d'accueil ");
+        mToolbar.setTitle(getResources().getText(R.string.title_add_message));
         mToolbar.setTitleTextColor(Color.WHITE);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

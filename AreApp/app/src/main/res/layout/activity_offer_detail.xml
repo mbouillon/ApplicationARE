@@ -20,7 +20,6 @@
         android:layout_alignParentStart="true">
     </include>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,9 +35,7 @@
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
             android:layout_marginTop="4dp"
-            fab:cardBackgroundColor="@color/cardview_shadow_end_color"
-
-            >
+            fab:cardBackgroundColor="@color/cardview_shadow_end_color">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -168,7 +165,7 @@
                     android:textColor="@color/colorAccent"
                     android:textSize="18dp"
                     android:textStyle="bold"
-                    android:text="Details : "/>
+                    android:text="@string/tv_offer_detail"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -189,13 +186,14 @@
                     android:textSize="18dp"
                     android:paddingTop="4dp"
                     android:textStyle="bold"
-                    android:text="Details visibles par les responsables : "/>
+                    android:text="@string/tv_offer_detail_reponsable"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="Lloreyusdghyuqgdyugudigyqsgdyugqsyudgiqsugdyuqsydgqsyudgyuqsgyudgyugqdyugduiqgdyuqgydgquydgyqdisgsdyuqgyuqdsgyudqgiuqdsgsdqygqsdyugsdqygsdqigqsdygdyqsugqsdyigqsd"
                     android:id="@+id/tvDetailsResponsables"/>
             </LinearLayout>
+
             <com.github.clans.fab.FloatingActionMenu
                 android:id="@+id/fbaMenuOffers"
                 android:layout_width="wrap_content"
@@ -218,7 +216,6 @@
                 fab:menu_shadowYOffset="4dp"
                 fab:menu_showShadow="true">
 
-
                 <com.github.clans.fab.FloatingActionButton
                     android:id="@+id/callBtn"
                     android:layout_width="wrap_content"
@@ -240,9 +237,6 @@
 
     </LinearLayout>
 
-
-
-
     <TextView
         android:id="@+id/tvPublishOffre"
         android:layout_width="match_parent"
@@ -253,8 +247,6 @@
         android:textSize="16dp"
         android:gravity="center"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="2dp"
-        />
-
+        android:layout_marginBottom="2dp" />
 
 </RelativeLayout>

@@ -1,0 +1,127 @@
+<resources>
+    <string name="app_name">A.R.E - IMERIR</string>
+
+    <string-array name="liste_contrats">
+        <item>Type de contrat</item>
+        <item>Stage</item>
+        <item>Apprentissage</item>
+        <item>Type non connu</item>
+    </string-array>
+
+    <string-array name="liste_formations">
+        <item>Formation</item>
+        <item>CDPIR</item>
+        <item>CDSM</item>
+        <item>UPVD</item>
+    </string-array>
+
+    <!-- Bottom Bar  -->
+    <string name="tab_offer">Offres</string>
+    <string name="tab_document">Documents</string>
+    <string name="tab_profil">Profil</string>
+
+    <!-- Set Title  -->
+    <string name="title_register_reponsable">Inscription Reponsable ARE</string>
+    <string name="title_register_student">Inscription responsable ARE</string>
+    <string name="title_offer">Offres diponibles</string>
+    <string name="title_document">Documents disponible</string>
+    <string name="title_message">Anciens Messages Publiés</string>
+    <string name="tab_profil_responsable">Profil Reponsable</string>
+    <string name="tab_profil_student">Profil Etudiant</string>
+    <string name="title_add_message">Ajouter un message d\'accueil</string>
+    <string name="title_add_offer">Ajouter une nouvelle offre</string>
+
+    <!-- Add Message -->
+    <string name="tv_add_message">Veuillez entrer ci-dessous votre message</string>
+    <string name="et_add_message">Saisissez votre message ici</string>
+    <string name="bt_add_message">Publier le message</string>
+
+    <!-- Add Offer -->
+    <string name="et_add_offer_poste_name">Nom du poste</string>
+    <string name="et_add_offer_contrat_name">Durée du contrat</string>
+    <string name="et_add_offer_company_name">Nom de l\'entreprise</string>
+    <string name="et_add_offer_location">Lieu</string>
+    <string name="et_add_offer_company_contact_name">Nom du contact entreprise</string>
+    <string name="et_add_offer_mail">Mail du contact entreprise</string>
+    <string name="et_add_offer_phone">N° Téléphone du contact entreprise</string>
+    <string name="et_add_offer_details">Détails</string>
+    <string name="et_add_offer_details_reponsable">Détails visibles par les responsables</string>
+    <string name="bt_add_offer">Ajouter l\'offre</string>
+
+    <string name="type_add_offer_Internship">Stage</string>
+    <string name="type_add_offer_Apprenticeship">Apprentissage</string>
+    <string name="type_add_offer_Type_not_known">Type non connu</string>
+
+    <!-- Login -->
+    <string name="et_login_mail">Adresse Mail</string>
+    <string name="et_login_mdp">Mot de passe</string>
+    <string name="bt_login">Connexion</string>
+    <string name="cb_login">Se souvenir de mon adresse mail.</string>
+    <string name="tv_login_valid_mail">Vous n\'avez pas validé votre compte, veuillez consulter votre boite mail pour cliquer sur le lien de validation, si vous n\'avez pas reçu le mail cliquez sur le bouton ci dessous et/ou vérifiez vos spams.</string>
+    <string name="bt_login_valid_mail">Envoyer email de validation</string>
+    <string name="bt_login_register_responsable">Inscription Responsable ARE</string>
+    <string name="bt_login_register_student">Inscription Etudiant IMERIR</string>
+
+    <!-- Offer Detail -->
+    <string name="tv_offer_detail">Détails : </string>
+    <string name="tv_offer_detail_reponsable">Détails visibles par les responsables : </string>
+
+    <!-- Register Responsable-->
+    <string name="et_register_reponsable_fName">Prénom</string>
+    <string name="et_register_reponsable_Name">Nom</string>
+    <string name="et_register_reponsable_mail">Mail</string>
+    <string name="et_register_reponsable_mail_valid">Confirmation Mail</string>
+    <string name="et_register_reponsable_mdp">Mot de Passe</string>
+    <string name="et_register_reponsable_mdp_valid">Confirmation Mot de Passe</string>
+    <string name="et_register_reponsable_phone">Téléphone</string>
+    <string name="et_register_reponsable_access">Mot de passe d\'accès</string>
+    <string name="tv_register_reponsable">Contactez un administrateur pour obtenir votre code d\'accès</string>
+    <string name="bt_register_reponsable">S\'inscrire</string>
+
+    <!-- Register Student -->
+    <string name="et_register_student_fName">Prénom</string>
+    <string name="et_register_student_Name">Nom</string>
+    <string name="et_register_student_mail">Mail</string>
+    <string name="et_register_student_mail_valid">Confirmation Mail</string>
+    <string name="et_register_student_mdp">Mot de Passe</string>
+    <string name="et_register_student_mdp_valid">Confirmation Mot de Passe</string>
+    <string name="et_register_student_phone">Téléphone</string>
+    <string name="rg_register_student_cdpir">CDPIR</string>
+    <string name="rg_register_student_cdsm">CDSM</string>
+    <string name="rg_register_student_upvd">UPVD</string>
+    <string name="bt_register_student">S\'inscrire</string>
+
+    <!-- Document Item -->
+    <string name="iv_document_item_document">Icon Document</string>
+
+    <!-- Fragment Document -->
+    <string name="bt_document_add_document">Ajouter un document</string>
+
+    <!-- Fragment Offers List -->
+    <string name="iv_offers_list_message">Icon Message</string>
+    <string name="bt_offers_listt_add_offer">Ajouter une offre</string>
+    <string name="iv_offers_list_add_message">Ajouter un message</string>
+
+    <!-- Message Item -->
+    <string name="iv_message_item_message">Icon Message</string>
+
+    <!-- Offer Item -->
+    <string name="iv_offer_item_offer">Icon Offre</string>
+    <string name="tv_offer_item_offer">Détails...</string>
+
+    <!-- Main Menu -->
+    <string name="item_main_menu_deco">Déconnexion</string>
+    <string name="item_main_menu_quit">Quitter l\'application</string>
+
+    <!-- Menu Document PDF -->
+    <string name="item_menu_document_pdf_dl">Télécharger le PDF</string>
+    <string name="item_menu_document_pdf_delete">Supprimer le Document</string>
+
+    <!-- Menu Login -->
+    <string name="item_menu_login_sync">Synchroniser</string>
+
+    <!-- Menu Offer Detail -->
+    <string name="item_menu_offer_detail_delete">Supprimer l\'offre</string>
+
+
+</resources>

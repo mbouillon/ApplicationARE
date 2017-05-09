@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
             ab.setDisplayShowTitleEnabled(false);
 
             mToolbar.inflateMenu(R.menu.main_menu);
-            mToolbar.setTitle("Offres disponibles");
+            mToolbar.setTitle(getResources().getText(R.string.title_offer));
             mToolbar.setTitleTextColor(Color.WHITE);
 
             //Initialisation de la vue principale + Mise en place des éléments du menu
@@ -95,13 +95,13 @@ public class MainActivity extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.fragmentOffers, new OffersListFragment())
                                 .commit();
-                        mToolbar.setTitle("Offres disponibles");
+                        mToolbar.setTitle(getResources().getText(R.string.title_offer));
                     }
                     if (tabId == R.id.tab_documents) {
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.fragmentOffers, new DocumentListFragment())
                                 .commit();
-                        mToolbar.setTitle("Documents disponibles");
+                        mToolbar.setTitle(getResources().getText(R.string.title_document));
                     }
                     if (tabId == R.id.tab_profile) {
 

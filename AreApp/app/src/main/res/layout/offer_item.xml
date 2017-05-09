@@ -18,14 +18,14 @@
             android:orientation="vertical">
 
             <ImageView
+                android:contentDescription="@string/iv_offer_item_offer"
                 android:layout_marginTop="8dp"
                 android:layout_marginLeft="4dp"
                 android:id="@+id/Image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_file_document_grey600_48dp"
-                android:paddingRight="4dp"
-                />
+                android:paddingRight="4dp" />
 
         </LinearLayout>
 
@@ -83,7 +83,7 @@
                 android:paddingTop="4dp"/>
 
             <TextView
-                android:text="Details..."
+                android:text="@string/tv_offer_item_offer"
                 android:layout_gravity="right"
                 android:paddingRight="8dp"
                 android:layout_width="wrap_content"
@@ -91,8 +91,6 @@
                 android:id="@+id/Details"
                 android:paddingTop="4dp"/>
         </LinearLayout>
-
-
     </LinearLayout>
 
     <View

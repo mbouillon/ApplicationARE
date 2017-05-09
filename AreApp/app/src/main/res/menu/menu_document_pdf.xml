@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
         android:id="@+id/download"
-        android:title="Télécharger le pdf" />
-
+        android:title="@string/item_menu_document_pdf_dl" />
     <item
         android:id="@+id/deleteDocument"
-        android:title="Supprimer le Document" />
-
+        android:title="@string/item_menu_document_pdf_delete" />
 </menu>

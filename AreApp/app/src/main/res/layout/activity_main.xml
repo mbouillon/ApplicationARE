@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
@@ -10,7 +9,7 @@
         android:layout_height="wrap_content">
     </include>
 
-<android.support.design.widget.CoordinatorLayout
+    <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
@@ -19,18 +18,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.imerir.bouillon.areapp.Activities.MainActivity"
     android:layout_below="@+id/customToolbar">
-
-
-
         <FrameLayout
-
             android:id="@+id/fragmentOffers"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-
-
-
-
 
     <com.roughike.bottombar.BottomBar
         android:id="@+id/bottomBar"
@@ -40,8 +31,6 @@
         app:bb_tabXmlResource="@xml/bottombar_tabs"
         app:bb_behavior="shy"
         android:layout_gravity="bottom"/>
-
-
 
     </android.support.design.widget.CoordinatorLayout>
 

@@ -5,7 +5,7 @@
     tools:context=".Activities.LoginActivity">
     <item
         android:id="@+id/restartButton"
-        android:title="Synchroniser"
+        android:title="@string/item_menu_login_sync"
         app:showAsAction="always"
         android:icon="@android:drawable/stat_notify_sync"/>
 </menu>

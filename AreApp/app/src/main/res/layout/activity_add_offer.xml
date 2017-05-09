@@ -30,7 +30,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:hint="Nom du poste"
+                android:hint="@string/et_add_offer_poste_name"
                 android:id="@+id/NomOffre"/>
 
             <EditText
@@ -39,7 +39,7 @@
                 android:inputType="textPersonName"
                 android:gravity="end"
                 android:ems="10"
-                android:hint="Durée du contrat"
+                android:hint="@string/et_add_offer_contrat_name"
                 android:id="@+id/Duree"/>
         </LinearLayout>
 
@@ -67,7 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:hint="Nom de l'entreprise" />
+                android:hint="@string/et_add_offer_company_name" />
 
             <EditText
                 android:layout_marginTop="4dp"
@@ -76,7 +76,7 @@
                 android:ems="10"
                 android:layout_height="wrap_content"
                 android:id="@+id/Lieu"
-                android:hint="Lieu"/>
+                android:hint="@string/et_add_offer_location"/>
 
             <EditText
                 android:layout_marginTop="4dp"
@@ -84,7 +84,7 @@
                 android:inputType="textPersonName"
                 android:ems="10"
                 android:layout_height="wrap_content"
-                android:hint="Nom du contact entreprise"
+                android:hint="@string/et_add_offer_company_contact_name"
                 android:id="@+id/NomContact"/>
             <EditText
                 android:layout_marginTop="4dp"
@@ -92,7 +92,7 @@
                 android:inputType="textEmailAddress"
                 android:ems="10"
                 android:layout_height="wrap_content"
-                android:hint="Mail du contact entreprise"
+                android:hint="@string/et_add_offer_mail"
                 android:id="@+id/MailContact"/>
             <EditText
                 android:layout_marginTop="4dp"
@@ -100,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="phone"
                 android:ems="10"
-                android:hint="N° Téléphone du contact entreprise"
+                android:hint="@string/et_add_offer_phone"
                 android:id="@+id/PhoneContact"/>
 
             <EditText
@@ -109,7 +109,7 @@
                 android:inputType="textPersonName"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Détails"
+                android:hint="@string/et_add_offer_details"
                 android:id="@+id/Detail"/>
             <EditText
                 android:layout_marginTop="4dp"
@@ -117,7 +117,7 @@
                 android:inputType="textPersonName"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Détails visibles par les responsables"
+                android:hint="@string/et_add_offer_details_reponsable"
                 android:id="@+id/DetailsResponsables"/>
 
             <Button
@@ -126,7 +126,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/AjouterOffre"
                 android:backgroundTint="@color/colorAccent"
-                android:text="Ajouter l'offre"
+                android:text="@string/bt_add_offer"
                 android:textColor="#FFFFFF"/>
         </LinearLayout>
     </LinearLayout>

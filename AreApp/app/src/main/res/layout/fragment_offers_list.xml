@@ -46,6 +46,7 @@
             android:layout_toStartOf="@+id/ImageMessage" />
 
             <ImageView
+                android:contentDescription="@string/iv_offers_list_message"
                 android:id="@+id/ImageMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -116,7 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_file_document_white_18dp"
-                fab:fab_label="Ajouter une offre"
+                fab:fab_label="@string/bt_offers_listt_add_offer"
                 fab:fab_size="mini" />
 
             <com.github.clans.fab.FloatingActionButton
@@ -124,7 +125,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_message_text_white_18dp"
-                fab:fab_label="Ajouter un message"
+                fab:fab_label="@string/iv_offers_list_add_message"
                 fab:fab_size="mini" />
 
         </com.github.clans.fab.FloatingActionMenu>

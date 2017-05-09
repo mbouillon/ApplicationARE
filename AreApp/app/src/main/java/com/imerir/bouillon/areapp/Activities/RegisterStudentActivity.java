@@ -62,7 +62,7 @@ public class RegisterStudentActivity extends AppCompatActivity implements View.O
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ab.setDisplayShowTitleEnabled(false);
         mToolbar.inflateMenu(R.menu.main_menu);
-        mToolbar.setTitle("Inscription étudiant IMERIR ");
+        mToolbar.setTitle(getResources().getText(R.string.tab_profil_student));
         mToolbar.setTitleTextColor(Color.WHITE);
 
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -154,6 +154,7 @@ public class RegisterStudentActivity extends AppCompatActivity implements View.O
             }
         });
 
+        /*
         //TODO Delete after tests
         etName.setText("Name");
         etfName.setText("FName");
@@ -162,6 +163,7 @@ public class RegisterStudentActivity extends AppCompatActivity implements View.O
         etPhoneNumber.setText("0657463678");
         etPassword.setText("azerty");
         etConfirmPassword.setText("azerty");
+        */
     }
 
     @Override

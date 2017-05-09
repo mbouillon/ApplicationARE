@@ -19,14 +19,15 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:contentDescription="@string/iv_document_item_document"
                 android:layout_gravity="center_vertical"
                 android:id="@+id/Image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_archive_grey600_48dp"
-                android:paddingRight="4dp"
-                />
+                android:paddingRight="4dp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

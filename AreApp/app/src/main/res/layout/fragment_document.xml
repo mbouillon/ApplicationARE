@@ -21,8 +21,7 @@
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
         android:src="@drawable/ic_file_document_white_18dp"
-        fab:fab_label="Ajouter un document"
+        fab:fab_label="@string/bt_document_add_document"
         fab:fab_size="normal" />
-
 
 </RelativeLayout>

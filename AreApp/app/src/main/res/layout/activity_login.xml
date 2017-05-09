@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -37,7 +35,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:hint="Adresse Mail" />
+        android:hint="@string/et_login_mail" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -49,10 +47,10 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="14dp"
         android:layout_alignParentEnd="true"
-        android:hint="Mot de passe" />
+        android:hint="@string/et_login_mdp" />
 
     <Button
-        android:text="Connexion"
+        android:text="@string/bt_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
@@ -64,7 +62,7 @@
         android:textColor="#fff"/>
 
     <CheckBox
-        android:text="Se souvenir de mon adresse mail."
+        android:text="@string/cb_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="textStart"
@@ -88,14 +86,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:text="Vous n'avez pas validé votre compte, veuillez consulter votre boite mail pour cliquer sur le lien de validation, si vous n'avez pas reçu le mail cliquez sur le bouton ci dessous et/ou vérifiez vos spams. "
+        android:text="@string/tv_login_valid_mail"
         android:gravity="center"
         android:id="@+id/tvCompteNonValide"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Envoyer email de validation"
+            android:text="@string/bt_login_valid_mail"
             android:backgroundTint="@color/colorAccent"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
@@ -149,7 +147,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_school_white_24dp"
-            fab:fab_label="Inscription Etudiant IMERIR"
+            fab:fab_label="@string/bt_login_register_student"
             fab:fab_size="mini" />
 
         <com.github.clans.fab.FloatingActionButton
@@ -157,7 +155,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_account_white_24dp"
-            fab:fab_label="Inscription Responsable ARE"
+            fab:fab_label="@string/bt_login_register_responsable"
             fab:fab_size="mini" />
 
     </com.github.clans.fab.FloatingActionMenu>

@@ -77,12 +77,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        setTitle("Connexion");
 
         //Toolbar
         mToolbar = (Toolbar) findViewById(R.id.customToolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("ARE - IMERIR");
+        getSupportActionBar().setTitle(getResources().getText(R.string.app_name));
         mToolbar.setTitleTextColor(Color.WHITE);
 
         //Si internet est activé alors on affiche un temps de chargement pour dl les données
@@ -193,10 +192,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             else{
                 accountNotValid.setVisibility(View.VISIBLE);
             }
-
-
-
-
 
         } else  {
             //Vérifie la présence de réseau

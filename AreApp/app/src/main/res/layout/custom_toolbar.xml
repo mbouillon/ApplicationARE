@@ -4,6 +4,4 @@
     android:layout_height="wrap_content"
     android:background="@color/colorPrimaryDark"
     android:theme="@style/AppTheme.ActionBar">
-
-
 </android.support.v7.widget.Toolbar>

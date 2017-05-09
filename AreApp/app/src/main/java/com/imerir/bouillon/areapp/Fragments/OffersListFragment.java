@@ -179,7 +179,7 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
     public void showLoadingDialog(){
         try{
             //Création d'un ProgressDialog et l'afficher
-            loadingDialog = ProgressDialog.show(getActivity(), "Veuillez patienter", "Chargement en cours...", true, false);
+            loadingDialog = ProgressDialog.show(getActivity(), "", "Chargement en cours...", true, false);
             //Création d'un Thread
             new Thread(new Runnable() {
                 @Override

@@ -48,7 +48,7 @@ public class RegisterResponsableActivity extends AppCompatActivity implements Vi
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ab.setDisplayShowTitleEnabled(false);
         mToolbar.inflateMenu(R.menu.main_menu);
-        mToolbar.setTitle("Inscription responsable ARE");
+        mToolbar.setTitle(getResources().getText(R.string.tab_profil_responsable));
         mToolbar.setTitleTextColor(Color.WHITE);
 
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -70,6 +70,7 @@ public class RegisterResponsableActivity extends AppCompatActivity implements Vi
 
         bRegister.setOnClickListener(this);
 
+        /*
         //TODO Delete after tests
         etName.setText("Name");
         etfName.setText("FName");
@@ -79,6 +80,7 @@ public class RegisterResponsableActivity extends AppCompatActivity implements Vi
         etPassword.setText("azerty");
         etConfirmPassword.setText("azerty");
         etAcessCode.setText("1234");
+        */
     }
 
     @Override

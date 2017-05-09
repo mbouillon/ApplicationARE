@@ -46,7 +46,7 @@ public class AddOfferActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ab.setDisplayShowTitleEnabled(false);
         mToolbar.inflateMenu(R.menu.main_menu);
-        mToolbar.setTitle("Ajouter une nouvelle offre");
+        mToolbar.setTitle(getResources().getText(R.string.title_add_offer));
         mToolbar.setTitleTextColor(Color.WHITE);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,13 +86,13 @@ public class AddOfferActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Gestion des spinners
                 switch (typeContrat.getSelectedItem().toString()) {
-                    case "Stage":
+                    case "@string/type_add_offer_Internship":
                         _typeContrat = 1;
                         break;
-                    case "Apprentissage":
+                    case "@string/type_add_offer_Apprenticeship":
                         _typeContrat = 2;
                         break;
-                    case "Type non connu":
+                    case "@string/type_add_offer_Type_not_known":
                         _typeContrat = 3;
                         break;
                     default:

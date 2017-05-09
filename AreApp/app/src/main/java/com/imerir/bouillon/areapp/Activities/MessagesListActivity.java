@@ -63,7 +63,7 @@ public class MessagesListActivity extends AppCompatActivity implements WebServic
         mToolbar = (Toolbar) findViewById(R.id.customToolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Anciens Messages Publiés");
+        getSupportActionBar().setTitle(getResources().getText(R.string.title_message));
         mToolbar.setTitleTextColor(Color.WHITE);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +90,7 @@ public class MessagesListActivity extends AppCompatActivity implements WebServic
     public void showLoadingDialog() {
         try {
             //Création d'un ProgressDialog et l'afficher
-            loadingDialog = ProgressDialog.show(this, "Veuillez patienter", "Chargement en cours...", true, false);
+            loadingDialog = ProgressDialog.show(this, "", "Chargement en cours...", true, false);
             //Création d'un Thread
             new Thread(new Runnable() {
                 @Override

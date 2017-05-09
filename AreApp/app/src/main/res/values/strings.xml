@@ -1,15 +1,11 @@
 <resources>
-    <string name="app_name">AreApp</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="app_name">A.R.E - IMERIR</string>
 
     <string-array name="liste_contrats">
-        <item>Type de contrat</item>
-        <item>Stage</item>
-        <item>Apprentissage</item>
-        <item>Type non connu</item>
+        <item>Type of Contract</item>
+        <item>Internship</item>
+        <item>Apprenticeship</item>
+        <item>Type not known</item>
     </string-array>
     
     <string-array name="liste_formations">
@@ -18,5 +14,114 @@
         <item>CDSM</item>
         <item>UPVD</item>
     </string-array>
+
+    <!-- Bottom Bar  -->
+    <string name="tab_offer">Offers</string>
+    <string name="tab_document">Documents</string>
+    <string name="tab_profil">Profile</string>
+
+    <!-- Set Title  -->
+    <string name="title_register_reponsable">Register Reponsable ARE</string>
+    <string name="title_register_student">Register Student IMERIR</string>
+    <string name="title_offer">Available offers</string>
+    <string name="title_document">Available documents</string>
+    <string name="title_message">Old Posts</string>
+    <string name="tab_profil_responsable">Register Reponsable ARE</string>
+    <string name="tab_profil_student">Register Student IMERIR</string>
+    <string name="title_add_message">Add a message</string>
+    <string name="title_add_offer">Add an offer</string>
+
+    <!-- Add Message -->
+    <string name="tv_add_message">Please enter your message below</string>
+    <string name="et_add_message">Enter your message here</string>
+    <string name="bt_add_message">Publish message</string>
+
+    <!-- Add Offer -->
+    <string name="et_add_offer_poste_name">Job Name</string>
+    <string name="et_add_offer_contrat_name">Contract length</string>
+    <string name="et_add_offer_company_name">Company Name</string>
+    <string name="et_add_offer_location">Place</string>
+    <string name="et_add_offer_company_contact_name">Company contact name</string>
+    <string name="et_add_offer_mail">Company contact mail</string>
+    <string name="et_add_offer_phone">Company contact phone number</string>
+    <string name="et_add_offer_details">Details</string>
+    <string name="et_add_offer_details_reponsable">Visible Details</string>
+    <string name="bt_add_offer">Add offer</string>
+
+    <string name="type_add_offer_Internship">Internship</string>
+    <string name="type_add_offer_Apprenticeship">Apprenticeship</string>
+    <string name="type_add_offer_Type_not_known">Type not known</string>
+
+
+    <!-- Login -->
+    <string name="et_login_mail">Mail address</string>
+    <string name="et_login_mdp">Password</string>
+    <string name="bt_login">Log in</string>
+    <string name="cb_login">Remember my email address.</string>
+    <string name="tv_login_valid_mail">You have not verified your account, please consult your mailbox to click on the validation link, if you have not received the email click the button below and/or check your spam.</string>
+    <string name="bt_login_valid_mail">Send validation email</string>
+    <string name="bt_login_register_responsable">Register Responsable ARE</string>
+    <string name="bt_login_register_student">Register Student IMERIR</string>
+
+    <!-- Offer Detail -->
+    <string name="tv_offer_detail">Details : </string>
+    <string name="tv_offer_detail_reponsable">Details visible to the Responsable</string>
+
+    <!-- Register Responsable-->
+    <string name="et_register_reponsable_fName">First name</string>
+    <string name="et_register_reponsable_Name">Name</string>
+    <string name="et_register_reponsable_mail">Mail</string>
+    <string name="et_register_reponsable_mail_valid">Confirmation Mail</string>
+    <string name="et_register_reponsable_mdp">Password</string>
+    <string name="et_register_reponsable_mdp_valid">Confirmation Password</string>
+    <string name="et_register_reponsable_phone">Phone number</string>
+    <string name="et_register_reponsable_access">Access password</string>
+    <string name="tv_register_reponsable">Contact an administrator to obtain your access code</string>
+    <string name="bt_register_reponsable">Register</string>
+
+    <!-- Register Student -->
+    <string name="et_register_student_fName">First name</string>
+    <string name="et_register_student_Name">Name</string>
+    <string name="et_register_student_mail">Mail</string>
+    <string name="et_register_student_mail_valid">Confirmation Mail</string>
+    <string name="et_register_student_mdp">Password</string>
+    <string name="et_register_student_mdp_valid">Confirmation Password</string>
+    <string name="et_register_student_phone">Phone number</string>
+    <string name="rg_register_student_cdpir">CDPIR</string>
+    <string name="rg_register_student_cdsm">CDSM</string>
+    <string name="rg_register_student_upvd">UPVD</string>
+    <string name="bt_register_student">Register</string>
+
+    <!-- Document Item -->
+    <string name="iv_document_item_document">Icon Document</string>
+
+    <!-- Fragment Document -->
+    <string name="bt_document_add_document">Add a document</string>
+
+    <!-- Fragment Offers List -->
+    <string name="iv_offers_list_message">Icon Message</string>
+    <string name="bt_offers_listt_add_offer">Add an offer</string>
+    <string name="iv_offers_list_add_message">Add a message</string>
+
+    <!-- Message Item -->
+    <string name="iv_message_item_message">Icon Message</string>
+
+    <!-- Offer Item -->
+    <string name="iv_offer_item_offer">Icon Offer</string>
+    <string name="tv_offer_item_offer">Details...</string>
+
+    <!-- Main Menu -->
+    <string name="item_main_menu_deco">Sign Out</string>
+    <string name="item_main_menu_quit">Exit</string>
+
+    <!-- Menu Document PDF -->
+    <string name="item_menu_document_pdf_dl">Download pdf</string>
+    <string name="item_menu_document_pdf_delete">Delete the document</string>
+
+    <!-- Menu Login -->
+    <string name="item_menu_login_sync">Synchronize</string>
+
+    <!-- Menu Offer Detail -->
+    <string name="item_menu_offer_detail_delete">Remove the offer</string>
 
 </resources>
