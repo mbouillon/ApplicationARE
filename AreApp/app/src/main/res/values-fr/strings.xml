@@ -23,8 +23,8 @@
     <!-- Set Title  -->
     <string name="title_register_reponsable">Inscription Reponsable ARE</string>
     <string name="title_register_student">Inscription responsable ARE</string>
-    <string name="title_offer">Offres diponibles</string>
-    <string name="title_document">Documents disponible</string>
+    <string name="title_offer">Offres disponibles</string>
+    <string name="title_document">Documents disponibles</string>
     <string name="title_message">Anciens Messages Publiés</string>
     <string name="tab_profil_responsable">Profil Reponsable</string>
     <string name="tab_profil_student">Profil Etudiant</string>
