@@ -1,40 +1,20 @@
 package com.imerir.bouillon.areapp.Activities;
 
-import android.Manifest;
-import android.annotation.TargetApi;
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.IdRes;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.webkit.WebResourceError;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.Toast;
 
-import com.imerir.bouillon.areapp.Clients.WebServiceDocumentClient;
 import com.imerir.bouillon.areapp.Fragments.DocumentListFragment;
 import com.imerir.bouillon.areapp.Fragments.OffersListFragment;
-import com.imerir.bouillon.areapp.Models.Document;
+import com.imerir.bouillon.areapp.Fragments.ProfilStudentFragment;
 import com.imerir.bouillon.areapp.R;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
@@ -104,6 +84,16 @@ public class MainActivity extends AppCompatActivity {
                         mToolbar.setTitle(getResources().getText(R.string.title_document));
                     }
                     if (tabId == R.id.tab_profile) {
+
+                        //PROFIL ETUDIANT
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.fragmentOffers, new ProfilStudentFragment())
+                                .commit();
+                        mToolbar.setTitle("Profil Etudiant");
+                        //user = WebServiceUserClient.getInstance().getUserById(user.getId());
+                        //mToolbar.setTitle("Profil" + user.getNom() + " " + user.getPrenom());
+
+
 
                     }
                 }
