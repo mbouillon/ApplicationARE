@@ -121,7 +121,7 @@ public class AddOfferActivity extends AppCompatActivity {
                     Si avertissement non ne pas envoyer POST
                     Si tous champs OK envoyer POST
                  */
-                if (nomOffre.getText().toString().equals("") & duree.getText().toString().equals("") & nomContact.getText().toString().equals("") & lieu.getText().toString().equals("") & mailContact.getText().toString().equals("") & telephoneContact.getText().toString().equals("") & nomEntreprise.getText().toString().equals("")) {
+                if (nomOffre.getText().toString().isEmpty() || duree.getText().toString().isEmpty() || nomContact.getText().toString().isEmpty() || lieu.getText().toString().isEmpty() || mailContact.getText().toString().isEmpty() || telephoneContact.getText().toString().isEmpty() || nomEntreprise.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Attention, veuillez renseigner tous les champs textes afin de pouvoir poster cette offre", Toast.LENGTH_SHORT).show();
                 } else if (_typeContrat == 0) {
                     Toast.makeText(getApplicationContext(), "Veuillez renseigner le champ type de contrat, si il est inconnu choisissez l'option 'Type Non Connu', merci ", Toast.LENGTH_SHORT).show();

@@ -25,7 +25,7 @@
     <string name="title_register_student">Register Student IMERIR</string>
     <string name="title_offer">Available offers</string>
     <string name="title_document">Available documents</string>
-    <string name="title_message">Old Posts</string>
+    <string name="title_message">Old Messages</string>
     <string name="tab_profil_responsable">Register Reponsable ARE</string>
     <string name="tab_profil_student">Register Student IMERIR</string>
     <string name="title_add_message">Add a message</string>
@@ -78,6 +78,13 @@
     <string name="et_register_reponsable_access">Access password</string>
     <string name="tv_register_reponsable">Contact an administrator to obtain your access code</string>
     <string name="bt_register_reponsable">Register</string>
+    <string name="error_empty_fields">Error, All the fiels must be renseigned to continue</string>
+    <string name="error_mail_not_equal">Error, The email address are not equals</string>
+    <string name="error_password_not_equal">Error, The passwords are not equals</string>
+    <string name="error_false_access_code">Error, The access password entered is incorrect</string>
+    <string name="error_mail_not_imerir">Erreur, The email address must be @imerir.com</string>
+    <string name="error_account_already_exist">Error, An account with this email address already exists</string>
+    <string name="account_created_successfuly">Compte créé avec succès</string>
 
     <!-- Register Student -->
     <string name="et_register_student_fName">First name</string>

@@ -112,6 +112,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onClick(View v) {
                 Intent loginActivityIntent = new Intent(LoginActivity.this, RegisterStudentActivity.class);
+                loginActivityIntent.putExtra("userArray", _user);
                 startActivity(loginActivityIntent);
             }
         });
@@ -121,6 +122,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onClick(View v) {
                 Intent loginActivityIntent = new Intent(LoginActivity.this, RegisterResponsableActivity.class);
+                loginActivityIntent.putExtra("userArray", _user);
                 startActivity(loginActivityIntent);
             }
         });
@@ -262,6 +264,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     //Gestion du Progress Dialog
     public void showLoadingDialogData() {

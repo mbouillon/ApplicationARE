@@ -1,6 +1,7 @@
 package com.imerir.bouillon.areapp.Activities;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -21,7 +22,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class RegisterResponsableActivity extends AppCompatActivity implements View.OnClickListener, WebServiceUserClient.OnUsersListListener {
+public class RegisterResponsableActivity extends AppCompatActivity implements WebServiceUserClient.OnUsersListListener {
 
     private EditText etName;
     private EditText etfName;
@@ -34,11 +35,12 @@ public class RegisterResponsableActivity extends AppCompatActivity implements Vi
     private Button bRegister;
     private Toolbar mToolbar;
 
+    private boolean userExists = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_responsable);
-
 
         //Toolbar
         mToolbar = (Toolbar) findViewById(R.id.customToolbar);
@@ -68,78 +70,82 @@ public class RegisterResponsableActivity extends AppCompatActivity implements Vi
         etAcessCode = (EditText) findViewById(R.id.etAcessCodeR);
         bRegister = (Button) findViewById(R.id.bRegisterR);
 
-        bRegister.setOnClickListener(this);
+        bRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        /*
-        //TODO Delete after tests
-        etName.setText("Name");
-        etfName.setText("FName");
-        etMail.setText("Name60000@imerir.com");
-        etConfirmMail.setText("Name60000@imerir.com");
-        etPhoneNumber.setText("0657463678");
-        etPassword.setText("azerty");
-        etConfirmPassword.setText("azerty");
-        etAcessCode.setText("1234");
-        */
+                // Récuperation de l'arrayList passée en paramètre de l'intent pour eviter un appel serveur
+                Bundle extras = getIntent().getExtras();
+                ArrayList<User> users = (ArrayList<User>) extras.getSerializable("userArray");
+
+                //Save la couleur par defaut de la couleur du texte d'un champ pour set la couleur par défaut dans la gestion des erreurs à chaque clic
+                ColorStateList oldColors = etName.getTextColors();
+                etAcessCode.setTextColor(oldColors);
+                etMail.setTextColor(oldColors);
+                etConfirmMail.setTextColor(oldColors);
+                etPassword.setTextColor(oldColors);
+                etConfirmPassword.setTextColor(oldColors);
+
+                //Test si le user existe si oui passe un bool a true pour la vérification à l'inscription
+                for(int i = 0; i < users.size(); i++){
+                    if(users.get(i).getMail().equals(etMail.getText().toString()))
+                        userExists = true;
+                }
+
+                //Creation de l'objet JSON qui va servir a construire notre objet User
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("Nom", etName.getText().toString());
+                    jsonObject.put("Prenom", etfName.getText().toString());
+                    jsonObject.put("Mail", etMail.getText().toString());
+                    jsonObject.put("Password", etPassword.getText().toString());
+                    jsonObject.put("Telephone", etPhoneNumber.getText().toString());
+                    jsonObject.put("Type", 1);
+                    jsonObject.put("Formation", 0);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                if (etName.getText().toString().isEmpty() || etfName.getText().toString().isEmpty() || etPhoneNumber.getText().toString().isEmpty() || etAcessCode.getText().toString().isEmpty() || etMail.getText().toString().isEmpty() || etConfirmMail.getText().toString().isEmpty() || etPassword.getText().toString().isEmpty() || etConfirmPassword.getText().toString().isEmpty()) {
+                    Toast.makeText(RegisterResponsableActivity.this, getResources().getText(R.string.error_empty_fields), Toast.LENGTH_LONG).show();
+                }
+                else if(!etMail.getText().toString().equals(etConfirmMail.getText().toString())){
+                    Toast.makeText(RegisterResponsableActivity.this, getResources().getText(R.string.error_mail_not_equal), Toast.LENGTH_LONG).show();
+                    etMail.setTextColor(Color.RED);
+                    etConfirmMail.setTextColor(Color.RED);
+                }
+                else if(!etPassword.getText().toString().equals(etConfirmPassword.getText().toString())){
+                    Toast.makeText(RegisterResponsableActivity.this, getResources().getText(R.string.error_password_not_equal), Toast.LENGTH_LONG).show();
+                    etPassword.setTextColor(Color.RED);
+                    etConfirmPassword.setTextColor(Color.RED);
+                }
+                else if(!etMail.getText().toString().contains("@imerir.com")){
+                    Toast.makeText(RegisterResponsableActivity.this, getResources().getText(R.string.error_mail_not_imerir), Toast.LENGTH_LONG).show();
+                    etMail.setTextColor(Color.RED);
+                }
+                else if(!etAcessCode.getText().toString().equals("1234")){
+                    Toast.makeText(RegisterResponsableActivity.this, getResources().getText(R.string.error_false_access_code), Toast.LENGTH_LONG).show();
+                    etAcessCode.setTextColor(Color.RED);
+                }
+                else if(userExists == true){
+                    etMail.setTextColor(Color.RED);
+                    Toast.makeText(RegisterResponsableActivity.this, getResources().getText(R.string.error_account_already_exist), Toast.LENGTH_LONG).show();
+                    userExists = false;
+                }
+                else{
+                    User user = new User(jsonObject);
+                    WebServiceUserClient.getInstance().POSTUser(user);
+                    Toast.makeText(getApplication(), getResources().getText(R.string.account_created_successfuly), Toast.LENGTH_SHORT).show();
+                    Intent LoginActivityIntent = new Intent(getBaseContext(), LoginActivity.class);
+                    startActivity(LoginActivityIntent);
+                    finish();
+                }
+            }
+        });
+
     }
 
-    @Override
-    public void onClick(View view) {
-        //Creation de l'objet JSON qui va servir a construire notre objet User
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("Nom", etName.getText().toString());
-            jsonObject.put("Prenom", etfName.getText().toString());
-            jsonObject.put("Mail", etMail.getText().toString());
-            jsonObject.put("Password", etPassword.getText().toString());
-            jsonObject.put("Telephone", etPhoneNumber.getText().toString());
-            jsonObject.put("Type", 1);
-            jsonObject.put("Formation", 0);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-        //TODO Vérifier si imerir.com
-        //TODO Ne pas afficher un toast dans les erreurs de champs mais afficher le champ en rouge
-        //vérification si les champs sont remplis
-        if (((!etName.getText().toString().equals(""))) &
-                ((!etfName.getText().toString().equals(""))) &
-                ((!etPhoneNumber.getText().toString().equals(""))) &
-                ((!etAcessCode.getText().toString().equals(""))) &
-                ((!etMail.getText().toString().equals(""))) &
-                ((!etConfirmMail.getText().toString().equals(""))) &
-                ((!etPassword.getText().toString().equals(""))) &
-                ((!etConfirmPassword.getText().toString().equals("")))) {
-                    Log.d("Ok", "Champs remplis");
-            //Verifie que le mail et pwd sois identique
-            //TODO Vérifier les champs séparement
-                if (((etMail.getText().toString()).equals(etConfirmMail.getText().toString())) &&
-                        ((etPassword.getText().toString()).equals(etConfirmPassword.getText().toString()))) {
-                    //Vérifie le code d'accès
-                    //TODO générer un code à l'aide du service web à la demande de l'adminitrateur PLUS TARD BEAUCOUP PLUS TARD
-                    if (etAcessCode.getText().toString().equals("1234")) {
-                        User user = new User(jsonObject);
-                        //poste le user dans la base de données
-                        WebServiceUserClient.getInstance().POSTUser(user);
-                        Log.d("Ok", "Compte créé avec succès");
-                        Toast.makeText(this, "Compte créé avec succès.", Toast.LENGTH_SHORT).show();
-                        Intent LoginActivityIntent = new Intent(getBaseContext(), LoginActivity.class);
-                        startActivity(LoginActivityIntent);
-                        finish();
-                    } else
-                        Log.d("Erreur", "Code incorrect");
-                        Toast.makeText(this, "Code d'accès incorrect", Toast.LENGTH_SHORT).show();
-                } else {
-                    Log.d("Erreur", "Password & Mail");
-                    Toast.makeText(this, "Erreur : Le mot de passe ou l'adresse mail doit être identiques", Toast.LENGTH_SHORT).show();
-                }}
-        else {
-            Log.d("Ok", "Champs invalides");
-            Toast.makeText(this, "Erreur : Tous les champs sont obligatoires", Toast.LENGTH_SHORT).show();
-        }
-    }
-
+    //Obligatoire
     @Override
     public void onUsersReceived(ArrayList<User> users) {
 

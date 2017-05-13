@@ -77,6 +77,18 @@
     <string name="et_register_reponsable_access">Mot de passe d\'accès</string>
     <string name="tv_register_reponsable">Contactez un administrateur pour obtenir votre code d\'accès</string>
     <string name="bt_register_reponsable">S\'inscrire</string>
+    <string name="error_empty_fields">Erreur, Veuillez renseigner tous les champs avant de continuer</string>
+    <string name="error_mail_not_equal">Erreur, Les adresses mail ne sont pas identiques</string>
+    <string name="error_password_not_equal">Erreur, Les mot de passes entrés ne sont pas identiques</string>
+    <string name="error_false_access_code">Erreur, Le code d\'accès est incorrect</string>
+    <string name="error_mail_not_imerir">Erreur, L\'adresse mail doit être @imerir.com</string>
+    <string name="error_account_already_exist">Erreur, Un compte avec cette addresse mail existe déjà</string>
+    <string name="account_created_successfuly">Compte créé avec succès</string>
+
+
+
+
+
 
     <!-- Register Student -->
     <string name="et_register_student_fName">Prénom</string>

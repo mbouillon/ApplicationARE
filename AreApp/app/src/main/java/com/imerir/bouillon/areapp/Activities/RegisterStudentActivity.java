@@ -1,6 +1,7 @@
 package com.imerir.bouillon.areapp.Activities;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.opengl.EGLSurface;
 import android.os.Bundle;
@@ -29,7 +30,7 @@ import java.util.ArrayList;
  * Created by maxime on 07/03/2017.
  */
 
-public class RegisterStudentActivity extends AppCompatActivity implements View.OnClickListener, WebServiceUserClient.OnUsersListListener {
+public class RegisterStudentActivity extends AppCompatActivity implements WebServiceUserClient.OnUsersListListener {
 
     private EditText etName;
     private EditText etfName;
@@ -47,6 +48,7 @@ public class RegisterStudentActivity extends AppCompatActivity implements View.O
     private Toolbar mToolbar;
 
     private int formation = 1;
+    private boolean userExists = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -106,7 +108,24 @@ public class RegisterStudentActivity extends AppCompatActivity implements View.O
         bRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Requete JSON
+
+                Bundle extras = getIntent().getExtras();
+                ArrayList<User> users = (ArrayList<User>) extras.getSerializable("userArray");
+
+                //Save la couleur par defaut de la couleur du texte d'un champ pour set la couleur par défaut dans la gestion des erreurs
+                ColorStateList oldColors =  etName.getTextColors();
+                etMail.setTextColor(oldColors);
+                etConfirmMail.setTextColor(oldColors);
+                etPassword.setTextColor(oldColors);
+                etConfirmPassword.setTextColor(oldColors);
+
+                //Test si le user existe si oui passe un bool a true pour la vérification à l'inscription
+                for(int i = 0; i < users.size(); i++){
+                    if(users.get(i).getMail().equals(etMail.getText().toString()))
+                        userExists = true;
+                }
+
+                //Creation d'un objet en JSON pour le POST Serveur afin de construire le modèle USER
                 JSONObject jsonObject = new JSONObject();
                 try {
                     jsonObject.put("Nom", etName.getText().toString());
@@ -120,55 +139,37 @@ public class RegisterStudentActivity extends AppCompatActivity implements View.O
                     e.printStackTrace();
                 }
 
-                //TODO Vérifier si imerir.com
-                //TODO Ne pas afficher un toast dans les erreurs de champs mais afficher le champ en rouge
-
-                //vérification si les champs sont remplis
-                if (((!etName.getText().toString().equals(""))) &
-                        ((!etfName.getText().toString().equals(""))) &
-                        ((!etPhoneNumber.getText().toString().equals(""))) &
-                        ((!etMail.getText().toString().equals(""))) &
-                        ((!etConfirmMail.getText().toString().equals(""))) &
-                        ((!etPassword.getText().toString().equals(""))) &
-                        ((!etConfirmPassword.getText().toString().equals("")))) {
-                    Log.d("Ok", "Champs remplis");
-
-                    //Verifie que le mail et pwd soies identique
-                    if (((etMail.getText().toString()).equals(etConfirmMail.getText().toString())) && ((etPassword.getText().toString()).equals(etConfirmPassword.getText().toString()))) {
-                        User user = new User(jsonObject);
-                        //poste le user dans la base de données
-                        WebServiceUserClient.getInstance().POSTUser(user);
-                        Log.d("Ok", "Compte créé avec succès.");
-                        Toast.makeText(getApplication(), "Compte créé avec succès.", Toast.LENGTH_SHORT).show();
-                        Intent LoginActivityIntent = new Intent(getBaseContext(), LoginActivity.class);
-                        startActivity(LoginActivityIntent);
-                        finish();
-                    } else {
-                        Log.d("Erreur", "Password & Mail");
-                        Toast.makeText(getApplication(), "Erreur : Mot de passe ou Email", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Log.d("Ok", "Champs invalides");
-                    Toast.makeText(getApplication(), "Erreur : Tous les champs sont obligatoires", Toast.LENGTH_SHORT).show();
+                if (etName.getText().toString().isEmpty() || etfName.getText().toString().isEmpty() || etPhoneNumber.getText().toString().isEmpty() || etMail.getText().toString().isEmpty() || etConfirmMail.getText().toString().isEmpty() || etPassword.getText().toString().isEmpty() || etConfirmPassword.getText().toString().isEmpty()) {
+                    Toast.makeText(RegisterStudentActivity.this, getResources().getText(R.string.error_empty_fields), Toast.LENGTH_LONG).show();
+                }
+                else if(!etMail.getText().toString().equals(etConfirmMail.getText().toString())){
+                    Toast.makeText(RegisterStudentActivity.this, getResources().getText(R.string.error_mail_not_equal), Toast.LENGTH_LONG).show();
+                    etMail.setTextColor(Color.RED);
+                    etConfirmMail.setTextColor(Color.RED);
+                }
+                else if(!etPassword.getText().toString().equals(etConfirmPassword.getText().toString())){
+                    Toast.makeText(RegisterStudentActivity.this, getResources().getText(R.string.error_password_not_equal), Toast.LENGTH_LONG).show();
+                    etPassword.setTextColor(Color.RED);
+                    etConfirmPassword.setTextColor(Color.RED);
+                }
+                else if(!etMail.getText().toString().contains("@imerir.com")){
+                    Toast.makeText(RegisterStudentActivity.this, getResources().getText(R.string.error_mail_not_imerir), Toast.LENGTH_LONG).show();
+                    etMail.setTextColor(Color.RED);
+                }
+                else if(userExists == true){
+                    etMail.setTextColor(Color.RED);
+                    Toast.makeText(RegisterStudentActivity.this, getResources().getText(R.string.error_account_already_exist), Toast.LENGTH_LONG).show();
+                }
+                else {
+                    User user = new User(jsonObject);
+                    WebServiceUserClient.getInstance().POSTUser(user);
+                    Toast.makeText(RegisterStudentActivity.this, getResources().getText(R.string.account_created_successfuly), Toast.LENGTH_SHORT).show();
+                    Intent LoginActivityIntent = new Intent(getBaseContext(), LoginActivity.class);
+                    startActivity(LoginActivityIntent);
+                    finish();
                 }
             }
         });
-
-        /*
-        //TODO Delete after tests
-        etName.setText("Name");
-        etfName.setText("FName");
-        etMail.setText("Name60000@imerir.com");
-        etConfirmMail.setText("Name60000@imerir.com");
-        etPhoneNumber.setText("0657463678");
-        etPassword.setText("azerty");
-        etConfirmPassword.setText("azerty");
-        */
-    }
-
-    @Override
-    public void onClick(View view) {
-
     }
 
     @Override

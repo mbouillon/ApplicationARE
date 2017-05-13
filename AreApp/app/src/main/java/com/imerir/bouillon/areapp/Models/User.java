@@ -2,11 +2,13 @@ package com.imerir.bouillon.areapp.Models;
 
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 /**
  * Created by maxime on 07/03/2017.
  */
 
-public class User {
+public class User implements Serializable {
     private int id;
     private boolean type;
     private String nom;
