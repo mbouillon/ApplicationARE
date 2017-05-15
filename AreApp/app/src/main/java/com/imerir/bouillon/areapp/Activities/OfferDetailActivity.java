@@ -83,16 +83,16 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
         NomContact.setText(offer.getNomContact());
         Mail.setText(offer.getMailContact());
         Telephone.setText(offer.getTelephoneContact());
-        DatePublish.setText("Publiée le : " + offer.getDatePublicaiton());
+        DatePublish.setText(getString(R.string.text_post_date) + " " + offer.getDatePublicaiton());
         switch (offer.getTypeContrat()){
             case 1:
-                Contrat.setText("Stage");
+                Contrat.setText(getString(R.string.type_Internship));
                 break;
             case 2:
-                Contrat.setText("Apprentissage");
+                Contrat.setText(R.string.type_add_offer_Apprenticeship);
                 break;
             default:
-                Contrat.setText("Contrat Non Connu");
+                Contrat.setText(R.string.type_add_offer_Type_not_known);
         }
 
         Details.setText(offer.getDetails());
@@ -138,11 +138,11 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
 
     public void showCallDialog() {
         new AlertDialog.Builder(this)
-                .setTitle("Appeler ?").setMessage("Voulez-vous appeler " + offer.getNomContact() + " ?")
-                .setPositiveButton("Appeler", new DialogInterface.OnClickListener() {
+                .setTitle(getString(R.string.ms_callDIalog_call_ask)).setMessage(getString(R.string.ms_callDialog_call_contact) + " " + offer.getNomContact() + " " + getString(R.string.ms_callDialog_call_end))
+                .setPositiveButton(getString(R.string.ms_callDialog_call), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + offer.getTelephoneContact()));
+                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse(getString(R.string.ms_callDialog_phone) + " " + offer.getTelephoneContact()));
                         try {
                             startActivity(intent);
                         }
@@ -151,7 +151,7 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
                         }
                     }
                 })
-                .setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+                .setNegativeButton(getString(R.string.ms_callDialog_stop), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -188,16 +188,16 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
         switch (item.getItemId()){
             case R.id.deleteOffer:
                 new AlertDialog.Builder(this)
-                        .setTitle("Supprimer l'offre")
-                        .setMessage("Êtes-vous sûr de vouloir supprimer cette entrée?")
+                        .setTitle(getString(R.string.ms_offer_delete))
+                        .setMessage(getString(R.string.ms_offer_delete_ask))
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                            //Envoie la requete de suppression + Destruction de l'activité + Rechargement de la main activity
-                            WebServiceOfferClient.getInstance().DELETEOffer(offer.getOfferID());
-                            Toast.makeText(getApplicationContext(), "L'offre " + offer.getTitre() + " a bien été supprimée", Toast.LENGTH_LONG).show();
-                            Intent MainActivityIntent = new Intent(getBaseContext(), MainActivity.class);
-                            startActivity(MainActivityIntent);
-                            finish();
+                                //Envoie la requete de suppression + Destruction de l'activité + Rechargement de la main activity
+                                WebServiceOfferClient.getInstance().DELETEOffer(offer.getOfferID());
+                                Toast.makeText(getApplicationContext(), getString(R.string.ms_offer_delete_offer) + " " + offer.getTitre() + " " + getString(R.string.ms_offer_delete_delete), Toast.LENGTH_LONG).show();
+                                Intent MainActivityIntent = new Intent(getBaseContext(), MainActivity.class);
+                                startActivity(MainActivityIntent);
+                                finish();
                             }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {

@@ -61,7 +61,7 @@ public class AddMessageActivity extends AppCompatActivity implements TextWatcher
         sendMessage = (Button) findViewById(R.id.btnPublierMessage);
         etMessage = (EditText) findViewById(R.id.etMessage);
         //Initialise la val par défaut de nbCarRestants
-        nbCarRestants.setText("255 Caractères restants...");
+        nbCarRestants.setText(getString(R.string.ms_characters_255));
         //Attache le listener TextWatcher sur l'EditText
         etMessage.addTextChangedListener(this);
 
@@ -80,12 +80,12 @@ public class AddMessageActivity extends AppCompatActivity implements TextWatcher
                 }
 
                 //Gestion du cas champ vide non rempli
-                if(etMessage.getText().toString().equals("")) Toast.makeText(getBaseContext(), "Saissisez un message avant de l'envoyer merci.", Toast.LENGTH_SHORT).show();
+                if(etMessage.getText().toString().equals("")) Toast.makeText(getBaseContext(), getString(R.string.ms_error_message), Toast.LENGTH_SHORT).show();
                 else
                 {
                     WelcomeMessage wm = new WelcomeMessage(jsonObject);
                     WebServiceMessageClient.getInstance().POSTMessage(wm);
-                    Toast.makeText(getApplicationContext(), "Le message a bien été ajouté", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.ms_success_message), Toast.LENGTH_LONG).show();
                     Intent MainActivityIntent = new Intent(getBaseContext(), MainActivity.class);
                     startActivity(MainActivityIntent);
                     finish();
@@ -100,7 +100,7 @@ public class AddMessageActivity extends AppCompatActivity implements TextWatcher
     public void afterTextChanged(Editable editable){
         int nbChar = etMessage.getText().toString().length();
         int leftChar = 255 - nbChar;
-        nbCarRestants.setText(Integer.toString(leftChar) + " Caractères restants...");
+        nbCarRestants.setText(Integer.toString(leftChar) + " " + getString(R.string.ms_characters));
         if (leftChar > 30)
             nbCarRestants.setTextColor(Color.GRAY);
         if (leftChar < 30 && leftChar >= 0)

@@ -142,8 +142,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     }
                 }
                 if(!cr)
-                    Toast.makeText(getBaseContext(), "Erreur votre compte n'existe pas ou le champ mail est mal renseigné, corrigez le champ et retentez ", Toast.LENGTH_LONG).show();
-
+                    Toast.makeText(getBaseContext(), getString(R.string.ms_error_login), Toast.LENGTH_LONG).show();
             }
         });
 
@@ -200,7 +199,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             if (checkConnectivity() == 0){
 
             }else {
-                Toast.makeText(this, "Erreur, identifiants incorrects", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.ms_error_login_incorrect), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -225,7 +224,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             if (checkConnectivity() == 0){
 
             }else{
-                Toast.makeText(this, "Erreur, Vous ne possedez pas de compte", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.ms_error_login_compte), Toast.LENGTH_SHORT).show();
             }
         }
         return response;
@@ -270,7 +269,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void showLoadingDialogData() {
         try {
             //Création d'un ProgressDialog et l'afficher
-            loadingDialog = ProgressDialog.show(this, "Veuillez patienter", "Chargement en cours...", true, false);
+            loadingDialog = ProgressDialog.show(this, getString(R.string.ms_loaddingDialog_one), getString(R.string.ms_loaddingDialog_two), true, false);
             //Création d'un Thread
             new Thread(new Runnable() {
                 @Override
@@ -315,7 +314,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             //Aucune connexion internet
             internet = 0;
             Log.d("Internet", "OFF");
-            Toast.makeText(getApplicationContext(), "Aucune connexion réseau.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.ms_error_network), Toast.LENGTH_SHORT).show();
             enabled = false;
         } else {
             //Le réseau est connecté

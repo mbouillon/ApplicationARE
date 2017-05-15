@@ -53,7 +53,6 @@ public class RegisterStudentActivity extends AppCompatActivity implements WebSer
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("Inscription étudiant");
         setContentView(R.layout.activity_register_student);
 
         //Toolbar
@@ -64,7 +63,7 @@ public class RegisterStudentActivity extends AppCompatActivity implements WebSer
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ab.setDisplayShowTitleEnabled(false);
         mToolbar.inflateMenu(R.menu.main_menu);
-        mToolbar.setTitle(getResources().getText(R.string.tab_profil_student));
+        mToolbar.setTitle(getResources().getText(R.string.title_register_student));
         mToolbar.setTitleTextColor(Color.WHITE);
 
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {

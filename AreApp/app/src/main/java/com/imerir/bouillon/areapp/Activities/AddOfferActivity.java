@@ -122,19 +122,19 @@ public class AddOfferActivity extends AppCompatActivity {
                     Si tous champs OK envoyer POST
                  */
                 if (nomOffre.getText().toString().isEmpty() || duree.getText().toString().isEmpty() || nomContact.getText().toString().isEmpty() || lieu.getText().toString().isEmpty() || mailContact.getText().toString().isEmpty() || telephoneContact.getText().toString().isEmpty() || nomEntreprise.getText().toString().isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Attention, veuillez renseigner tous les champs textes afin de pouvoir poster cette offre", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.ms_error_offer), Toast.LENGTH_SHORT).show();
                 } else if (_typeContrat == 0) {
-                    Toast.makeText(getApplicationContext(), "Veuillez renseigner le champ type de contrat, si il est inconnu choisissez l'option 'Type Non Connu', merci ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.ms_error_offer_contrat), Toast.LENGTH_SHORT).show();
                 } else if (_formation == 0) {
                     new AlertDialog.Builder(AddOfferActivity.this)
-                            .setTitle("Attention")
-                            .setMessage("Vous n'avez pas selectionné de formation ciblée pour cette offre, si vous laissez ce champ par défaut tous les étudiants pourront voir l'offre proposée. Voulez vous continuer ?")
-                            .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                            .setTitle(getString(R.string.ms_warning))
+                            .setMessage(getString(R.string.ms_error_offer_formation))
+                            .setPositiveButton(getString(R.string.ms_yes), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     _castAndSendOffer();
                                 }
                             })
-                            .setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                            .setNegativeButton(getString(R.string.ms_no), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
 
                                 }
@@ -167,8 +167,7 @@ public class AddOfferActivity extends AppCompatActivity {
                  //Création de l'objet json et POST dans la BDD + Après le POST desctruction de l'activité et rechargement de l'activité principale
                  Offer offre = new Offer(jsonObject);
                  WebServiceOfferClient.getInstance().POSTOffer(offre);
-                 Toast.makeText(getApplicationContext(), "L'offre " + nomOffre.getText().toString() + " a bien été ajoutée", Toast.LENGTH_LONG).show();
-                 Intent MainActivityIntent = new Intent(getBaseContext(), MainActivity.class);
+                 Toast.makeText(getApplicationContext(),getString(R.string.ms_succes_offer) + " " + nomOffre.getText().toString() + " " + getString(R.string.ms_succes_offer_add), Toast.LENGTH_LONG).show();                 Intent MainActivityIntent = new Intent(getBaseContext(), MainActivity.class);
                  startActivity(MainActivityIntent);
                  finish();
              }

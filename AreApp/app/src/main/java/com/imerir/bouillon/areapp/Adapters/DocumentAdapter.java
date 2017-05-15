@@ -81,8 +81,8 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.Docume
             document = mDocument;
 
             user = WebServiceUserClient.getInstance().getUserById(document.getPublisherId());
-            PublisherId.setText("Publié par : "+ user.getNom() + " " + user.getPrenom());
-            PublishDate.setText("Publié le : " + document.getPublishDate());
+            PublisherId.setText(user.getNom() + " " + user.getPrenom());
+            PublishDate.setText(document.getPublishDate());
             DocumentURL.setText(document.getDocumentURL());
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override

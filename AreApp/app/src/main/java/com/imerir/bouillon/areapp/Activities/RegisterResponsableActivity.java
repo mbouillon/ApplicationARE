@@ -50,7 +50,7 @@ public class RegisterResponsableActivity extends AppCompatActivity implements We
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ab.setDisplayShowTitleEnabled(false);
         mToolbar.inflateMenu(R.menu.main_menu);
-        mToolbar.setTitle(getResources().getText(R.string.tab_profil_responsable));
+        mToolbar.setTitle(getResources().getText(R.string.title_register_reponsable));
         mToolbar.setTitleTextColor(Color.WHITE);
 
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {

@@ -209,7 +209,7 @@ public class PdfActivity extends AppCompatActivity {
         private void showProgressDialog()
         {
             dismissProgressDialog();
-            mProgressDialog = ProgressDialog.show(mContext, "", "Loading...");
+            mProgressDialog = ProgressDialog.show(mContext, "", getString(R.string.ms_loaddingDialog_two));
         }
 
         private void dismissProgressDialog()
@@ -252,7 +252,7 @@ public class PdfActivity extends AppCompatActivity {
             case R.id.download:
                 // TODO download le pdf en cours
                 //Version web
-                Toast.makeText(getApplicationContext(), "Download...", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.ms_download), Toast.LENGTH_LONG).show();
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://mod.ctpmperpignan.com/pdf/pdf_lignes/Ligne15.pdf"));
                 //Uri.parse("http://10.0.2.2:5000/DocUps/" + document.getDocId()));
                 startActivity(browserIntent);

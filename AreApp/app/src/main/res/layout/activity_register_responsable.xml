@@ -31,7 +31,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/etNameR"
-        android:hint="@string/et_register_reponsable_fName" />
+        android:hint="@string/et_register_fName" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -41,7 +41,7 @@
         android:id="@+id/etNameR"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:hint="@string/et_register_reponsable_Name" />
+        android:hint="@string/et_register_Name" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -53,7 +53,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="13dp"
         android:layout_alignParentEnd="true"
-        android:hint="@string/et_register_reponsable_mail" />
+        android:hint="@string/et_register_mail" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -61,7 +61,7 @@
         android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/etConfirmMailR"
-        android:hint="@string/et_register_reponsable_mail_valid"
+        android:hint="@string/et_register_mail_valid"
         android:layout_below="@+id/etMailLoginR"
         android:layout_alignParentStart="true"
         android:layout_marginTop="11dp"
@@ -74,7 +74,7 @@
         android:ems="10"
         android:layout_marginTop="12dp"
         android:id="@+id/etPasswordR"
-        android:hint="@string/et_register_reponsable_mdp"
+        android:hint="@string/et_register_mdp"
         android:layout_below="@+id/etConfirmMailR"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
@@ -85,7 +85,7 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/etConfirmPasswordR"
-        android:hint="@string/et_register_reponsable_mdp_valid"
+        android:hint="@string/et_register_mdp_valid"
         android:layout_below="@id/etPasswordR"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
@@ -96,7 +96,7 @@
         android:inputType="phone"
         android:ems="10"
         android:id="@+id/etPhoneNumberR"
-        android:hint="@string/et_register_reponsable_phone"
+        android:hint="@string/et_register_phone"
         android:layout_below="@+id/etConfirmPasswordR"
         android:layout_alignParentStart="true"
         android:layout_marginTop="10dp"
@@ -125,7 +125,7 @@
         android:layout_marginTop="11dp" />
 
     <Button
-        android:text="@string/bt_register_reponsable"
+        android:text="@string/bt_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/bRegisterR"

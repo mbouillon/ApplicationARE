@@ -156,7 +156,7 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
         message = messages.get(0);
         user = WebServiceUserClient.getInstance().getUserById(message.getPublisherId());
         tvMessage.setText(message.getMessage());
-        publisherName.setText("Publié par : " + user.getNom() + " " + user.getPrenom());
+        publisherName.setText(getString(R.string.text_post_by) + " " + user.getNom() + " " + user.getPrenom());
 
     }
 
@@ -179,7 +179,7 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
     public void showLoadingDialog(){
         try{
             //Création d'un ProgressDialog et l'afficher
-            loadingDialog = ProgressDialog.show(getActivity(), "", "Chargement en cours...", true, false);
+            loadingDialog = ProgressDialog.show(getActivity(), "", getString(R.string.ms_loaddingDialog_two), true, false);
             //Création d'un Thread
             new Thread(new Runnable() {
                 @Override
@@ -224,7 +224,7 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
             //Aucune connexion internet
             internet = 0;
             Log.d("Internet", "OFF");
-            Toast.makeText(getActivity(), "Connexion internet perdu.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.ms_error_network), Toast.LENGTH_SHORT).show();
             enabled = false;
         } else {
             //Le réseau est connecté

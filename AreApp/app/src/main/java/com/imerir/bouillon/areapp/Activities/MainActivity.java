@@ -89,12 +89,7 @@ public class MainActivity extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.fragmentOffers, new ProfilStudentFragment())
                                 .commit();
-                        mToolbar.setTitle("Profil Etudiant");
-                        //user = WebServiceUserClient.getInstance().getUserById(user.getId());
-                        //mToolbar.setTitle("Profil" + user.getNom() + " " + user.getPrenom());
-
-
-
+                        mToolbar.setTitle(getResources().getText(R.string.tab_profil_student));
                     }
                 }
             });

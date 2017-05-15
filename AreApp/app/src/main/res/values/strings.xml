@@ -15,6 +15,18 @@
         <item>UPVD</item>
     </string-array>
 
+    <!-- Other  -->
+    <string name="ms_warning">Warning</string>
+    <string name="ms_yes">Yes</string>
+    <string name="ms_no">No</string>
+    <string name="ms_loaddingDialog_one">Please wait</string>
+    <string name="ms_loaddingDialog_two">Loading...</string>
+    <string name="ms_error_network">No network connection.</string>
+    <string name="ms_download">Download...</string>
+    <string name="text_post_by">Published by :</string>
+    <string name="text_post_date">Published on :</string>
+    <string name="ms_remove">Remove...</string>
+
     <!-- Bottom Bar  -->
     <string name="tab_offer">Offers</string>
     <string name="tab_document">Documents</string>
@@ -26,12 +38,16 @@
     <string name="title_offer">Available offers</string>
     <string name="title_document">Available documents</string>
     <string name="title_message">Old Messages</string>
-    <string name="tab_profil_responsable">Register Reponsable ARE</string>
-    <string name="tab_profil_student">Register Student IMERIR</string>
+    <string name="tab_profil_responsable">Profile Responsable</string>
+    <string name="tab_profil_student">Profile Student</string>
     <string name="title_add_message">Add a message</string>
     <string name="title_add_offer">Add an offer</string>
 
     <!-- Add Message -->
+    <string name="ms_characters_255">255 Remaining Characters...</string>
+    <string name="ms_characters">Remaining Characters...</string>
+    <string name="ms_error_message">Please enter a message before sending it.</string>
+    <string name="ms_success_message">The message has been added</string>
     <string name="tv_add_message">Please enter your message below</string>
     <string name="et_add_message">Enter your message here</string>
     <string name="bt_add_message">Publish message</string>
@@ -47,11 +63,14 @@
     <string name="et_add_offer_details">Details</string>
     <string name="et_add_offer_details_reponsable">Visible Details</string>
     <string name="bt_add_offer">Add offer</string>
-
     <string name="type_add_offer_Internship">Internship</string>
     <string name="type_add_offer_Apprenticeship">Apprenticeship</string>
     <string name="type_add_offer_Type_not_known">Type not known</string>
-
+    <string name="ms_error_offer">Warning, please fill in all the text fields in order to post this offer.</string>
+    <string name="ms_error_offer_contrat">Please fill in the field type of contract, if it is unknown choose the option \'Type Not Known\', thank you.</string>
+    <string name="ms_error_offer_formation">You have not selected any targeted training for this offer, if you leave this field by default all students will be able to see the proposed offer. Do you want to continue ?</string>
+    <string name="ms_succes_offer">Offer</string>
+    <string name="ms_succes_offer_add">has been added</string>
 
     <!-- Login -->
     <string name="et_login_mail">Mail address</string>
@@ -62,53 +81,77 @@
     <string name="bt_login_valid_mail">Send validation email</string>
     <string name="bt_login_register_responsable">Register Responsable ARE</string>
     <string name="bt_login_register_student">Register Student IMERIR</string>
+    <string name="ms_error_login">Error your account does not exist or the email field is incorrect, correct the field and try again.</string>
+    <string name="ms_error_login_incorrect">Error, incorrect identifiers.</string>
+    <string name="ms_error_login_compte">Error, You do not have an account.</string>
 
     <!-- Offer Detail -->
     <string name="tv_offer_detail">Details : </string>
     <string name="tv_offer_detail_reponsable">Details visible to the Responsable</string>
+    <string name="ms_offer_detail_post">Date Posted :</string>
+    <string name="ms_offer_delete">Remove the offer</string>
+    <string name="ms_offer_delete_ask">Are you sure you want to delete this entry ?</string>
+    <string name="ms_offer_delete_offer">Offer</string>
+    <string name="ms_offer_delete_delete">has been deleted.</string>
+    <string name="type_Internship">Internship</string>
+    <string name="type_Apprenticeship">Apprenticeship</string>
+    <string name="type_Type_not_known">Type not known</string>
 
+    <!-- Register Responsable & Student-->
+    <string name="et_register_fName">First name</string>
+    <string name="et_register_Name">Name</string>
+    <string name="et_register_mail">Mail</string>
+    <string name="et_register_mail_valid">Confirmation Mail</string>
+    <string name="et_register_mdp">Password</string>
+    <string name="et_register_mdp_valid">Confirmation Password</string>
+    <string name="et_register_phone">Phone number</string>
+    <string name="bt_register">Register</string>
+    <string name="error_empty_fields">Error, All the fiels must be renseigned to continue.</string>
+    <string name="error_mail_not_equal">Error, The email address are not equals.</string>
+    <string name="error_password_not_equal">Error, The passwords are not equals.</string>
+    <string name="error_mail_not_imerir">Erreur, The email address must be @imerir.com.</string>
+    <string name="error_account_already_exist">Error, An account with this email address already exists.</string>
+    <string name="account_created_successfuly">Account successfully created</string>
     <!-- Register Responsable-->
-    <string name="et_register_reponsable_fName">First name</string>
-    <string name="et_register_reponsable_Name">Name</string>
-    <string name="et_register_reponsable_mail">Mail</string>
-    <string name="et_register_reponsable_mail_valid">Confirmation Mail</string>
-    <string name="et_register_reponsable_mdp">Password</string>
-    <string name="et_register_reponsable_mdp_valid">Confirmation Password</string>
-    <string name="et_register_reponsable_phone">Phone number</string>
     <string name="et_register_reponsable_access">Access password</string>
-    <string name="tv_register_reponsable">Contact an administrator to obtain your access code</string>
-    <string name="bt_register_reponsable">Register</string>
-    <string name="error_empty_fields">Error, All the fiels must be renseigned to continue</string>
-    <string name="error_mail_not_equal">Error, The email address are not equals</string>
-    <string name="error_password_not_equal">Error, The passwords are not equals</string>
+    <string name="tv_register_reponsable">Contact an administrator to obtain your access code.</string>
     <string name="error_false_access_code">Error, The access password entered is incorrect</string>
-    <string name="error_mail_not_imerir">Erreur, The email address must be @imerir.com</string>
-    <string name="error_account_already_exist">Error, An account with this email address already exists</string>
-    <string name="account_created_successfuly">Compte créé avec succès</string>
-
     <!-- Register Student -->
-    <string name="et_register_student_fName">First name</string>
-    <string name="et_register_student_Name">Name</string>
-    <string name="et_register_student_mail">Mail</string>
-    <string name="et_register_student_mail_valid">Confirmation Mail</string>
-    <string name="et_register_student_mdp">Password</string>
-    <string name="et_register_student_mdp_valid">Confirmation Password</string>
-    <string name="et_register_student_phone">Phone number</string>
     <string name="rg_register_student_cdpir">CDPIR</string>
     <string name="rg_register_student_cdsm">CDSM</string>
     <string name="rg_register_student_upvd">UPVD</string>
-    <string name="bt_register_student">Register</string>
 
     <!-- Document Item -->
     <string name="iv_document_item_document">Icon Document</string>
 
     <!-- Fragment Document -->
+    <string name="bt_document_add_send">Sending the file ...</string>
     <string name="bt_document_add_document">Add a document</string>
+    <string name="ms_document_send">Select the file to send.</string>
+    <string name="ms_document_success">Loading the finished file.</string>
+    <string name="ms_document_file_lost">File not found</string>
+    <string name="ms_document_error_url">URL Error</string>
+    <string name="ms_document_error_read_write">Unable to read / write a file.</string>
+    <string name="ms_document_error_unknown">Unknown error</string>
 
     <!-- Fragment Offers List -->
     <string name="iv_offers_list_message">Icon Message</string>
     <string name="bt_offers_listt_add_offer">Add an offer</string>
     <string name="iv_offers_list_add_message">Add a message</string>
+
+    <!-- Fragment Student  -->
+    <string name="bt_image_cv">Select the Curriculum Vitae to send.</string>
+    <string name="bt_image_lm">Select the motivation letter to send.</string>
+    <string name="bt_image_etiquette">Select the Label you want to send.</string>
+    <string name="bt_image_db">Select the DashBoard to send.</string>
+    <string name="ms_select_file">Choose the file to send ...</string>
+    <string name="tv_cv">CV</string>
+    <string name="tv_lm">Cover letter</string>
+    <string name="tv_etiquette">Label</string>
+    <string name="tv_DB">DashBoard</string>
+
+    <!-- Fragment Responsable  -->
+
 
     <!-- Message Item -->
     <string name="iv_message_item_message">Icon Message</string>
@@ -130,5 +173,13 @@
 
     <!-- Menu Offer Detail -->
     <string name="item_menu_offer_detail_delete">Remove the offer</string>
+
+    <!-- showCallDialog -->
+    <string name="ms_callDIalog_call_ask">Calling ?</string>
+    <string name="ms_callDialog_call_contact">Do you want to call</string>
+    <string name="ms_callDialog_call_end">\?</string>
+    <string name="ms_callDialog_call">Call </string>
+    <string name="ms_callDialog_phone">Phone :</string>
+    <string name="ms_callDialog_stop">Cancel</string>
 
 </resources>

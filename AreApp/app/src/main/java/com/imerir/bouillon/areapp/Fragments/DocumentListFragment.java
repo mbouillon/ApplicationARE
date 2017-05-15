@@ -93,8 +93,7 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
             @Override
             public void onClick(View v) {
                     showFileChooser();
-                    Toast.makeText(getActivity(),"Selectionnez le fichier a envoyer",Toast.LENGTH_SHORT).show();
-            }
+                Toast.makeText(getActivity(),getString(R.string.ms_document_send),Toast.LENGTH_SHORT).show();            }
         });
     }
 
@@ -111,7 +110,7 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
         //Permet de sélectionner les données et de les retourner
         intent.setAction(Intent.ACTION_GET_CONTENT);
         //Démarre une nouvelle activité pour sélectionner les fichiers et retourner les données
-        startActivityForResult(Intent.createChooser(intent,"Choisissez le fichier à envoyer.."),PICK_FILE_REQUEST);
+        startActivityForResult(Intent.createChooser(intent,getString(R.string.ms_document_send)),PICK_FILE_REQUEST);
     }
 
     @Override
@@ -167,7 +166,7 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
     public void showLoadingDialog(){
         try{
             //Création d'un ProgressDialog et l'afficher
-            loadingDialog = ProgressDialog.show(getActivity(), "", "Chargement en cours...", true, false);
+            loadingDialog = ProgressDialog.show(getActivity(), "", getString(R.string.ms_loaddingDialog_two), true, false);
             //Création d'un Thread
             new Thread(new Runnable() {
                 @Override
@@ -212,7 +211,7 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
             //Aucune connexion internet
             internet = 0;
             Log.d("Internet", "OFF");
-            Toast.makeText(getActivity(), "Connexion internet perdu.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.ms_error_network), Toast.LENGTH_SHORT).show();
             enabled = false;
         } else {
             //Le réseau est connecté
@@ -296,7 +295,7 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
 
                 //Le code de réponse de 200 indique l'état du serveur OK
                 if(serverResponseCode == 200){
-                    Toast.makeText(getActivity(),"Chargement du fichier terminé.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getString(R.string.ms_document_success) ,Toast.LENGTH_SHORT).show();
                 }
 
                 //Fermeture les flux d'entrée et de sortie
@@ -306,16 +305,16 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
-                Toast.makeText(getActivity(),"Fichier non trouvé",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getString(R.string.ms_document_file_lost) ,Toast.LENGTH_SHORT).show();
             } catch (MalformedURLException e) {
                 e.printStackTrace();
-                Toast.makeText(getActivity(), "Erreur d'URL!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getString(R.string.ms_document_error_url), Toast.LENGTH_SHORT).show();
             } catch (IOException e) {
                 e.printStackTrace();
-                Toast.makeText(getActivity(), "Impossible de lire / écrire un fichier!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getString(R.string.ms_document_error_read_write), Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
                 e.printStackTrace();
-                Toast.makeText(getActivity(), "Erreur inconnue", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getString(R.string.ms_document_error_unknown), Toast.LENGTH_SHORT).show();
             }
             dialog.dismiss();
             return serverResponseCode;

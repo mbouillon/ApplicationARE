@@ -54,15 +54,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/DatePublication"
-                tools:text="Publié le : 27/09/2017"
+                android:textStyle="bold"
+                tools:text="27/09/2017"
                 android:paddingTop="4dp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"

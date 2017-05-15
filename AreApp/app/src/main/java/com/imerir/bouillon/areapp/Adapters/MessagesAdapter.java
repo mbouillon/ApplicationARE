@@ -81,7 +81,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
             message = mMessage;
 
             user = WebServiceUserClient.getInstance().getUserById(message.getPublisherId());
-            PublishName.setText("Publié par : "+ user.getNom() + " " + user.getPrenom());
+            PublishName.setText(user.getNom() + " " + user.getPrenom());
             //TODO crash quand on affiche le texte du message
             Message.setText( message.getMessage());
         }

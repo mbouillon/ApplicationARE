@@ -52,8 +52,6 @@ public class ProfilStudentFragment extends Fragment implements View.OnClickListe
     ProgressDialog dialog;
 
     TextView firstname, secondname, mail, phoneNumber;
-
-    TextView tvCV_load, tvLM_load, tvEtiquette_load, tvDB_load;
     ImageButton ibCV, ibLM, ibEtiquette, ibDB;
 
     com.github.clans.fab.FloatingActionButton floatingActionButtonEdited;
@@ -98,7 +96,7 @@ public class ProfilStudentFragment extends Fragment implements View.OnClickListe
             @Override
             public void onClick(View view) {
                 showFileChooserCV();
-                Toast.makeText(getActivity(),"Selectionnez le CV a envoyer",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),getString(R.string.bt_image_cv),Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -106,7 +104,7 @@ public class ProfilStudentFragment extends Fragment implements View.OnClickListe
             @Override
             public void onClick(View view) {
                 showFileChooserLM();
-                Toast.makeText(getActivity(),"Selectionnez la Lettre de motivation a envoyer",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),getString(R.string.bt_image_lm),Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -114,7 +112,7 @@ public class ProfilStudentFragment extends Fragment implements View.OnClickListe
             @Override
             public void onClick(View view) {
                 showFileChooserEtiquette();
-                Toast.makeText(getActivity(),"Selectionnez l'Etiquette a envoyer",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),getString(R.string.bt_image_etiquette),Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -122,7 +120,7 @@ public class ProfilStudentFragment extends Fragment implements View.OnClickListe
             @Override
             public void onClick(View view) {
                 showFileChooserDB();
-                Toast.makeText(getActivity(),"Selectionnez le DashBoard a envoyer",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),getString(R.string.bt_image_db),Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -150,7 +148,7 @@ public class ProfilStudentFragment extends Fragment implements View.OnClickListe
         //Permet de sélectionner les données et de les retourner
         intent.setAction(Intent.ACTION_GET_CONTENT);
         //Démarre une nouvelle activité pour sélectionner les fichiers et retourner les données
-        startActivityForResult(Intent.createChooser(intent,"Choisissez le fichier à envoyer.."),PICK_FILE_REQUEST_CV);
+        startActivityForResult(Intent.createChooser(intent, getString(R.string.ms_select_file)),PICK_FILE_REQUEST_CV);
     }
     private void showFileChooserLM() {
         Intent intent = new Intent();
@@ -159,7 +157,7 @@ public class ProfilStudentFragment extends Fragment implements View.OnClickListe
         //Permet de sélectionner les données et de les retourner
         intent.setAction(Intent.ACTION_GET_CONTENT);
         //Démarre une nouvelle activité pour sélectionner les fichiers et retourner les données
-        startActivityForResult(Intent.createChooser(intent,"Choisissez le fichier à envoyer.."),PICK_FILE_REQUEST_LM);
+        startActivityForResult(Intent.createChooser(intent, getString(R.string.ms_select_file)),PICK_FILE_REQUEST_LM);
     }
     private void showFileChooserEtiquette() {
         Intent intent = new Intent();
@@ -168,7 +166,7 @@ public class ProfilStudentFragment extends Fragment implements View.OnClickListe
         //Permet de sélectionner les données et de les retourner
         intent.setAction(Intent.ACTION_GET_CONTENT);
         //Démarre une nouvelle activité pour sélectionner les fichiers et retourner les données
-        startActivityForResult(Intent.createChooser(intent,"Choisissez le fichier à envoyer.."),PICK_FILE_REQUEST_ETIQUETTE);
+        startActivityForResult(Intent.createChooser(intent, getString(R.string.ms_select_file)),PICK_FILE_REQUEST_ETIQUETTE);
     }
     private void showFileChooserDB() {
         Intent intent = new Intent();
@@ -177,7 +175,7 @@ public class ProfilStudentFragment extends Fragment implements View.OnClickListe
         //Permet de sélectionner les données et de les retourner
         intent.setAction(Intent.ACTION_GET_CONTENT);
         //Démarre une nouvelle activité pour sélectionner les fichiers et retourner les données
-        startActivityForResult(Intent.createChooser(intent,"Choisissez le fichier à envoyer.."),PICK_FILE_REQUEST_DB);
+        startActivityForResult(Intent.createChooser(intent, getString(R.string.ms_select_file)),PICK_FILE_REQUEST_DB);
     }
 
     //Méthode qui récupère les nouvelles données s'il y en a
@@ -216,7 +214,7 @@ public class ProfilStudentFragment extends Fragment implements View.OnClickListe
     public void showLoadingDialog(){
         try{
             //Création d'un ProgressDialog et l'afficher
-            loadingDialog = ProgressDialog.show(getActivity(), "", "Chargement en cours...", true, false);
+            loadingDialog = ProgressDialog.show(getActivity(), "", getString(R.string.ms_loaddingDialog_two), true, false);
             //Création d'un Thread
             new Thread(new Runnable() {
                 @Override
@@ -261,7 +259,7 @@ public class ProfilStudentFragment extends Fragment implements View.OnClickListe
             //Aucune connexion internet
             internet = 0;
             Log.d("Internet", "OFF");
-            Toast.makeText(getActivity(), "Aucune connexion réseau.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.ms_error_network), Toast.LENGTH_SHORT).show();
             enabled = false;
         } else {
             //Le réseau est connecté
