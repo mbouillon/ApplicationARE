@@ -2,16 +2,21 @@ package com.imerir.bouillon.areapp.Activities;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -28,6 +33,8 @@ import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import com.imerir.bouillon.areapp.Clients.WebServiceDocumentClient;
+import com.imerir.bouillon.areapp.Clients.WebServiceOfferClient;
+import com.imerir.bouillon.areapp.Fragments.DocumentListFragment;
 import com.imerir.bouillon.areapp.Models.Document;
 import com.imerir.bouillon.areapp.R;
 
@@ -240,7 +247,11 @@ public class PdfActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_document_pdf, menu);
+        inflater.inflate(R.menu.main_document_dl, menu);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        if(preferences.getBoolean("type",false) == false){
+            getMenuInflater().inflate(R.menu.menu_document_pdf, menu);
+        }
         return true;
     }
 
@@ -249,19 +260,34 @@ public class PdfActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            case R.id.download:
+            case R.id.deleteDocument:
+                new AlertDialog.Builder(this)
+                        .setTitle(getString(R.string.ms_document_delete))
+                        .setMessage(getString(R.string.ms_document_delete_ask))
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                //Envoie la requete de suppression + Destruction de l'activité + Rechargement de la main activity
+                                WebServiceDocumentClient.getInstance().DELETEDocument(document.getDocId());
+                                Toast.makeText(getApplicationContext(), getString(R.string.ms_document_delete_offer) + " " + document.getDocumentURL() + " " + getString(R.string.ms_document_delete_delete), Toast.LENGTH_LONG).show();
+                                Intent DocumentFragment = new Intent(getBaseContext(), MainActivity.class);
+                                startActivity(DocumentFragment);
+                                finish();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+                return true;
+            case R.id.document_DL:
                 // TODO download le pdf en cours
                 //Version web
                 Toast.makeText(getApplicationContext(), getString(R.string.ms_download), Toast.LENGTH_LONG).show();
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://mod.ctpmperpignan.com/pdf/pdf_lignes/Ligne15.pdf"));
                 //Uri.parse("http://10.0.2.2:5000/DocUps/" + document.getDocId()));
                 startActivity(browserIntent);
-                return true;
-            case R.id.deleteDocument:
-                // TODO Pouvoir supprimer le pdf en cours
-                //deleteDocument();
-                //Toast.makeText(getApplicationContext(), "Delete...", Toast.LENGTH_LONG).show();
-                //super.onBackPressed();
                 return true;
         }
         return super.onOptionsItemSelected(item);

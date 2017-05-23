@@ -166,8 +166,11 @@
     <string name="item_main_menu_quit">Quitter l\'application</string>
 
     <!-- Menu Document PDF -->
-    <string name="item_menu_document_pdf_dl">Télécharger le PDF</string>
     <string name="item_menu_document_pdf_delete">Supprimer le Document</string>
+    <string name="ms_document_delete">Supprimer le document</string>
+    <string name="ms_document_delete_ask">Êtes-vous sûr de vouloir supprimer cette entrée ?</string>
+    <string name="ms_document_delete_offer">Document</string>
+    <string name="ms_document_delete_delete">a bien été supprimée.</string>
 
     <!-- Menu Login -->
     <string name="item_menu_login_sync">Synchroniser</string>

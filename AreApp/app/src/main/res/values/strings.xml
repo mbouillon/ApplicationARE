@@ -166,8 +166,11 @@
     <string name="item_main_menu_quit">Exit</string>
 
     <!-- Menu Document PDF -->
-    <string name="item_menu_document_pdf_dl">Download pdf</string>
     <string name="item_menu_document_pdf_delete">Delete the document</string>
+    <string name="ms_document_delete">Remove the document</string>
+    <string name="ms_document_delete_ask">Are you sure you want to delete this entry ?</string>
+    <string name="ms_document_delete_offer">Document</string>
+    <string name="ms_document_delete_delete">has been deleted.</string>
 
     <!-- Menu Login -->
     <string name="item_menu_login_sync">Synchronize</string>

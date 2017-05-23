@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Activities.PdfActivity">
+    <item
+        android:id="@+id/document_DL"
+        android:title="@string/item_menu_login_sync"
+        app:showAsAction="always"
+        android:icon="@android:drawable/stat_sys_download"/>
+</menu>
