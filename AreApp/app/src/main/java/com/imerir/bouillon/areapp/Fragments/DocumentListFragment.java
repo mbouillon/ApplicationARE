@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -78,6 +80,9 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+
         ///Si internet est activé alors on affiche un temps de chargement pour dl les données
         if (checkConnectivity() == 1){
             showLoadingDialog();
@@ -114,6 +119,10 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
                 }, 2500);
             }
         });
+
+        if(preferences.getBoolean("type", false) == false ){
+            fbaAddDocument.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

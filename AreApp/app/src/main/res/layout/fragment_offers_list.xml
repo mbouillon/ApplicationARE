@@ -75,6 +75,7 @@
         </android.support.v4.widget.SwipeRefreshLayout>
 
         <com.github.clans.fab.FloatingActionMenu
+            android:visibility="invisible"
             android:id="@+id/fbaMenuOffers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

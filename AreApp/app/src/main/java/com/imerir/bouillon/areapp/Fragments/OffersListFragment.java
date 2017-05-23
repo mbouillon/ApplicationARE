@@ -3,12 +3,14 @@ package com.imerir.bouillon.areapp.Fragments;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -68,6 +70,7 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
     //SwipeRefreshLayout Offres
     private SwipeRefreshLayout mSwipeRefreshLayoutOffre;
 
+    com.github.clans.fab.FloatingActionMenu fabMenu;
     com.github.clans.fab.FloatingActionButton fabAddOffer;
     com.github.clans.fab.FloatingActionButton fabAddMessage;
 
@@ -75,6 +78,8 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         //Si internet activé Affiche un temps de chargement pour dl les données
         if (checkConnectivity() == 1){
@@ -99,6 +104,7 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
         publisherName = (TextView) view.findViewById(R.id.PublishName);
         ImageMessage = (ImageView) view.findViewById(R.id.ImageMessage);
         cardView = (CardView) view.findViewById(R.id.cardView);
+        fabMenu = (com.github.clans.fab.FloatingActionMenu) view.findViewById(R.id.fbaMenuOffers);
         fabAddMessage = (com.github.clans.fab.FloatingActionButton) view.findViewById(R.id.fbaAddMessage);
         fabAddOffer = (com.github.clans.fab.FloatingActionButton) view.findViewById(R.id.fbaAddOffer);
         fabAddMessage.setOnClickListener(new View.OnClickListener() {
@@ -140,6 +146,10 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
                 }, 2500);
             }
         });
+
+        if(preferences.getBoolean("type", false) == false ){
+            fabMenu.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
