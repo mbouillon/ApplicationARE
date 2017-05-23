@@ -5,11 +5,13 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -20,7 +22,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.imerir.bouillon.areapp.Activities.AddOfferActivity;
+
 import com.imerir.bouillon.areapp.Clients.WebServiceUserClient;
 import com.imerir.bouillon.areapp.Models.User;
 import com.imerir.bouillon.areapp.R;
@@ -39,6 +41,8 @@ public class ProfilStudentFragment extends Fragment implements View.OnClickListe
     }
 
     User user;
+    private ArrayList<User> _user;
+
 
     private static final int PICK_FILE_REQUEST_CV = 1;
     private static final String TAG = ProfilStudentFragment.class.getSimpleName();
@@ -80,7 +84,6 @@ public class ProfilStudentFragment extends Fragment implements View.OnClickListe
         valide = (TextView) view.findViewById(R.id.valid);
 
         WebServiceUserClient.getInstance().requestUsers(this);
-        WebServiceUserClient.getInstance().getUsers();
 
         floatingActionButtonEdited = (com.github.clans.fab.FloatingActionButton) view.findViewById(R.id.floatingActionButtonEdited);
         floatingActionButtonEdited.setOnClickListener(this);
@@ -157,8 +160,8 @@ public class ProfilStudentFragment extends Fragment implements View.OnClickListe
 
     //Méthode qui récupère les nouvelles données s'il y en a
     private void setupRefreshSwipe(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         WebServiceUserClient.getInstance().requestUsers(this);
-        WebServiceUserClient.getInstance().getUsers();
     }
 
     @Override
@@ -172,8 +175,8 @@ public class ProfilStudentFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onUsersReceived(ArrayList<User> users) {
-        user = users.get(0);
-        user = WebServiceUserClient.getInstance().getUserById(user.getId());
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        user = WebServiceUserClient.getInstance().getUserById(preferences.getInt("id", 0));
         firstname.setText(user.getNom());
         secondname.setText(user.getPrenom());
         mail.setText(user.getMail());
@@ -199,7 +202,7 @@ public class ProfilStudentFragment extends Fragment implements View.OnClickListe
             default:
                 formation.setText("CDPIR");
         }
-        //Récuperation des DOCUMENT, puis on renvoi la boîte de dialogue de progression
+        //Récuperation des DOCUMENT, puis on renvoie la boite de dialogue de progression
         loadingDialog.dismiss();
     }
 
