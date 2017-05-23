@@ -1,6 +1,7 @@
 package com.imerir.bouillon.areapp.Activities;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -22,13 +23,15 @@ import com.imerir.bouillon.areapp.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Locale;
+
 
 public class AddOfferActivity extends AppCompatActivity {
 
     //Var Formation et var TypeContrat pour compatibilité BDD
     private int _formation, _typeContrat;
 
-    private EditText nomOffre, duree, nomEntreprise, lieu, nomContact, mailContact, telephoneContact;
+    private EditText nomOffre, duree, nomEntreprise, lieu, nomContact, mailContact, telephoneContact, details, detailsResponsable;
     private Spinner typeContrat, formation;
     private Button ajouterOffre;
 
@@ -64,6 +67,8 @@ public class AddOfferActivity extends AppCompatActivity {
         mailContact = (EditText) findViewById(R.id.MailContact);
         telephoneContact = (EditText) findViewById(R.id.PhoneContact);
         nomEntreprise = (EditText) findViewById(R.id.NomEntreprise);
+        details = (EditText) findViewById(R.id.Detail);
+        detailsResponsable = (EditText) findViewById(R.id.DetailsResponsables);
 
         //Spinners + Adapters
         //Spinner contrat
@@ -84,20 +89,30 @@ public class AddOfferActivity extends AppCompatActivity {
         ajouterOffre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Gestion des spinners
+                //Gestion des spinners + Langue
                 switch (typeContrat.getSelectedItem().toString()) {
-                    case "@string/type_add_offer_Internship":
+                    case "Stage":
                         _typeContrat = 1;
                         break;
-                    case "@string/type_add_offer_Apprenticeship":
+                    case "Apprentissage":
                         _typeContrat = 2;
                         break;
-                    case "@string/type_add_offer_Type_not_known":
+                    case "Type non connu":
                         _typeContrat = 3;
+                        break;
+                    case "Internship":
+                        _typeContrat = 1;
+                        break;
+                    case "Apprenticeship":
+                        _typeContrat = 2;
+                        break;
+                    case "Type not known":
+                        _typeContrat = 1;
                         break;
                     default:
                         _typeContrat = 0;
                 }
+
                 switch (formation.getSelectedItem().toString()) {
                     case "CDPIR":
                         _formation = 1;
@@ -112,7 +127,6 @@ public class AddOfferActivity extends AppCompatActivity {
                         _formation = 0;
                 }
 
-                //VOIR COMMENT ALLEGER CE PLAT DE SPAGUETTI
                 /*
                     Si champs pas remplis afficher message erreur,
                     Sinon Si type contrat non rempli afficher message d'erreur
@@ -164,10 +178,13 @@ public class AddOfferActivity extends AppCompatActivity {
                  jsonObject.put("ContactMail", mailContact.getText().toString());
                  jsonObject.put("ContactPhone", telephoneContact.getText().toString());
                  jsonObject.put("NomEntreprise", nomEntreprise.getText().toString());
+                 jsonObject.put("Details", details.getText().toString());
+                 jsonObject.put("DetailsResponsable", detailsResponsable.getText().toString());
                  //Création de l'objet json et POST dans la BDD + Après le POST desctruction de l'activité et rechargement de l'activité principale
                  Offer offre = new Offer(jsonObject);
                  WebServiceOfferClient.getInstance().POSTOffer(offre);
-                 Toast.makeText(getApplicationContext(),getString(R.string.ms_succes_offer) + " " + nomOffre.getText().toString() + " " + getString(R.string.ms_succes_offer_add), Toast.LENGTH_LONG).show();                 Intent MainActivityIntent = new Intent(getBaseContext(), MainActivity.class);
+                 Toast.makeText(getApplicationContext(),getString(R.string.ms_succes_offer) + " " + nomOffre.getText().toString() + " " + getString(R.string.ms_succes_offer_add), Toast.LENGTH_LONG).show();
+                 Intent MainActivityIntent = new Intent(getBaseContext(), MainActivity.class);
                  startActivity(MainActivityIntent);
                  finish();
              }
