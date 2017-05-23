@@ -36,7 +36,7 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
     //Declatation des widgets
     private Toolbar mToolbar;
 
-    TextView Titre, Duree, NomEntreprise, Lieu, NomContact, Mail, Telephone, DatePublish, Contrat;
+    TextView Titre, Duree, NomEntreprise, Lieu, NomContact, Mail, Telephone, DatePublish, Contrat, tvDetailsResponsables;
     TextView Details, DetailsResponsables;
 
     com.github.clans.fab.FloatingActionButton callBtn, mailBtn;
@@ -47,6 +47,8 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offer_detail);
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         offer = WebServiceOfferClient.getInstance().getOffer(getIntent().getIntExtra("offre_id", 0));
 
@@ -73,9 +75,15 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
         Telephone =   (TextView) findViewById(R.id.tvTelephone);
         DatePublish = (TextView) findViewById(R.id.tvPublishOffre);
         Contrat = (TextView) findViewById(R.id.tvContrat);
+        tvDetailsResponsables = (TextView) findViewById(R.id.textDetailsResponsables);
 
         Details =   (TextView) findViewById(R.id.tvDetails);
         DetailsResponsables =   (TextView) findViewById(R.id.tvDetailsResponsables);
+
+        if (preferences.getBoolean("type", false) == true){
+            DetailsResponsables.setVisibility(View.INVISIBLE);
+            tvDetailsResponsables.setVisibility(View.INVISIBLE);
+        }
 
         //Recuperation des données de l'offre cliquée + Affichage sur le widget
         Titre.setText(offer.getTitre());
