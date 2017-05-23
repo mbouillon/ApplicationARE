@@ -1,8 +1,11 @@
 package com.imerir.bouillon.areapp.Fragments;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -17,6 +20,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.imerir.bouillon.areapp.Activities.AddOfferActivity;
 import com.imerir.bouillon.areapp.Clients.WebServiceUserClient;
 import com.imerir.bouillon.areapp.Models.User;
 import com.imerir.bouillon.areapp.R;
@@ -37,21 +41,15 @@ public class ProfilStudentFragment extends Fragment implements View.OnClickListe
     User user;
 
     private static final int PICK_FILE_REQUEST_CV = 1;
-    private static final int PICK_FILE_REQUEST_LM = 1;
-    private static final int PICK_FILE_REQUEST_ETIQUETTE = 1;
-    private static final int PICK_FILE_REQUEST_DB = 1;
     private static final String TAG = ProfilStudentFragment.class.getSimpleName();
     private String selectedFilePath;
 
     //URL du serveur URL 10.0.2.2 localServeur Emulateur
-    private String SERVER_URL_CV = "http://10.0.2.2:5000/mobile/cv/";
-    private String SERVER_URL_LM = "http://10.0.2.2:5000/mobile/lm/";
-    private String SERVER_URL_ETIQUETTE = "http://10.0.2.2:5000/mobile/etiquette/";
-    private String SERVER_URL_DB = "http://10.0.2.2:5000/mobile/db/";
+
 
     ProgressDialog dialog;
 
-    TextView firstname, secondname, mail, phoneNumber;
+    TextView firstname, secondname, mail, phoneNumber, formation, valide;
     ImageButton ibCV, ibLM, ibEtiquette, ibDB;
 
     com.github.clans.fab.FloatingActionButton floatingActionButtonEdited;
@@ -78,6 +76,8 @@ public class ProfilStudentFragment extends Fragment implements View.OnClickListe
         secondname = (TextView) view.findViewById(R.id.secondname);
         mail = (TextView) view.findViewById(R.id.mail);
         phoneNumber = (TextView) view.findViewById(R.id.phoneNumber);
+        formation = (TextView) view.findViewById(R.id.formation);
+        valide = (TextView) view.findViewById(R.id.valid);
 
         WebServiceUserClient.getInstance().requestUsers(this);
         WebServiceUserClient.getInstance().getUsers();
@@ -95,32 +95,36 @@ public class ProfilStudentFragment extends Fragment implements View.OnClickListe
         ibCV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showFileChooserCV();
-                Toast.makeText(getActivity(),getString(R.string.bt_image_cv),Toast.LENGTH_SHORT).show();
+                //showFileChooser();
+                //Toast.makeText(getActivity(),getString(R.string.bt_image_cv),Toast.LENGTH_SHORT).show();
+                showAlertNotImplemented();
             }
         });
 
         ibLM.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showFileChooserLM();
-                Toast.makeText(getActivity(),getString(R.string.bt_image_lm),Toast.LENGTH_SHORT).show();
+                //showFileChooser();
+                //Toast.makeText(getActivity(),getString(R.string.bt_image_lm),Toast.LENGTH_SHORT).show();
+                showAlertNotImplemented();
             }
         });
 
         ibEtiquette.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showFileChooserEtiquette();
-                Toast.makeText(getActivity(),getString(R.string.bt_image_etiquette),Toast.LENGTH_SHORT).show();
+                //showFileChooser();
+                //Toast.makeText(getActivity(),getString(R.string.bt_image_etiquette),Toast.LENGTH_SHORT).show();
+                showAlertNotImplemented();
             }
         });
 
         ibDB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showFileChooserDB();
-                Toast.makeText(getActivity(),getString(R.string.bt_image_db),Toast.LENGTH_SHORT).show();
+                //showFileChooser();
+                //Toast.makeText(getActivity(),getString(R.string.bt_image_db),Toast.LENGTH_SHORT).show();
+                showAlertNotImplemented();
             }
         });
 
@@ -141,7 +145,7 @@ public class ProfilStudentFragment extends Fragment implements View.OnClickListe
 
     }
 
-    private void showFileChooserCV() {
+    private void showFileChooser() {
         Intent intent = new Intent();
         //Définit le fichier de sélection sur tous les types de fichiers
         intent.setType("*/*");
@@ -149,33 +153,6 @@ public class ProfilStudentFragment extends Fragment implements View.OnClickListe
         intent.setAction(Intent.ACTION_GET_CONTENT);
         //Démarre une nouvelle activité pour sélectionner les fichiers et retourner les données
         startActivityForResult(Intent.createChooser(intent, getString(R.string.ms_select_file)),PICK_FILE_REQUEST_CV);
-    }
-    private void showFileChooserLM() {
-        Intent intent = new Intent();
-        //Définit le fichier de sélection sur tous les types de fichiers
-        intent.setType("*/*");
-        //Permet de sélectionner les données et de les retourner
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        //Démarre une nouvelle activité pour sélectionner les fichiers et retourner les données
-        startActivityForResult(Intent.createChooser(intent, getString(R.string.ms_select_file)),PICK_FILE_REQUEST_LM);
-    }
-    private void showFileChooserEtiquette() {
-        Intent intent = new Intent();
-        //Définit le fichier de sélection sur tous les types de fichiers
-        intent.setType("*/*");
-        //Permet de sélectionner les données et de les retourner
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        //Démarre une nouvelle activité pour sélectionner les fichiers et retourner les données
-        startActivityForResult(Intent.createChooser(intent, getString(R.string.ms_select_file)),PICK_FILE_REQUEST_ETIQUETTE);
-    }
-    private void showFileChooserDB() {
-        Intent intent = new Intent();
-        //Définit le fichier de sélection sur tous les types de fichiers
-        intent.setType("*/*");
-        //Permet de sélectionner les données et de les retourner
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        //Démarre une nouvelle activité pour sélectionner les fichiers et retourner les données
-        startActivityForResult(Intent.createChooser(intent, getString(R.string.ms_select_file)),PICK_FILE_REQUEST_DB);
     }
 
     //Méthode qui récupère les nouvelles données s'il y en a
@@ -189,6 +166,7 @@ public class ProfilStudentFragment extends Fragment implements View.OnClickListe
         if(view == floatingActionButtonEdited){
             //Intent edtitIntent = new Intent(getActivity(), EditProfilActivity.class);
             //startActivity(edtitIntent);
+            showAlertNotImplemented();
         }
     }
 
@@ -200,9 +178,29 @@ public class ProfilStudentFragment extends Fragment implements View.OnClickListe
         secondname.setText(user.getPrenom());
         mail.setText(user.getMail());
         phoneNumber.setText(user.getTelephone());
+        if(user.isValid() == true){
+            valide.setText("Compte validé");
+            valide.setTextColor(Color.GREEN);
+        }
+        else{
+            valide.setText("Compte non validé");
+            valide.setTextColor(Color.RED);
+        }
+        switch (user.getFormation()) {
+            case 1:
+                formation.setText("CDPIR");
+                break;
+            case 2:
+                formation.setText("CDSM");
+                break;
+            case 3:
+                formation.setText("UPVD");
+                break;
+            default:
+                formation.setText("CDPIR");
+        }
         //Récuperation des DOCUMENT, puis on renvoi la boîte de dialogue de progression
         loadingDialog.dismiss();
-
     }
 
     @Override
@@ -251,7 +249,6 @@ public class ProfilStudentFragment extends Fragment implements View.OnClickListe
 
     private int checkConnectivity() {
         boolean enabled = true;
-
         ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = connectivityManager.getActiveNetworkInfo();
         //Vérification si le téléphone est connecté a un réseau mobile, wifi ou pas
@@ -267,5 +264,17 @@ public class ProfilStudentFragment extends Fragment implements View.OnClickListe
             internet = 1;
         }
         return internet;
+    }
+
+    private void showAlertNotImplemented(){
+        new AlertDialog.Builder(getActivity())
+                .setTitle(getString(R.string.ms_warning))
+                .setMessage(getString(R.string.alert))
+                .setPositiveButton(getString(R.string.ms_yes), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .show();
     }
 }

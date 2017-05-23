@@ -148,7 +148,8 @@
     <string name="tv_cv">CV</string>
     <string name="tv_lm">Lettre de motivation</string>
     <string name="tv_etiquette">Étiquette</string>
-    <string name="tv_DB">DashBoard</string>
+    <string name="tv_DB">Tableau de bord</string>
+    <string name="alert">Cette fontionnalité n\'a pas encore été ajoutée, elle le sera dans une prochaine mise à jour :) </string>
 
     <!-- Fragment Responsable  -->
 
