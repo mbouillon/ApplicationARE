@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -62,6 +63,9 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
     //Progress Bar du chargement d'un document pdf
     ProgressDialog dialog;
 
+    //SwipeRefreshLayout Document
+    private SwipeRefreshLayout mSwipeRefreshLayoutDocument;
+
     //Gestion de la Progress Bar des données
     ProgressDialog loadingDialog;
     private int progressStatus = 0;
@@ -95,22 +99,26 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
                     showFileChooser();
                 Toast.makeText(getActivity(),getString(R.string.ms_document_send),Toast.LENGTH_SHORT).show();            }
         });
+
+        //Swipe
+        mSwipeRefreshLayoutDocument = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout_document);
+        mSwipeRefreshLayoutDocument.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        setupRefreshSwipe();
+                        mSwipeRefreshLayoutDocument.setRefreshing(false);
+                    }
+                }, 2500);
+            }
+        });
     }
 
     @Override
     public void onClick(View v) {
 
-    }
-
-    //Permet de parcourir sont téléphone a la recherhce d'un document
-    private void showFileChooser() {
-        Intent intent = new Intent();
-        //Définit le fichier de sélection sur tous les types de fichiers
-        intent.setType("*/*");
-        //Permet de sélectionner les données et de les retourner
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        //Démarre une nouvelle activité pour sélectionner les fichiers et retourner les données
-        startActivityForResult(Intent.createChooser(intent,getString(R.string.ms_document_send)),PICK_FILE_REQUEST);
     }
 
     @Override
@@ -160,6 +168,23 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
                 }
             }
         }
+    }
+
+    //Permet de parcourir sont téléphone a la recherhce d'un document
+    private void showFileChooser() {
+        Intent intent = new Intent();
+        //Définit le fichier de sélection sur tous les types de fichiers
+        intent.setType("*/*");
+        //Permet de sélectionner les données et de les retourner
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        //Démarre une nouvelle activité pour sélectionner les fichiers et retourner les données
+        startActivityForResult(Intent.createChooser(intent,getString(R.string.ms_document_send)),PICK_FILE_REQUEST);
+    }
+
+    //Méthode qui récupère les nouvelles données s'il y en a
+    private void setupRefreshSwipe(){
+        WebServiceDocumentClient.getInstance().requestDocuments(this);
+        WebServiceDocumentClient.getInstance().getDocuments();
     }
 
     //Gestion du Progress Dialog

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -63,6 +64,9 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
     private int progressStatus = 0;
     private Handler handler = new Handler();
     int internet;
+
+    //SwipeRefreshLayout Offres
+    private SwipeRefreshLayout mSwipeRefreshLayoutOffre;
 
     com.github.clans.fab.FloatingActionButton fabAddOffer;
     com.github.clans.fab.FloatingActionButton fabAddMessage;
@@ -121,8 +125,22 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
                 startActivity(messagesListIntent);
             }
         });
-    }
 
+        //Swipe
+        mSwipeRefreshLayoutOffre = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout_offers);
+        mSwipeRefreshLayoutOffre.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        setupRefreshSwipe();
+                        mSwipeRefreshLayoutOffre.setRefreshing(false);
+                    }
+                }, 2500);
+            }
+        });
+    }
 
     @Override
     public void onClick(View v) {
@@ -135,7 +153,6 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
         intent.putExtra("offre_id", offre.getOfferID());
         startActivity(intent);
     }
-
 
     @Override
     public void onMessagesFailed(String error) {
@@ -173,6 +190,13 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
     @Override
     public void onUsersFailed(String error) {
 
+    }
+
+    //Méthode qui récupère les nouvelles données s'il y en a
+    private void setupRefreshSwipe(){
+        WebServiceUserClient.getInstance().requestUsers(this);
+        WebServiceOfferClient.getInstance().requestOffers(this);
+        WebServiceOfferClient.getInstance().getOffers();
     }
 
     //Gestion du Progress Dialog

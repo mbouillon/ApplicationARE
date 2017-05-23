@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
@@ -72,6 +73,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     //Toolbar
     private Toolbar mToolbar;
+
+    //Swipe load
+    private SwipeRefreshLayout mSwipeRefreshLayoutLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,6 +150,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         });
 
+        //Swipe
+        mSwipeRefreshLayoutLogin = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout_login);
+        mSwipeRefreshLayoutLogin.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        setupRefreshSwipe();
+                        mSwipeRefreshLayoutLogin.setRefreshing(false);
+                    }
+                }, 2500);
+            }
+        });
+
         //Création des préférences à sauvegarder
         loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
         loginPrefsEditor = loginPreferences.edit();
@@ -204,6 +223,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    //Méthode qui récupère les nouvelles données s'il y en a
+    private void setupRefreshSwipe(){
+        WebServiceUserClient.createInstance(this);
+        WebServiceUserClient.getInstance().requestUsers(this);
+    }
+
     private boolean checkUser(String mail, String password) {
         user = WebServiceUserClient.getInstance().getUser(mail);
         boolean response = false;
@@ -256,9 +281,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.restartButton:
-                //Au clique, il démarre l'activité et ferme celui dans lequel vous vous trouvez
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                finish();
+                //Permet de recharger les données
+                showLoadingDialogData();
+                WebServiceUserClient.createInstance(this);
+                WebServiceUserClient.getInstance().requestUsers(this);
                 return true;
         }
         return super.onOptionsItemSelected(item);

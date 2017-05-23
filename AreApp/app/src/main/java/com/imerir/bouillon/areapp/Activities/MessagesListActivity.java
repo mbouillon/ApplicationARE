@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import com.android.volley.Response;
 import com.imerir.bouillon.areapp.Adapters.MessagesAdapter;
 import com.imerir.bouillon.areapp.Clients.WebServiceMessageClient;
+import com.imerir.bouillon.areapp.Clients.WebServiceUserClient;
 import com.imerir.bouillon.areapp.Models.WelcomeMessage;
 import com.imerir.bouillon.areapp.R;
 
@@ -40,6 +42,9 @@ public class MessagesListActivity extends AppCompatActivity implements WebServic
 
     //Toolbar
     private Toolbar mToolbar;
+
+    //SwipeRefreshLayout Message
+    private SwipeRefreshLayout mSwipeRefreshLayoutMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +76,21 @@ public class MessagesListActivity extends AppCompatActivity implements WebServic
                 onBackPressed();
             }
         });
+
+        //Swipe
+        mSwipeRefreshLayoutMessage = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout_message);
+        mSwipeRefreshLayoutMessage.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        setupRefreshSwipe();
+                        mSwipeRefreshLayoutMessage.setRefreshing(false);
+                    }
+                }, 2500);
+            }
+        });
     }
 
     @Override
@@ -84,6 +104,12 @@ public class MessagesListActivity extends AppCompatActivity implements WebServic
     @Override
     public void onMessagesFailed(String error) {
 
+    }
+
+    //Méthode qui récupère les nouvelles données s'il y en a
+    private void setupRefreshSwipe(){
+        WebServiceMessageClient.getInstance().requestAllMessages(this);
+        WebServiceMessageClient.getInstance().getMessages();
     }
 
     //Gestion du Progress Dialog
