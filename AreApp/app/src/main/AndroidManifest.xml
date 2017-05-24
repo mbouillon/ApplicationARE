@@ -34,7 +34,8 @@
         <activity android:name=".Activities.MessagesListActivity" />
         <activity android:name=".Activities.OfferDetailActivity" />
         <activity android:name=".Activities.AddMessageActivity" />
-        <activity android:name=".Activities.AddOfferActivity"></activity>
+        <activity android:name=".Activities.AddOfferActivity" />
+        <activity android:name=".Activities.EditOfferActivity"></activity>
     </application>
 
 </manifest>

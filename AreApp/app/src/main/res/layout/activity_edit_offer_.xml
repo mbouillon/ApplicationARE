@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_add_offer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.imerir.bouillon.areapp.Activities.EditOfferActivity">
+
+    <include layout="@layout/custom_toolbar"
+        android:id="@+id/customToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </include>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="8dp"
+        android:layout_below="@id/customToolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="@string/et_add_offer_poste_name"
+                android:id="@+id/NomOffre"/>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:gravity="end"
+                android:ems="10"
+                android:hint="@string/et_add_offer_contrat_name"
+                android:id="@+id/Duree"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:paddingTop="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/typeDeContrat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </Spinner>
+
+            <Spinner
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/formation">
+            </Spinner>
+
+            <EditText
+                android:id="@+id/NomEntreprise"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="@string/et_add_offer_company_name" />
+
+            <EditText
+                android:layout_marginTop="4dp"
+                android:layout_width="match_parent"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:layout_height="wrap_content"
+                android:id="@+id/Lieu"
+                android:hint="@string/et_add_offer_location"/>
+
+            <EditText
+                android:layout_marginTop="4dp"
+                android:layout_width="match_parent"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:layout_height="wrap_content"
+                android:hint="@string/et_add_offer_company_contact_name"
+                android:id="@+id/NomContact"/>
+            <EditText
+                android:layout_marginTop="4dp"
+                android:layout_width="match_parent"
+                android:inputType="textEmailAddress"
+                android:ems="10"
+                android:layout_height="wrap_content"
+                android:hint="@string/et_add_offer_mail"
+                android:id="@+id/MailContact"/>
+            <EditText
+                android:layout_marginTop="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:ems="10"
+                android:hint="@string/et_add_offer_phone"
+                android:id="@+id/PhoneContact"/>
+
+            <EditText
+                android:layout_marginTop="4dp"
+                android:layout_width="match_parent"
+                android:inputType="textPersonName"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/et_add_offer_details"
+                android:id="@+id/Detail"/>
+            <EditText
+                android:layout_marginTop="4dp"
+                android:layout_width="match_parent"
+                android:inputType="textPersonName"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/et_add_offer_details_reponsable"
+                android:id="@+id/DetailsResponsables"/>
+
+            <Button
+                android:paddingTop="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/AjouterOffre"
+                android:backgroundTint="@color/colorAccent"
+                android:text="@string/bt_add_offer"
+                android:textColor="#FFFFFF"/>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

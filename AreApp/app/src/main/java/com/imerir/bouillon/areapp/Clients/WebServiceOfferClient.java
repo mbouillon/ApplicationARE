@@ -138,6 +138,46 @@ public class WebServiceOfferClient {
         queue.start();
     }
 
+    public void PUTOffer(Offer offer) {
+        final HashMap<String, String> params = new HashMap<String, String>();
+        //String apiUrl = "https://desolate-hollows-18116.herokuapp.com/mobile/User/";
+        String apiUrl = "http://10.0.2.2:5000/mobile/OfferLinkedWithContact/"+offer.getOfferID();
+        Gson gson = new Gson();
+        final String json = gson.toJson(offer);
+
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.PUT, apiUrl,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //Response
+                    }}, new Response.ErrorListener(){
+            @Override
+            public void onErrorResponse(VolleyError error){
+            }
+        }){
+            @Override
+            public byte[] getBody()throws AuthFailureError {
+                return json.getBytes();
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                return super.getParams();
+            }
+
+            public String getBodyContentType()
+            {
+                return "application/json";
+            }
+        };
+        queue.add(stringRequest);
+        queue.start();
+    }
+
 
 
     public void DELETEOffer(int id) {
