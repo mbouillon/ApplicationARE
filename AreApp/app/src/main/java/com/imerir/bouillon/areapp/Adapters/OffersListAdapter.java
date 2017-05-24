@@ -80,10 +80,18 @@ public class OffersListAdapter extends RecyclerView.Adapter<OffersListAdapter.Of
                     listener.onOfferClicked(mOffer);
                 }
             });
+            cardView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    listener.onOfferLongClicked(mOffer);
+                    return true;
+                }
+            });
         }
     }
     public interface OnOfferClickListener {
         void onOfferClicked(Offer offre);
+        void onOfferLongClicked(Offer offre);
     }
 }
 

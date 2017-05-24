@@ -138,6 +138,8 @@
     <string name="iv_offers_list_message">Icon Message</string>
     <string name="bt_offers_listt_add_offer">Ajouter une offre</string>
     <string name="iv_offers_list_add_message">Ajouter un message</string>
+    <string name="ms_offers_list_alert_edit">Editer</string>
+    <string name="ms_offers_list_alert_remove">Supprimer</string>
 
     <!-- Fragment Student  -->
     <string name="bt_image_cv">Sélectionnez le CV à envoyer.</string>

@@ -2,6 +2,7 @@ package com.imerir.bouillon.areapp.Fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -14,6 +15,7 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -60,6 +62,7 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
     WelcomeMessage message;
     private CardView cardView;
 
+    Offer offer;
     User user;
     //Gestion de la Progress Bar des données
     ProgressDialog loadingDialog;
@@ -162,6 +165,40 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
         Intent intent = new Intent(getActivity(), OfferDetailActivity.class);
         intent.putExtra("offre_id", offre.getOfferID());
         startActivity(intent);
+    }
+
+    @Override
+    public void onOfferLongClicked(final Offer offre) {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+        alertDialogBuilder.setTitle(offre.getTitre());
+        // set dialog message
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton(getString(R.string.ms_offers_list_alert_edit),new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        Toast.makeText(getActivity(), getString(R.string.alert), Toast.LENGTH_SHORT).show();
+                        dialog.cancel();
+                    }
+                })
+                .setNegativeButton(getString(R.string.ms_offers_list_alert_remove),new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        //Envoie la requete de suppression + Destruction de l'activité + Rechargement de la main activity
+                        WebServiceOfferClient.getInstance().DELETEOffer(offre.getOfferID());
+                        Toast.makeText(getActivity(), getString(R.string.ms_offer_delete_offer) + " " + offre.getTitre() + " " + getString(R.string.ms_offer_delete_delete), Toast.LENGTH_LONG).show();
+                        setupRefreshSwipe();
+                        //Intent MainActivityIntent = new Intent(getActivity(), MainActivity.class);
+                        //startActivity(MainActivityIntent);
+                    }
+                })
+                .setNeutralButton(getString(R.string.ms_callDialog_stop),new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        dialog.cancel();
+                    }
+                });
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        // show it
+        alertDialog.show();
     }
 
     @Override
