@@ -144,6 +144,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         accountNotValid.setVisibility(View.INVISIBLE);
                         cr = true;
                     }
+                    setupRefreshSwipe();
                 }
                 if(!cr)
                     Toast.makeText(getBaseContext(), getString(R.string.ms_error_login), Toast.LENGTH_LONG).show();

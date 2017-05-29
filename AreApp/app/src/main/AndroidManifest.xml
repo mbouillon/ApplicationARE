@@ -20,22 +20,32 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Activities.MainActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.PdfActivity" />
-        <activity android:name=".Activities.LoginActivity" />
-        <activity android:name=".Activities.RegisterStudentActivity" />
-        <activity android:name=".Activities.RegisterResponsableActivity" />
-        <activity android:name=".Activities.MessagesListActivity" />
-        <activity android:name=".Activities.OfferDetailActivity" />
-        <activity android:name=".Activities.AddMessageActivity" />
-        <activity android:name=".Activities.AddOfferActivity" />
-        <activity android:name=".Activities.EditOfferActivity"></activity>
+        <activity android:name=".Activities.PdfActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.RegisterStudentActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.RegisterResponsableActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.MessagesListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.OfferDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.AddMessageActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.AddOfferActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.EditOfferActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

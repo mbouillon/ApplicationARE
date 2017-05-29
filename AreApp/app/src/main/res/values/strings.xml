@@ -63,6 +63,7 @@
     <string name="et_add_offer_details">Details</string>
     <string name="et_add_offer_details_reponsable">Visible Details</string>
     <string name="bt_add_offer">Add offer</string>
+    <string name="bt_edit_offer">Edit offer</string>
     <string name="type_add_offer_Internship">Internship</string>
     <string name="type_add_offer_Apprenticeship">Apprenticeship</string>
     <string name="type_add_offer_Type_not_known">Type not known</string>
@@ -71,6 +72,7 @@
     <string name="ms_error_offer_formation">You have not selected any targeted training for this offer, if you leave this field by default all students will be able to see the proposed offer. Do you want to continue ?</string>
     <string name="ms_succes_offer">Offer</string>
     <string name="ms_succes_offer_add">has been added</string>
+    <string name="ms_succes_offer_edit">has been edited</string>
 
     <!-- Login -->
     <string name="et_login_mail">Mail address</string>
@@ -158,6 +160,8 @@
 
     <!-- Message Item -->
     <string name="iv_message_item_message">Icon Message</string>
+    <string name="iv_message">Message</string>
+    <string name="iv_message_id">The message number</string>
 
     <!-- Offer Item -->
     <string name="iv_offer_item_offer">Icon Offer</string>

@@ -132,7 +132,7 @@ public class RegisterStudentActivity extends AppCompatActivity implements WebSer
                     jsonObject.put("Mail", etMail.getText().toString());
                     jsonObject.put("Password", etPassword.getText().toString());
                     jsonObject.put("Telephone", etPhoneNumber.getText().toString());
-                    jsonObject.put("Type", 1);
+                    jsonObject.put("Type", true);
                     jsonObject.put("Formation", formation);
                 } catch (JSONException e) {
                     e.printStackTrace();

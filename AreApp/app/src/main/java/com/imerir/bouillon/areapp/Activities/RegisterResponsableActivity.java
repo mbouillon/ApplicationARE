@@ -100,7 +100,7 @@ public class RegisterResponsableActivity extends AppCompatActivity implements We
                     jsonObject.put("Mail", etMail.getText().toString());
                     jsonObject.put("Password", etPassword.getText().toString());
                     jsonObject.put("Telephone", etPhoneNumber.getText().toString());
-                    jsonObject.put("Type", 1);
+                    jsonObject.put("Type", false);
                     jsonObject.put("Formation", 0);
                 } catch (JSONException e) {
                     e.printStackTrace();

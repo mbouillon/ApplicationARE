@@ -63,6 +63,7 @@
     <string name="et_add_offer_details">Détails</string>
     <string name="et_add_offer_details_reponsable">Détails visibles par les responsables</string>
     <string name="bt_add_offer">Ajouter l\'offre</string>
+    <string name="bt_edit_offer">Modifier l\'offre</string>
     <string name="type_add_offer_Internship">Stage</string>
     <string name="type_add_offer_Apprenticeship">Apprentissage</string>
     <string name="type_add_offer_Type_not_known">Type non connu</string>
@@ -71,6 +72,7 @@
     <string name="ms_error_offer_formation">Vous n\'avez pas selectionné de formation ciblée pour cette offre, si vous laissez ce champ par défaut tous les étudiants pourront voir l\'offre proposée. Voulez vous continuer ?</string>
     <string name="ms_succes_offer">L\'offre</string>
     <string name="ms_succes_offer_add">a bien été ajoutée</string>
+    <string name="ms_succes_offer_edit">a bien été modifiée</string>
 
     <!-- Login -->
     <string name="et_login_mail">Adresse Mail</string>
@@ -158,6 +160,8 @@
 
     <!-- Message Item -->
     <string name="iv_message_item_message">Icon Message</string>
+    <string name="iv_message">Message</string>
+    <string name="iv_message_id">Le message numéro</string>
 
     <!-- Offer Item -->
     <string name="iv_offer_item_offer">Icon Offre</string>

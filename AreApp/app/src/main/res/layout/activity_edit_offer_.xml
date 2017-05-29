@@ -126,7 +126,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/AjouterOffre"
                 android:backgroundTint="@color/colorAccent"
-                android:text="@string/bt_add_offer"
+                android:text="@string/bt_edit_offer"
                 android:textColor="#FFFFFF"/>
         </LinearLayout>
     </LinearLayout>

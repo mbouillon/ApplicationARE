@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import com.imerir.bouillon.areapp.Activities.AddMessageActivity;
 import com.imerir.bouillon.areapp.Activities.AddOfferActivity;
+import com.imerir.bouillon.areapp.Activities.EditOfferActivity;
 import com.imerir.bouillon.areapp.Activities.LoginActivity;
 import com.imerir.bouillon.areapp.Activities.MainActivity;
 import com.imerir.bouillon.areapp.Activities.MessagesListActivity;
@@ -176,8 +177,9 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
                 .setCancelable(false)
                 .setPositiveButton(getString(R.string.ms_offers_list_alert_edit),new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
-                        Toast.makeText(getActivity(), getString(R.string.alert), Toast.LENGTH_SHORT).show();
-                        dialog.cancel();
+                        Intent intent = new Intent(getActivity(), EditOfferActivity.class);
+                        intent.putExtra("offre_id", offre.getOfferID());
+                        startActivity(intent);
                     }
                 })
                 .setNegativeButton(getString(R.string.ms_offers_list_alert_remove),new DialogInterface.OnClickListener() {
@@ -185,9 +187,6 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
                         //Envoie la requete de suppression + Destruction de l'activité + Rechargement de la main activity
                         WebServiceOfferClient.getInstance().DELETEOffer(offre.getOfferID());
                         Toast.makeText(getActivity(), getString(R.string.ms_offer_delete_offer) + " " + offre.getTitre() + " " + getString(R.string.ms_offer_delete_delete), Toast.LENGTH_LONG).show();
-                        setupRefreshSwipe();
-                        //Intent MainActivityIntent = new Intent(getActivity(), MainActivity.class);
-                        //startActivity(MainActivityIntent);
                     }
                 })
                 .setNeutralButton(getString(R.string.ms_callDialog_stop),new DialogInterface.OnClickListener() {
@@ -212,7 +211,6 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
         offersList.setAdapter(new OffersListAdapter(offers,this));
         //Récuperation des OFFRES, puis on renvoi la boîte de dialogue de progression
         loadingDialog.dismiss();
-
     }
 
     @Override
@@ -243,7 +241,6 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
     private void setupRefreshSwipe(){
         WebServiceUserClient.getInstance().requestUsers(this);
         WebServiceOfferClient.getInstance().requestOffers(this);
-        WebServiceOfferClient.getInstance().getOffers();
     }
 
     //Gestion du Progress Dialog

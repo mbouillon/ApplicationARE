@@ -36,6 +36,9 @@ public class EditOfferActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
 
+    Offer offre;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,9 +83,7 @@ public class EditOfferActivity extends AppCompatActivity {
         spinnerAdapterFormation.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         formation.setAdapter(spinnerAdapterFormation);
 
-        // Récuperation de l'arrayList passée en paramètre de l'intent pour eviter un appel serveur
-        Bundle extras = getIntent().getExtras();
-        Offer offre = (Offer) extras.getSerializable("offre");
+        offre = WebServiceOfferClient.getInstance().getOffer(getIntent().getIntExtra("offre_id", 0));
 
         nomOffre.setText(offre.getTitre());
         duree.setText(offre.getDureeContrat());
@@ -194,8 +195,8 @@ public class EditOfferActivity extends AppCompatActivity {
             jsonObject.put("DetailsResponsable", detailsResponsable.getText().toString());
             //Création de l'objet json et POST dans la BDD + Après le POST desctruction de l'activité et rechargement de l'activité principale
             Offer offre = new Offer(jsonObject);
-            WebServiceOfferClient.getInstance().PUTOffer(offre);
-            Toast.makeText(getApplicationContext(),getString(R.string.ms_succes_offer) + " " + nomOffre.getText().toString() + " " + getString(R.string.ms_succes_offer_add), Toast.LENGTH_LONG).show();
+            WebServiceOfferClient.getInstance().PUTOffer(offre, offre.getOfferID());
+            Toast.makeText(getApplicationContext(),getString(R.string.ms_succes_offer) + " " + nomOffre.getText().toString() + " " + getString(R.string.ms_succes_offer_edit), Toast.LENGTH_LONG).show();
             Intent MainActivityIntent = new Intent(getBaseContext(), MainActivity.class);
             startActivity(MainActivityIntent);
             finish();

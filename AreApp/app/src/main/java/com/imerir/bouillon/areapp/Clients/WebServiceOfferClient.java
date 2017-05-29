@@ -138,10 +138,10 @@ public class WebServiceOfferClient {
         queue.start();
     }
 
-    public void PUTOffer(Offer offer) {
+    public void PUTOffer(Offer offer, int id) {
         final HashMap<String, String> params = new HashMap<String, String>();
         //String apiUrl = "https://desolate-hollows-18116.herokuapp.com/mobile/User/";
-        String apiUrl = "http://10.0.2.2:5000/mobile/OfferLinkedWithContact/"+offer.getOfferID();
+        String apiUrl = "http://10.0.2.2:5000/mobile/Offre/" + id;
         Gson gson = new Gson();
         final String json = gson.toJson(offer);
 
