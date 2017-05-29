@@ -161,6 +161,24 @@ public class WebServiceMessageClient {
 
     public WelcomeMessage getMessage(String id) {return messageHash.get(id);}
 
+    public void DELETEMessage(int id) {
+        String apiUrl = "http://10.0.2.2:5000/mobile/Message/" + id;
+        RequestQueue queue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Request.Method.DELETE, apiUrl,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //Response
+                    }}, new Response.ErrorListener(){
+            @Override
+            public void onErrorResponse(VolleyError error){
+            }
+        }){
+        };
+        queue.add(stringRequest);
+        queue.start();
+    }
+
     public interface OnMessagesListListener {
         void onMessagesReceived(ArrayList<WelcomeMessage> messages);
         void onMessagesFailed(String error);

@@ -24,10 +24,11 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
     private ArrayList<WelcomeMessage> message;
     CardView cardView;
     User user;
+    private OnMessageClickListener listener;
 
     public MessagesAdapter(ArrayList<WelcomeMessage> messages, MessagesListActivity listener) {
         this.message = messages;
-        //this.listener = listener;
+        this.listener = listener;
         WebServiceUserClient.getInstance().requestUsers(this);
     }
 
@@ -84,11 +85,19 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
             PublishName.setText(user.getNom() + " " + user.getPrenom());
             //TODO crash quand on affiche le texte du message
             Message.setText( message.getMessage());
+            cardView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    listener.onMessageLongClicked(mMessage);
+                    return true;
+                }
+            });
         }
     }
 
     public interface OnMessageClickListener {
         void onMessageClicked(WelcomeMessage message);
+        void onMessageLongClicked(WelcomeMessage message);
     }
 
 }

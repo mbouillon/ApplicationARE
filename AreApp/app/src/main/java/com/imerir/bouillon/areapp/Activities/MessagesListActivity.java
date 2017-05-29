@@ -2,11 +2,13 @@ package com.imerir.bouillon.areapp.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,7 +20,9 @@ import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.imerir.bouillon.areapp.Adapters.MessagesAdapter;
+import com.imerir.bouillon.areapp.Adapters.OffersListAdapter;
 import com.imerir.bouillon.areapp.Clients.WebServiceMessageClient;
+import com.imerir.bouillon.areapp.Clients.WebServiceOfferClient;
 import com.imerir.bouillon.areapp.Clients.WebServiceUserClient;
 import com.imerir.bouillon.areapp.Models.WelcomeMessage;
 import com.imerir.bouillon.areapp.R;
@@ -26,7 +30,7 @@ import com.imerir.bouillon.areapp.R;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class MessagesListActivity extends AppCompatActivity implements WebServiceMessageClient.OnMessagesListListener {
+public class MessagesListActivity extends AppCompatActivity implements WebServiceMessageClient.OnMessagesListListener, MessagesAdapter.OnMessageClickListener {
 
 
     RecyclerView recyclerView;
@@ -94,6 +98,38 @@ public class MessagesListActivity extends AppCompatActivity implements WebServic
     }
 
     @Override
+    public void onMessageClicked(WelcomeMessage message) {
+
+    }
+
+    @Override
+    public void onMessageLongClicked(final WelcomeMessage message) {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle(getString(R.string.iv_message));
+        // set dialog message
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton(getString(R.string.ms_offers_list_alert_remove),new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        //Envoie la requete de suppression + Destruction de l'activité + Rechargement de la main activity
+                        WebServiceMessageClient.getInstance().DELETEMessage(message.getId());
+                        Toast.makeText(getApplicationContext(), getString(R.string.iv_message_id) + " " + message.getId() + " " + getString(R.string.ms_offer_delete_delete), Toast.LENGTH_LONG).show();
+                        setupRefreshSwipe();
+                    }
+                })
+                .setNegativeButton(R.string.ms_callDialog_stop,new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        dialog.cancel();
+                    }
+                });
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        // show it
+        alertDialog.show();
+
+    }
+
+    @Override
     public void onMessagesReceived(ArrayList<WelcomeMessage> messages) {
         Collections.reverse(messages);
         recyclerView.setAdapter(new MessagesAdapter(messages, this));
@@ -109,7 +145,6 @@ public class MessagesListActivity extends AppCompatActivity implements WebServic
     //Méthode qui récupère les nouvelles données s'il y en a
     private void setupRefreshSwipe(){
         WebServiceMessageClient.getInstance().requestAllMessages(this);
-        WebServiceMessageClient.getInstance().getMessages();
     }
 
     //Gestion du Progress Dialog
