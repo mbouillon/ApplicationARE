@@ -168,36 +168,42 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
         startActivity(intent);
     }
 
-    @Override
     public void onOfferLongClicked(final Offer offre) {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
-        alertDialogBuilder.setTitle(offre.getTitre());
-        // set dialog message
-        alertDialogBuilder
-                .setCancelable(false)
-                .setPositiveButton(getString(R.string.ms_offers_list_alert_edit),new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        Intent intent = new Intent(getActivity(), EditOfferActivity.class);
-                        intent.putExtra("offre_id", offre.getOfferID());
-                        startActivity(intent);
-                    }
-                })
-                .setNegativeButton(getString(R.string.ms_offers_list_alert_remove),new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        //Envoie la requete de suppression + Destruction de l'activité + Rechargement de la main activity
-                        WebServiceOfferClient.getInstance().DELETEOffer(offre.getOfferID());
-                        Toast.makeText(getActivity(), getString(R.string.ms_offer_delete_offer) + " " + offre.getTitre() + " " + getString(R.string.ms_offer_delete_delete), Toast.LENGTH_LONG).show();
-                    }
-                })
-                .setNeutralButton(getString(R.string.ms_callDialog_stop),new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        dialog.cancel();
-                    }
-                });
-        // create alert dialog
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        // show it
-        alertDialog.show();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        if(preferences.getBoolean("type", false) == false){
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+            alertDialogBuilder.setTitle(offre.getTitre());
+            // set dialog message
+            alertDialogBuilder
+                    .setCancelable(false)
+                    .setPositiveButton(getString(R.string.ms_offers_list_alert_edit),new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int id) {
+                            Intent intent = new Intent(getActivity(), EditOfferActivity.class);
+                            intent.putExtra("offre_id", offre.getOfferID());
+                            startActivity(intent);
+                        }
+                    })
+                    .setNegativeButton(getString(R.string.ms_offers_list_alert_remove),new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int id) {
+                            //Envoie la requete de suppression + Destruction de l'activité + Rechargement de la main activity
+                            WebServiceOfferClient.getInstance().DELETEOffer(offre.getOfferID());
+                            Toast.makeText(getActivity(), getString(R.string.ms_offer_delete_offer) + " " + offre.getTitre() + " " + getString(R.string.ms_offer_delete_delete), Toast.LENGTH_LONG).show();
+                        }
+                    })
+                    .setNeutralButton(getString(R.string.ms_callDialog_stop),new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int id) {
+                            dialog.cancel();
+                        }
+                    });
+            // create alert dialog
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            // show it
+            alertDialog.show();
+        }
+        else{
+
+        }
+
     }
 
     @Override

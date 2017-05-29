@@ -3,10 +3,12 @@ package com.imerir.bouillon.areapp.Activities;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -104,29 +106,33 @@ public class MessagesListActivity extends AppCompatActivity implements WebServic
 
     @Override
     public void onMessageLongClicked(final WelcomeMessage message) {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle(getString(R.string.iv_message));
-        // set dialog message
-        alertDialogBuilder
-                .setCancelable(false)
-                .setPositiveButton(getString(R.string.ms_offers_list_alert_remove),new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        //Envoie la requete de suppression + Destruction de l'activité + Rechargement de la main activity
-                        WebServiceMessageClient.getInstance().DELETEMessage(message.getId());
-                        Toast.makeText(getApplicationContext(), getString(R.string.iv_message_id) + " " + message.getId() + " " + getString(R.string.ms_offer_delete_delete), Toast.LENGTH_LONG).show();
-                        setupRefreshSwipe();
-                    }
-                })
-                .setNegativeButton(R.string.ms_callDialog_stop,new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        dialog.cancel();
-                    }
-                });
-        // create alert dialog
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        // show it
-        alertDialog.show();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        if(preferences.getBoolean("type", false) == false){
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setTitle(getString(R.string.iv_message));
+            // set dialog message
+            alertDialogBuilder
+                    .setCancelable(false)
+                    .setPositiveButton(getString(R.string.ms_offers_list_alert_remove),new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int id) {
+                            //Envoie la requete de suppression + Destruction de l'activité + Rechargement de la main activity
+                            WebServiceMessageClient.getInstance().DELETEMessage(message.getId());
+                            Toast.makeText(getApplicationContext(), getString(R.string.iv_message_id) + " " + message.getId() + " " + getString(R.string.ms_offer_delete_delete), Toast.LENGTH_LONG).show();
+                            setupRefreshSwipe();
+                        }
+                    })
+                    .setNegativeButton(R.string.ms_callDialog_stop,new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int id) {
+                            dialog.cancel();
+                        }
+                    });
+            // create alert dialog
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            // show it
+            alertDialog.show();
+        }else{
 
+        }
     }
 
     @Override
