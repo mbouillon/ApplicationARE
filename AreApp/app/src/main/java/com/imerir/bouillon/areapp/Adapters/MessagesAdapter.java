@@ -19,6 +19,11 @@ import java.util.ArrayList;
  * Created by maxime on 12/03/2017.
  */
 
+/**
+ * @author Bouillon Maxime
+ * @version 0.9
+ * Classe gérant l'adapteur des données de la liste des Messages présent sur le MessagesListActivity
+ */
 public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MessageViewHolder> implements  WebServiceUserClient.OnUsersListListener {
 
     private ArrayList<WelcomeMessage> message;
@@ -26,23 +31,43 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
     User user;
     private OnMessageClickListener listener;
 
+    /**
+     *
+     * @param messages
+     * @param listener
+     */
     public MessagesAdapter(ArrayList<WelcomeMessage> messages, MessagesListActivity listener) {
         this.message = messages;
         this.listener = listener;
         WebServiceUserClient.getInstance().requestUsers(this);
     }
 
+    /**
+     *
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @Override
     public MessagesAdapter.MessageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_item, parent, false);
         return new MessagesAdapter.MessageViewHolder(v);
     }
 
+    /**
+     *
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(MessagesAdapter.MessageViewHolder holder, int position) {
         holder.update(message.get(position));
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int getItemCount() {
         //return message.size();
@@ -52,17 +77,27 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
         return a;
     }
 
+    /**
+     *
+     * @param users
+     */
     @Override
     public void onUsersReceived(ArrayList<User> users) {
 
     }
 
+    /**
+     *
+     * @param error
+     */
     @Override
     public void onUsersFailed(String error) {
 
     }
 
-
+    /**
+     *
+     */
     public class MessageViewHolder extends RecyclerView.ViewHolder {
 
         TextView PublishName;
@@ -70,6 +105,10 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
 
         WelcomeMessage message;
 
+        /**
+         *
+         * @param itemView
+         */
         public MessageViewHolder(View itemView) {
             super(itemView);
             cardView    = (CardView) itemView.findViewById(R.id.cardView);
@@ -78,6 +117,10 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
 
         }
 
+        /**
+         *
+         * @param mMessage
+         */
         public void update(final WelcomeMessage mMessage) {
             message = mMessage;
 
@@ -95,6 +138,9 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
         }
     }
 
+    /**
+     *
+     */
     public interface OnMessageClickListener {
         void onMessageClicked(WelcomeMessage message);
         void onMessageLongClicked(WelcomeMessage message);

@@ -24,7 +24,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by maxime on 07/03/2017.
+ * @author Bouillon Maxime
+ * @version 0.9
+ * Classe gérant les appels serveurs pour la table Users de la BDD
  */
 
 public class WebServiceUserClient {
@@ -39,14 +41,27 @@ public class WebServiceUserClient {
     private HashMap<String, User> userHash;
     private HashMap<Integer, User> userHashById;
 
+    /**
+     * Methode permettant de créer l'instance de la classe
+     * @param appContext
+     */
     public static void createInstance(Context appContext){
         instance = new WebServiceUserClient(appContext);
     }
 
+    /**
+     * Methode permettant de récuperer l'instance de la classe
+     * @return
+     */
     public static WebServiceUserClient getInstance(){
         return instance;
     }
 
+    /**
+     * Cosntructeur de la classe
+     * recupere le contexte de l'app et construit une volley request à partir de celui ci
+     * @param context
+     */
     private WebServiceUserClient(Context context){
         this.context = context;
 
@@ -56,6 +71,11 @@ public class WebServiceUserClient {
         userHashById = new HashMap<>();
     }
 
+    /**
+     * Methode qui envoie la http request au serveur
+     * Il recupère les Utilisateurs sous forme de json et les convertitenun tableau d'objets USers
+     * @param listener
+     */
     public void requestUsers(final OnUsersListListener listener) {
         //String apiUrl = "https://desolate-hollows-18116.herokuapp.com/mobile/UsersList/";
         String apiUrl = "http://10.0.2.2:5000/mobile/UsersList/";
@@ -91,6 +111,10 @@ public class WebServiceUserClient {
         queue.add(request);
     }
 
+    /**
+     * Methode construisant un json a partir d'un userObject et envoie une requete post http a la bdd/serveur
+     * @param user
+     */
     public void POSTUser(User user) {
         final HashMap<String, String> params = new HashMap<String, String>();
         //String apiUrl = "https://desolate-hollows-18116.herokuapp.com/mobile/User/";

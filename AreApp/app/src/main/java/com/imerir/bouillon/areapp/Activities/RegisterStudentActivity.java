@@ -26,10 +26,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * Created by maxime on 07/03/2017.
- */
 
+/**
+ * @author Bouillon Maxime
+ * @version 0.9
+ * Classe gérant l'activité proposant l'inscription d'un étudiant
+ */
 public class RegisterStudentActivity extends AppCompatActivity implements WebServiceUserClient.OnUsersListListener {
 
 
@@ -44,6 +46,11 @@ public class RegisterStudentActivity extends AppCompatActivity implements WebSer
     private int formation = 1;
     private boolean userExists = false;
 
+    /**
+     *
+     * @param savedInstanceState
+     * Actions lancées a la création de l'activité principalement la mise en place de l'IHM
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,11 +142,19 @@ public class RegisterStudentActivity extends AppCompatActivity implements WebSer
         });
     }
 
+    /**
+     *
+     * @param users
+     */
     @Override
     public void onUsersReceived(ArrayList<User> users) {
 
     }
 
+    /**
+     *
+     * @param error
+     */
     @Override
     public void onUsersFailed(String error) {
 

@@ -19,12 +19,18 @@ import com.imerir.bouillon.areapp.R;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
+/**
+ * @author Bouillon Maxime
+ * @version 0.9
+ * Classe gérant l'activité principale celle ci navique grace a une bottom bar a travers 3 ecrans différents déclarés dans des fragments
+ */
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
 
     /**
      * @param savedInstanceState
+     * Actions lancées a la création de l'activité principalement la mise en place de l'IHM
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
             mToolbar.setTitle(getResources().getText(R.string.title_offer));
             mToolbar.setTitleTextColor(Color.WHITE);
 
+            /**
+             * Gestion des actions de la bottom bar, appel des fragments en fonction de l'onglet selectionné
+             */
             //Initialisation de la vue principale + Mise en place des éléments du menu
             BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
             bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
@@ -81,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     /**
-     * Methode deconnexion permettant de se deconnecter de l'app et oublie le compte sauvegardé
+     * Methode deconnexion permettant de se deconnecter de l'application
      */
     private void deconnexion() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);

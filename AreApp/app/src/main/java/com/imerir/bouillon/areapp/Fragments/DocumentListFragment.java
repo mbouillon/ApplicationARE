@@ -41,12 +41,23 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 
+
 /**
- * Created by maxime on 09/03/2017.
+ * @author Sire Rémy
+ * @version 0.9
+ * Fragment appellé dans la main activity gérant la liste des documents
  */
+
 
 public class DocumentListFragment extends Fragment implements View.OnClickListener, WebServiceDocumentClient.OnDocumentsListListener, DocumentAdapter.OnDocumentClickListener {
 
+    /**
+     * Methode qui constuit la vue du fragment
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_document, null);
@@ -76,6 +87,11 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
 
     ArrayList<Document> _document;
 
+    /**
+     * Quand la vue est créée faire..
+     * @param view
+     * @param savedInstanceState
+     */
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -130,6 +146,10 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
 
     }
 
+    /**
+     * Quand un document est cliqué / Méthode implémentée a partir de l'interface de son Adapter
+     * @param document
+     */
     @Override
     public void onDocumentClicked(Document document) {
         Intent intent = new Intent(getActivity(), PdfActivity.class);
@@ -137,6 +157,10 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
         startActivity(intent);
     }
 
+    /**
+     * Quand une liste de documents est recue / Méthode implémentée a partir de l'interface de son clientHttp
+     * @param Documents
+     */
     @Override
     public void onDocumentsReceived(ArrayList<Document> Documents) {
         Collections.reverse(Documents);
@@ -150,6 +174,12 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
 
     }
 
+    /**
+     * Reception des données de l'intent get documents
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -179,7 +209,9 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
         }
     }
 
-    //Permet de parcourir sont téléphone a la recherhce d'un document
+    /**
+     *     Permet de parcourir son téléphone a la recherhce d'un document
+     */
     private void showFileChooser() {
         Intent intent = new Intent();
         //Définit le fichier de sélection sur tous les types de fichiers
@@ -190,13 +222,17 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
         startActivityForResult(Intent.createChooser(intent,getString(R.string.ms_document_send)),PICK_FILE_REQUEST);
     }
 
-    //Méthode qui récupère les nouvelles données s'il y en a
+    /**
+     * Méthode qui récupère les nouvelles données s'il y en a
+     */
     private void setupRefreshSwipe(){
         WebServiceDocumentClient.getInstance().requestDocuments(this);
         WebServiceDocumentClient.getInstance().getDocuments();
     }
 
-    //Gestion du Progress Dialog
+    /**
+     * Gestion de la progress dialog
+     */
     public void showLoadingDialog(){
         try{
             //Création d'un ProgressDialog et l'afficher
@@ -235,6 +271,10 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
         }
     }
 
+    /**
+     * Methode qui dit si il y a une connexion ou pas
+     * @return
+     */
     private int checkConnectivity() {
         boolean enabled = true;
 

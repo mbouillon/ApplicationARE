@@ -26,6 +26,11 @@ import java.util.Map;
  * Created by maxime on 09/03/2017.
  */
 
+/**
+ * @author Bouillon Maxime
+ * @version 0.9
+ * Classe gérant les appels serveurs pour la table Offers de la BDD
+ */
 
 public class WebServiceOfferClient {
 
@@ -38,14 +43,27 @@ public class WebServiceOfferClient {
     private ArrayList<Offer> offers;
     private HashMap<Integer, Offer> offerHash;
 
+    /**
+     * Methode permettant de créer l'instance de la classe
+     * @param appContext
+     */
     public static void createInstance(Context appContext){
         instance = new WebServiceOfferClient(appContext);
     }
 
+    /**
+     * Methode permettant de récuperer l'instance de la classe
+     * @return
+     */
     public static WebServiceOfferClient getInstance(){
         return instance;
     }
 
+    /**
+     * Cosntructeur de la classe
+     * recupere le contexte de l'app et construit une volley request à partir de celui ci
+     * @param context
+     */
     private WebServiceOfferClient(Context context){
         this.context = context;
         queue = Volley.newRequestQueue(context);
@@ -54,6 +72,12 @@ public class WebServiceOfferClient {
 
     }
 
+
+    /**
+     * Methode qui envoie la http request au serveur
+     * Il recupère les offres sous forme de json et les convertitenun tableau d'objets Offres
+     * @param listener
+     */
     public void requestOffers(final OnOffersListListener listener) {
         //String apiUrl = "https://desolate-hollows-18116.herokuapp.com/mobile/OffersListLinkedWithContact/";
         String apiUrl = "http://10.0.2.2:5000/mobile/OffersListLinkedWithContact/";
@@ -88,16 +112,28 @@ public class WebServiceOfferClient {
         queue.add(request);
     }
 
+    /**
+     * Retourne la liste des offres
+     * @return
+     */
     public ArrayList<Offer> getOffers(){
         return offers;
     }
 
+    /**
+     * Retourne une offre en fonction de son id
+     * @param id
+     * @return
+     */
     public Offer getOffer(int id) {
         return offerHash.get(id);
     }
 
 
-
+    /**
+     * Poste une nouvelle offre en la serialisant en json et en l'envoyant en HTTP par POST
+     * @param offer
+     */
     public void POSTOffer(Offer offer) {
         final HashMap<String, String> params = new HashMap<String, String>();
         //String apiUrl = "https://desolate-hollows-18116.herokuapp.com/mobile/User/";
@@ -138,6 +174,11 @@ public class WebServiceOfferClient {
         queue.start();
     }
 
+    /**
+     * Methode permettant la modification d'une offre fonctionne comme un POST mais en envoyant un PUT au serveur modifiant les informations dans la BDD
+     * @param offer
+     * @param id
+     */
     public void PUTOffer(Offer offer, int id) {
         final HashMap<String, String> params = new HashMap<String, String>();
         //String apiUrl = "https://desolate-hollows-18116.herokuapp.com/mobile/User/";
@@ -179,7 +220,10 @@ public class WebServiceOfferClient {
     }
 
 
-
+    /**
+     * Methode qui permet de suprimmer une offre en fonction de son ID ENvoie un Delete en http au serveur
+     * @param id
+     */
     public void DELETEOffer(int id) {
         String apiUrl = "http://10.0.2.2:5000/mobile/Offre/" + id;
         RequestQueue queue = Volley.newRequestQueue(context);

@@ -30,6 +30,12 @@ import java.util.ArrayList;
  * Created by maxime on 07/03/2017.
  */
 
+
+/**
+ * @author Bouillon Maxime
+ * @version 0.9
+ * Classe gérant l'activité permettant de se connecter à l'app à  partir d'un compte google @imerir.com
+ */
 public class LoginActivity extends AppCompatActivity implements WebServiceUserClient.OnUsersListListener, GoogleApiClient.OnConnectionFailedListener {
 
     private static final int RC_SIGN_IN = 647;
@@ -45,6 +51,10 @@ public class LoginActivity extends AppCompatActivity implements WebServiceUserCl
     //Toolbar
     private Toolbar mToolbar;
 
+    /**
+     * @param savedInstanceState
+     * Actions lancées a la création de l'activité principalement la mise en place de l'IHM
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +102,14 @@ public class LoginActivity extends AppCompatActivity implements WebServiceUserCl
 
     }
 
+    /**
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     *
+     * Vérification du resultat de la connexion avec le compte google
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -102,6 +120,12 @@ public class LoginActivity extends AppCompatActivity implements WebServiceUserCl
         }
     }
 
+    /**
+     *
+     * @param result
+     * Si connexion réussie appel de cette methode qui gère la connexion/inscription
+     * SI un étudiant n'est pas encore enregistré, redirection vers les activités de register sinon direction la main activity
+     */
     private void handleResult(GoogleSignInResult result)
     {
         User user;
@@ -173,21 +197,37 @@ public class LoginActivity extends AppCompatActivity implements WebServiceUserCl
         }
     }
 
+    /**
+     * SignIn Google
+     */
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
+    /**
+     * Methode de l'interface WebServiceUserClient qui gère les réactions du listenner
+     * Cette methode gère la reception de l'arraylist Users provenant de la BDD fonctionne un peu comme un get général
+     * @param users
+     */
     @Override
     public void onUsersReceived(ArrayList<User> users) {
         _user = users;
     }
 
+    /**
+     * Même description du dessus mais gère une erreur dans la reception des données
+     * @param error
+     */
     @Override
     public void onUsersFailed(String error) {
 
     }
 
+    /**
+     * Methode ecoutant les erreurs dans la connexion du compte google
+     * @param connectionResult
+     */
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 

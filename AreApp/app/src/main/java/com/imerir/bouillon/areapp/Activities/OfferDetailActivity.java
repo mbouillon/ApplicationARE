@@ -28,6 +28,12 @@ import com.imerir.bouillon.areapp.R;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
 
+
+/**
+ * @author Bouillon Maxime
+ * @version 0.9
+ * Classe gérant l'activité proposant le détail d'une offre
+ */
 public class OfferDetailActivity extends AppCompatActivity implements View.OnClickListener {
 
     //Permission appel telephone
@@ -45,6 +51,7 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
 
     /**
      * @param savedInstanceState
+     * Actions lancées a la création de l'activité principalement la mise en place de l'IHM
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -216,6 +223,7 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
     }
 
     /**
+     * Gère le menu a droite de la toolbar
      * @param item
      * @return
      */

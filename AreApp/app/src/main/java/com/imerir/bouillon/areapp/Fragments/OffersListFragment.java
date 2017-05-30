@@ -48,9 +48,22 @@ import com.imerir.bouillon.areapp.R;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * @author Bouillon Maxime
+ * @version 0.9
+ * Fragment appellé dans la main activity gérant la liste des offres et l'affichage du message d'accueil
+ */
+
 
 public class OffersListFragment extends Fragment implements View.OnClickListener, WebServiceOfferClient.OnOffersListListener,WebServiceMessageClient.OnMessagesListListener, OffersListAdapter.OnOfferClickListener, WebServiceUserClient.OnUsersListListener {
 
+    /**
+     * Création de lavue
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_offers_list, null);
@@ -79,6 +92,11 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
     com.github.clans.fab.FloatingActionButton fabAddMessage;
 
 
+    /**
+     * Quand la vue est créée faire...
+     * @param view
+     * @param savedInstanceState
+     */
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -156,11 +174,16 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
         }
     }
 
+
     @Override
     public void onClick(View v) {
 
     }
 
+    /**
+     * Quand une offre est cliquée / Methode implémentée de l'interface de son adapter
+     * @param offre
+     */
     @Override
     public void onOfferClicked(Offer offre) {
         Intent intent = new Intent(getActivity(), OfferDetailActivity.class);
@@ -168,6 +191,10 @@ public class OffersListFragment extends Fragment implements View.OnClickListener
         startActivity(intent);
     }
 
+    /**
+     * Quand une offre est longuement cliquée / Methode implémentée de l'interface de son adapter
+     * @param offre
+     */
     public void onOfferLongClicked(final Offer offre) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         if(preferences.getBoolean("type", false) == false){

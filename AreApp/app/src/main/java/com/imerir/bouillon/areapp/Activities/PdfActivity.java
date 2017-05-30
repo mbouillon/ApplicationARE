@@ -39,7 +39,9 @@ import com.imerir.bouillon.areapp.Models.Document;
 import com.imerir.bouillon.areapp.R;
 
 /**
- * Created by SireRemy on 31/03/2017.
+ * @author Sire Rémy
+ * @version 0.9
+ * Classe gérant l'affichage des documents pdf dans une webview
  */
 public class PdfActivity extends AppCompatActivity {
 
@@ -53,6 +55,7 @@ public class PdfActivity extends AppCompatActivity {
 
     /**
      * @param savedInstanceState
+     * Actions lancées a la création de l'activité principalement la mise en place de l'IHM
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -3,7 +3,9 @@ package com.imerir.bouillon.areapp.Models;
 import org.json.JSONObject;
 
 /**
- * Created by maxime on 09/03/2017.
+ * @author Bouillon Maxime
+ * @version 0.9
+ * Modèle objet de WelcomeMessage avec ses getters et setters Il se construit directement a partir d'un JSONObject
  */
 
 public class WelcomeMessage {

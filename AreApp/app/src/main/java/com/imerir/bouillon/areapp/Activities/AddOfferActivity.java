@@ -1,13 +1,12 @@
 package com.imerir.bouillon.areapp.Activities;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -23,12 +22,15 @@ import com.imerir.bouillon.areapp.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Locale;
-
-
+/**
+ * @author Bouillon Maxime
+ * @version 0.9
+ * Classe gérant l'activité permettant d'ajouter une offre
+ */
 public class AddOfferActivity extends AppCompatActivity {
-
-    //Var Formation et var TypeContrat pour compatibilité BDD
+    /**
+     * Var Formation et var TypeContrat pour compatibilité BDD
+     */
     private int _formation, _typeContrat;
 
     private EditText nomOffre, duree, nomEntreprise, lieu, nomContact, mailContact, telephoneContact, details, detailsResponsable;
@@ -39,6 +41,7 @@ public class AddOfferActivity extends AppCompatActivity {
 
     /**
      * @param savedInstanceState
+     * Actions lancées a la création de l'activité principalement la mise en place de l'IHM
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,13 +133,13 @@ public class AddOfferActivity extends AppCompatActivity {
                         _formation = 0;
                 }
 
-                /*
-                    Si champs pas remplis afficher message erreur,
-                    Sinon Si type contrat non rempli afficher message d'erreur
-                    Sinon Si formation non rempli afficher avertissement
-                    Si avertissement oui envoyer le POST
-                    Si avertissement non ne pas envoyer POST
-                    Si tous champs OK envoyer POST
+                /**
+                 *    Si champs pas remplis afficher message erreur,
+                 *    Sinon Si type contrat non rempli afficher message d'erreur
+                 *    Sinon Si formation non rempli afficher avertissement
+                 *    Si avertissement oui envoyer le POST
+                 *    Si avertissement non ne pas envoyer POST
+                 *    Si tous champs OK envoyer POST
                  */
                 if (nomOffre.getText().toString().isEmpty() || duree.getText().toString().isEmpty() || nomContact.getText().toString().isEmpty() || lieu.getText().toString().isEmpty() || mailContact.getText().toString().isEmpty() || telephoneContact.getText().toString().isEmpty() || nomEntreprise.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), getString(R.string.ms_error_offer), Toast.LENGTH_SHORT).show();
@@ -148,7 +151,7 @@ public class AddOfferActivity extends AppCompatActivity {
                             .setMessage(getString(R.string.ms_error_offer_formation))
                             .setPositiveButton(getString(R.string.ms_yes), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    _castAndSendOffer();
+                                    castAndSendOffer();
                                 }
                             })
                             .setNegativeButton(getString(R.string.ms_no), new DialogInterface.OnClickListener() {
@@ -158,7 +161,7 @@ public class AddOfferActivity extends AppCompatActivity {
                             })
                             .show();
                 } else {
-                    _castAndSendOffer();
+                    castAndSendOffer();
                 }
                 //Fin du onClick du bouton ajouterOffre
             }
@@ -166,10 +169,10 @@ public class AddOfferActivity extends AppCompatActivity {
     }
 
     /**
-     * Code utilisée 2 fois dans le on click (Si user ne rensegne pas formation et si il le renseigne)
+     * Code utilisé 2 fois dans le on click (Si user ne rensegne pas formation et si il le renseigne)
      * Donc je fait une methode pour pas surcharger le onClick()
      */
-    private void _castAndSendOffer(){
+    private void castAndSendOffer(){
              //Creation de l'objet json qui va servir a la creation de l'objet Offer
              JSONObject jsonObject = new JSONObject();
              try{

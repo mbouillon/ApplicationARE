@@ -30,9 +30,10 @@ import com.imerir.bouillon.areapp.R;
 import java.util.ArrayList;
 
 /**
- * Created by SireRemy on 13/05/2017.
+ * @author Sire Rémy
+ * @version 0.9
+ * Fragment appellé dans la main activity gérant le profil étudiant
  */
-
 public class ProfilStudentFragment extends Fragment implements View.OnClickListener, WebServiceUserClient.OnUsersListListener {
 
     @Override

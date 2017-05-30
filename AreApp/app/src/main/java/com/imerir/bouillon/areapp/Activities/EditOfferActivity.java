@@ -4,9 +4,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -17,13 +17,17 @@ import android.widget.Toast;
 
 import com.imerir.bouillon.areapp.Clients.WebServiceOfferClient;
 import com.imerir.bouillon.areapp.Models.Offer;
-import com.imerir.bouillon.areapp.Models.User;
 import com.imerir.bouillon.areapp.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
+/**
+ * @author Bouillon Maxime
+ * @version 0.9
+ * Classe gérant l'activité permettant de modifier une offre
+ */
+
 
 public class EditOfferActivity extends AppCompatActivity {
 
@@ -38,9 +42,9 @@ public class EditOfferActivity extends AppCompatActivity {
 
     Offer offre;
 
-
     /**
      * @param savedInstanceState
+     * Actions lancées a la création de l'activité principalement la mise en place de l'IHM
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,7 +147,7 @@ public class EditOfferActivity extends AppCompatActivity {
                         _formation = 0;
                 }
 
-                /*
+                /**
                     Si champs pas remplis afficher message erreur,
                     Sinon Si type contrat non rempli afficher message d'erreur
                     Sinon Si formation non rempli afficher avertissement

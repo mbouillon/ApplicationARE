@@ -16,29 +16,53 @@ import java.util.ArrayList;
  * Created by maxime on 09/03/2017.
  */
 
+/**
+ * @author Bouillon Maxime
+ * @version 0.9
+ * Classe gérant l'adapteur des données de la liste des offres présente sur le OffersListFragment
+ */
 public class OffersListAdapter extends RecyclerView.Adapter<OffersListAdapter.OfferViewHolder> {
 
     private ArrayList<Offer> offres;
     CardView cardView;
     private OnOfferClickListener listener;
 
+    /**
+     *
+     * @param offers
+     * @param listener
+     */
     public OffersListAdapter(ArrayList<Offer> offers, OnOfferClickListener listener) {
         this.offres = offers;
         this.listener = listener;
     }
 
+    /**
+     *
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @Override
     public OfferViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.offer_item, parent, false);
         return new OfferViewHolder(v);
     }
 
+    /**
+     *
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(OfferViewHolder holder, int position) {
         holder.udpate(offres.get(position));
     }
 
-
+    /**
+     *
+     * @return
+     */
     @Override
     public int getItemCount() {
         int a;
@@ -47,6 +71,9 @@ public class OffersListAdapter extends RecyclerView.Adapter<OffersListAdapter.Of
         return a;
     }
 
+    /**
+     *
+     */
     public class OfferViewHolder extends RecyclerView.ViewHolder {
         TextView titre;
         TextView duree;
@@ -56,6 +83,10 @@ public class OffersListAdapter extends RecyclerView.Adapter<OffersListAdapter.Of
 
         Offer offer;
 
+        /**
+         *
+         * @param itemView
+         */
         public OfferViewHolder(View itemView) {
             super(itemView);
 
@@ -67,6 +98,10 @@ public class OffersListAdapter extends RecyclerView.Adapter<OffersListAdapter.Of
             lieu = (TextView) itemView.findViewById(R.id.Lieu);
         }
 
+        /**
+         *
+         * @param mOffer
+         */
         public void udpate(final Offer mOffer) {
             offer = mOffer;
             titre.setText(offer.getTitre());
@@ -89,6 +124,10 @@ public class OffersListAdapter extends RecyclerView.Adapter<OffersListAdapter.Of
             });
         }
     }
+
+    /**
+     *  Interface des methodes pour le clic d'une offre
+     */
     public interface OnOfferClickListener {
         void onOfferClicked(Offer offre);
         void onOfferLongClicked(Offer offre);

@@ -21,7 +21,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-
+/**
+ * @author Bouillon Maxime
+ * @version 0.9
+ * Classe gérant l'activité proposant l'inscription d'un responsable
+ */
 public class RegisterResponsableActivity extends AppCompatActivity implements WebServiceUserClient.OnUsersListListener {
 
     private EditText etName;
@@ -33,6 +37,11 @@ public class RegisterResponsableActivity extends AppCompatActivity implements We
 
     private boolean userExists = false;
 
+    /**
+     *
+     * @param savedInstanceState
+     * Actions lancées a la création de l'activité principalement la mise en place de l'IHM
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,12 +121,20 @@ public class RegisterResponsableActivity extends AppCompatActivity implements We
 
     }
 
+    /**
+     *
+     * @param users
+     */
     //Obligatoire
     @Override
     public void onUsersReceived(ArrayList<User> users) {
 
     }
 
+    /**
+     *
+     * @param error
+     */
     @Override
     public void onUsersFailed(String error) {
 

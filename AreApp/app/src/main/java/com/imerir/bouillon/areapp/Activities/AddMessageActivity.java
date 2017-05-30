@@ -24,11 +24,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+/**
+ * @author Bouillon Maxime
+ * @version 0.9
+ * Classe gérant l'activité permettant d'ajouter un message
+ */
+
 public class AddMessageActivity extends AppCompatActivity implements TextWatcher{
 
 
     private Toolbar mToolbar;
-
     private TextView nbCarRestants;
     private Button sendMessage;
     private EditText etMessage;
@@ -36,13 +41,19 @@ public class AddMessageActivity extends AppCompatActivity implements TextWatcher
 
     /**
      * @param savedInstanceState
+     *
+     * Actions lancées a la création de l'activité principalement la mise en place de l'IHM
+     *
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_message);
 
-        //Toolbar
+        /**
+         * Gestion de la toolbar
+         */
+
         mToolbar = (Toolbar) findViewById(R.id.customToolbar);
         setSupportActionBar(mToolbar);
         final ActionBar ab = getSupportActionBar();
@@ -58,21 +69,31 @@ public class AddMessageActivity extends AppCompatActivity implements TextWatcher
             }
         });
 
-
-        //Cast des widgets
+        /**
+         * Cast des widgets
+         */
         nbCarRestants = (TextView) findViewById(R.id.nbCarRestants);
         sendMessage = (Button) findViewById(R.id.btnPublierMessage);
         etMessage = (EditText) findViewById(R.id.etMessage);
-        //Initialise la val par défaut de nbCarRestants
+
+        /**
+         *Initialise la val par défaut de nbCarRestants
+         */
         nbCarRestants.setText(getString(R.string.ms_characters_255));
-        //Attache le listener TextWatcher sur l'EditText
+        /**
+         * Attache le listener TextWatcher sur l'EditText
+         */
         etMessage.addTextChangedListener(this);
 
-        //Au click du bouton
+        /**
+         * Au click du bouton
+         */
         sendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Construction du json pour le post avec les données dans le champs
+                /**
+                 * Construction du json pour le post avec les données dans le champs
+                 */
                 JSONObject jsonObject = new JSONObject();
                 try {
                     jsonObject.put("Message", etMessage.getText().toString());
@@ -82,10 +103,18 @@ public class AddMessageActivity extends AppCompatActivity implements TextWatcher
                     e.printStackTrace();
                 }
 
-                //Gestion du cas champ vide non rempli
-                if(etMessage.getText().toString().equals("")) Toast.makeText(getBaseContext(), getString(R.string.ms_error_message), Toast.LENGTH_SHORT).show();
+                /**
+                 * Gestion du cas champ vide si non rempli
+                 */
+                if(etMessage.getText().toString().isEmpty()) Toast.makeText(getBaseContext(), getString(R.string.ms_error_message), Toast.LENGTH_SHORT).show();
                 else
                 {
+                    /**
+                     * Construction de l'objet json qui va passer par une requete http vers le serveur
+                     * + Appel de la methode pour passer le post
+                     * + Redirection vers la mainActivity
+                     * + Desctruction de l'activity
+                     */
                     WelcomeMessage wm = new WelcomeMessage(jsonObject);
                     WebServiceMessageClient.getInstance().POSTMessage(wm);
                     Toast.makeText(getApplicationContext(), getString(R.string.ms_success_message), Toast.LENGTH_LONG).show();
@@ -101,8 +130,10 @@ public class AddMessageActivity extends AppCompatActivity implements TextWatcher
     //
 
     /**
-     * Gestion du nombre de caractères restants
+     *
      * @param editable
+     * Gestion du nombre de caractères restants
+     * Méthode liée au listenner elle vérifie le champ texte après chaque changement de texte
      */
     @Override
     public void afterTextChanged(Editable editable){
@@ -116,11 +147,13 @@ public class AddMessageActivity extends AppCompatActivity implements TextWatcher
     }
 
     /**
-     * Methodes obligatoires liées à l'implémentationn de TextWatcher
+     *
      * @param s
      * @param start
      * @param count
      * @param after
+     *
+     * Methodes obligatoires liées à l'implémentationn de TextWatcher
      */
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {

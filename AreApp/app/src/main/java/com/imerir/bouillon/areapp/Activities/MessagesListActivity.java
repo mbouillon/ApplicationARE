@@ -32,6 +32,11 @@ import com.imerir.bouillon.areapp.R;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * @author Bouillon Maxime
+ * @version 0.9
+ * Classe gérant l'activité liste des messages
+ */
 public class MessagesListActivity extends AppCompatActivity implements WebServiceMessageClient.OnMessagesListListener, MessagesAdapter.OnMessageClickListener {
 
 
@@ -54,6 +59,7 @@ public class MessagesListActivity extends AppCompatActivity implements WebServic
 
     /**
      * @param savedInstanceState
+     * Actions lancées a la création de l'activité principalement la mise en place de l'IHM
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +110,7 @@ public class MessagesListActivity extends AppCompatActivity implements WebServic
 
     /**
      * @param message
+     * Methode issue d'une interface de l'adapter ecoutant si le user clique sur un message
      */
     @Override
     public void onMessageClicked(WelcomeMessage message) {
@@ -112,6 +119,7 @@ public class MessagesListActivity extends AppCompatActivity implements WebServic
 
     /**
      * @param message
+     * Methode issue d'une interface de l'adapter ecoutant si le user clique longuement sur un message
      */
     @Override
     public void onMessageLongClicked(final WelcomeMessage message) {
@@ -146,6 +154,7 @@ public class MessagesListActivity extends AppCompatActivity implements WebServic
 
     /**
      * @param messages
+     * Methode issue d'une interface de la classe WebServiceMessageClient (Client HTTP) Est appelée quand le listenner recois les messages de la BDD
      */
     @Override
     public void onMessagesReceived(ArrayList<WelcomeMessage> messages) {

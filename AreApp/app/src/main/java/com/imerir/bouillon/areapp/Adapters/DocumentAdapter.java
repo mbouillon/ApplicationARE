@@ -18,30 +18,57 @@ import java.util.ArrayList;
  * Created by maxime on 09/03/2017.
  */
 
+/**
+ * @author Bouillon Maxime
+ * @version 0.9
+ * Classe gérant l'adapteur des données de la liste de documents présente sur le DocumentListFragment
+ */
+
 public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.DocumentViewHolder> implements WebServiceUserClient.OnUsersListListener {
+
 
     private ArrayList<Document> documents;
     CardView cardView;
     private OnDocumentClickListener listener;
     User user;
 
+    /**
+     * Constructeur de l'adapteur
+     * @param documents
+     * @param listener
+     */
     public DocumentAdapter(ArrayList<Document> documents, OnDocumentClickListener listener) {
         this.documents = documents;
         this.listener = listener;
         WebServiceUserClient.getInstance().requestUsers(this);
     }
 
+    /**
+     *
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @Override
     public DocumentViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.document_item, parent, false);
         return new DocumentViewHolder(v);
     }
 
+    /**
+     *
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(DocumentViewHolder holder, int position) {
         holder.update(documents.get(position));
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int getItemCount() {
         //return documents.size();
@@ -51,16 +78,27 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.Docume
         return a;
     }
 
+    /**
+     *
+     * @param users
+     */
     @Override
     public void onUsersReceived(ArrayList<User> users) {
 
     }
 
+    /**
+     *
+     * @param error
+     */
     @Override
     public void onUsersFailed(String error) {
 
     }
 
+    /**
+     * Classe view holder
+     */
     public class DocumentViewHolder extends RecyclerView.ViewHolder {
 
         TextView PublisherId;
@@ -69,6 +107,10 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.Docume
 
         Document document;
 
+        /**
+         * Constructeur du view holder
+         * @param itemView
+         */
         public DocumentViewHolder(View itemView) {
             super(itemView);
             cardView    = (CardView) itemView.findViewById(R.id.cardView);
@@ -77,6 +119,10 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.Docume
             DocumentURL = (TextView) itemView.findViewById(R.id.DocumentURL);
         }
 
+        /**
+         *
+         * @param mDocument
+         */
         public void update(final Document mDocument) {
             document = mDocument;
 
@@ -93,6 +139,9 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.Docume
         }
     }
 
+    /**
+     * Interface pour savoir quand un document est cliqué
+     */
     public interface OnDocumentClickListener {
         void onDocumentClicked(Document document);
     }

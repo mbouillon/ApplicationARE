@@ -26,6 +26,12 @@ import java.util.Map;
 /**
  * Created by maxime on 09/03/2017.
  */
+
+/**
+ * @author Bouillon Maxime
+ * @version 0.9
+ * Classe gérant les appels serveurs pour la table Messages de la BDD
+ */
 public class WebServiceMessageClient {
 
     private static WebServiceMessageClient instance;
@@ -36,12 +42,26 @@ public class WebServiceMessageClient {
     private ArrayList<WelcomeMessage> messages;
     private HashMap<Integer, WelcomeMessage> messageHash;
 
+
+    /**
+     * Methode permettant de créer l'instance de la classe
+     * @param appContext
+     */
     public static void createInstance(Context appContext) {
         instance = new WebServiceMessageClient(appContext);
     }
 
+    /**
+     * Methode permettant de récuperer l'instance de la classe
+     * @return
+     */
     public static WebServiceMessageClient getInstance() {return instance; }
 
+    /**
+     * Cosntructeur de la classe
+     * recupere le contexte de l'app et construit une volley request à partir de celui ci
+     * @param context
+     */
     private WebServiceMessageClient(Context context){
         this.context = context;
 
@@ -50,6 +70,11 @@ public class WebServiceMessageClient {
         messageHash = new HashMap<>();
     }
 
+    /**
+     * Methode qui envoie la http request au serveur
+     * Il recupère le dernier message sous forme de json
+     * @param listener
+     */
     public void requestMessages(final OnMessagesListListener listener){
         //String apiUrl = "https://desolate-hollows-18116.herokuapp.com/mobile/LastMessage/";
         String apiUrl = "http://10.0.2.2:5000/mobile/LastMessage";
@@ -84,6 +109,11 @@ public class WebServiceMessageClient {
         queue.add(request);
     }
 
+    /**
+     * Methode qui envoie la http request au serveur
+     * Il recupère le resultat sous forme de json et le convertit en un tableau d'objets Messages
+     * @param listener
+     */
     public void requestAllMessages(final OnMessagesListListener listener){
         //String apiUrl = "https://desolate-hollows-18116.herokuapp.com/mobile/MessagesList/";
         String apiUrl = "http://10.0.2.2:5000/mobile/MessagesList";
@@ -118,6 +148,10 @@ public class WebServiceMessageClient {
         queue.add(request);
     }
 
+    /**
+     * Methode construisant un json a partir d'un messageObject et envoie une requete post a la bdd
+     * @param message
+     */
     //Methode de post de message
     public void POSTMessage(WelcomeMessage message) {
         final HashMap<String, String> params = new HashMap<String, String>();
@@ -154,13 +188,23 @@ public class WebServiceMessageClient {
     }
 
 
-
-
-
+    /**
+     * Methode qui retourne la liste de tous les messages
+     * @return
+     */
     public ArrayList<WelcomeMessage> getMessages() {return messages;}
 
+    /**
+     * Methode qui retourne un message en fonction de son id
+     * @param id
+     * @return
+     */
     public WelcomeMessage getMessage(String id) {return messageHash.get(id);}
 
+    /**
+     * Methode envoyant une requete HTTP DELETE au serveur supprimant un message en fonction de son id
+     * @param id
+     */
     public void DELETEMessage(int id) {
         String apiUrl = "http://10.0.2.2:5000/mobile/Message/" + id;
         RequestQueue queue = Volley.newRequestQueue(context);
