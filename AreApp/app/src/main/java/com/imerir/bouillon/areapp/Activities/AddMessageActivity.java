@@ -34,6 +34,9 @@ public class AddMessageActivity extends AppCompatActivity implements TextWatcher
     private EditText etMessage;
 
 
+    /**
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,7 +98,12 @@ public class AddMessageActivity extends AppCompatActivity implements TextWatcher
 
     }
 
-    //Gestion du nombre de caractères restants
+    //
+
+    /**
+     * Gestion du nombre de caractères restants
+     * @param editable
+     */
     @Override
     public void afterTextChanged(Editable editable){
         int nbChar = etMessage.getText().toString().length();
@@ -107,7 +115,13 @@ public class AddMessageActivity extends AppCompatActivity implements TextWatcher
             nbCarRestants.setTextColor(Color.RED);
     }
 
-    //Methodes obligatoires liées à l'implémentationn de TextWatcher
+    /**
+     * Methodes obligatoires liées à l'implémentationn de TextWatcher
+     * @param s
+     * @param start
+     * @param count
+     * @param after
+     */
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
     }

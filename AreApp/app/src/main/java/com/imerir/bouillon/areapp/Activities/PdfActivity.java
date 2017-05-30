@@ -51,6 +51,9 @@ public class PdfActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
 
+    /**
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,6 +113,9 @@ public class PdfActivity extends AppCompatActivity {
         //Uri.parse("http://10.0.2.2:5000/DocUps/" + document.getDocId()));
     }
 
+    /**
+     * Le client WebView pour la lecture du pdf depuis l'application (A deplacer dans WebServiceDocumentClient)
+     */
     private class PdfWebViewClient extends WebViewClient
     {
         private static final String TAG = "PdfWebViewClient";
@@ -243,7 +249,11 @@ public class PdfActivity extends AppCompatActivity {
         }
     }
 
-    //Assosie le menu au menu_ducument_pdf
+    /**
+     * Assosie le menu au menu_ducument_pdf
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -255,7 +265,11 @@ public class PdfActivity extends AppCompatActivity {
         return true;
     }
 
-    //Assigne chaque item du menu a sont action
+    /**
+     * Assigne chaque item du menu a sont action
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection

@@ -37,6 +37,9 @@ public class AddOfferActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
 
+    /**
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,9 +165,10 @@ public class AddOfferActivity extends AppCompatActivity {
         });
     }
 
-
-    //Code utilisée 2 fois dans le on click (Si user ne rensegne pas formation et si il le renseigne)
-    //Donc je fait une methode pour pas surcharger le onClick()
+    /**
+     * Code utilisée 2 fois dans le on click (Si user ne rensegne pas formation et si il le renseigne)
+     * Donc je fait une methode pour pas surcharger le onClick()
+     */
     private void _castAndSendOffer(){
              //Creation de l'objet json qui va servir a la creation de l'objet Offer
              JSONObject jsonObject = new JSONObject();
@@ -192,8 +196,5 @@ public class AddOfferActivity extends AppCompatActivity {
                  e.printStackTrace();
              }
           }
-
-
-
     //fin de la classe
 }

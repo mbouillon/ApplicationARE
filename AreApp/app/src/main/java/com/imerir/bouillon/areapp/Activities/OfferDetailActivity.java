@@ -43,6 +43,9 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
 
     Offer offer;
 
+    /**
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,7 +128,11 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
         mailBtn.setOnClickListener(this);
     }
 
-    //On Click des deux boutons flottants
+
+    /**
+     * On Click des deux boutons flottants
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         if(v==callBtn) {
@@ -146,6 +153,9 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+    /**
+     * Alerte pour passer un appel telephonique
+     */
     public void showCallDialog() {
         new AlertDialog.Builder(this)
                 .setTitle(getString(R.string.ms_callDIalog_call_ask)).setMessage(getString(R.string.ms_callDialog_call_contact) + " " + offer.getNomContact() + " " + getString(R.string.ms_callDialog_call_end))
@@ -169,7 +179,12 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
                 }).show();
     }
 
-    //Demande la permission d'utiliser le telephone
+    /**
+     * Demande la permission d'utiliser le telephone
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
@@ -187,6 +202,10 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+    /**
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -196,6 +215,10 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
         return true;
     }
 
+    /**
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){

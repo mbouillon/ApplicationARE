@@ -23,26 +23,9 @@ public class MainActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.Deconnexion:
-                deconnexion();
-                return true;
-            case R.id.Quitter:
-                System.exit(0);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
+    /**
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,13 +79,44 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //Methode deconnexion permettant de se deconnecter de l'app et oublie le compte sauvegardé
+
+    /**
+     * Methode deconnexion permettant de se deconnecter de l'app et oublie le compte sauvegardé
+     */
     private void deconnexion() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         preferences.edit().putBoolean("isConnected", false).commit();
         Intent loginActivityIntent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(loginActivityIntent);
         finish();
+    }
+
+    /**
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    /**
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.Deconnexion:
+                deconnexion();
+                return true;
+            case R.id.Quitter:
+                System.exit(0);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }

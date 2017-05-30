@@ -52,6 +52,9 @@ public class MessagesListActivity extends AppCompatActivity implements WebServic
     //SwipeRefreshLayout Message
     private SwipeRefreshLayout mSwipeRefreshLayoutMessage;
 
+    /**
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,11 +102,17 @@ public class MessagesListActivity extends AppCompatActivity implements WebServic
         });
     }
 
+    /**
+     * @param message
+     */
     @Override
     public void onMessageClicked(WelcomeMessage message) {
 
     }
 
+    /**
+     * @param message
+     */
     @Override
     public void onMessageLongClicked(final WelcomeMessage message) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -135,6 +144,9 @@ public class MessagesListActivity extends AppCompatActivity implements WebServic
         }
     }
 
+    /**
+     * @param messages
+     */
     @Override
     public void onMessagesReceived(ArrayList<WelcomeMessage> messages) {
         Collections.reverse(messages);
@@ -143,17 +155,26 @@ public class MessagesListActivity extends AppCompatActivity implements WebServic
         loadingDialog.dismiss();
     }
 
+    /**
+     * @param error
+     */
     @Override
     public void onMessagesFailed(String error) {
 
     }
 
-    //Méthode qui récupère les nouvelles données s'il y en a
+
+    /**
+     * Méthode qui récupère les nouvelles données s'il y en a
+     */
     private void setupRefreshSwipe(){
         WebServiceMessageClient.getInstance().requestAllMessages(this);
     }
 
-    //Gestion du Progress Dialog
+
+    /**
+     * Gestion du Progress Dialog
+     */
     public void showLoadingDialog() {
         try {
             //Création d'un ProgressDialog et l'afficher
@@ -192,7 +213,11 @@ public class MessagesListActivity extends AppCompatActivity implements WebServic
         }
     }
 
-    //Verification de la connexion internet du téléphone
+
+    /**
+     * Verification de la connexion internet du téléphone
+     * @return
+     */
     private int checkConnectivity() {
         boolean enabled = true;
         ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
