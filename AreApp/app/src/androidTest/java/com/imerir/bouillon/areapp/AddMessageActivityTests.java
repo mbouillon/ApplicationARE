@@ -10,9 +10,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 /**
  * Created by SireRemy on 30/05/2017.
@@ -27,7 +29,7 @@ public class AddMessageActivityTests {
 
     @Test
     public void testButton() {
-        onView(withId(R.id.etMessage)).perform(typeText("Jake"), closeSoftKeyboard());
+        onView(withId(R.id.etMessage)).perform(typeText("Hello World ! "), closeSoftKeyboard());
+        onView(withId(R.id.btnPublierMessage)).perform(click());
     }
-
 }
