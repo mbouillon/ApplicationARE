@@ -26,10 +26,6 @@ public class RegisterResponsableActivity extends AppCompatActivity implements We
 
     private EditText etName;
     private EditText etfName;
-    private EditText etMail;
-    private EditText etConfirmMail;
-    private EditText etPassword;
-    private EditText etConfirmPassword;
     private EditText etPhoneNumber;
     private EditText etAcessCode;
     private Button bRegister;
@@ -41,6 +37,10 @@ public class RegisterResponsableActivity extends AppCompatActivity implements We
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_responsable);
+
+
+        final Bundle extras = getIntent().getExtras();
+
 
         //Toolbar
         mToolbar = (Toolbar) findViewById(R.id.customToolbar);
@@ -62,75 +62,42 @@ public class RegisterResponsableActivity extends AppCompatActivity implements We
 
         etName = (EditText) findViewById(R.id.etNameR);
         etfName = (EditText) findViewById(R.id.etfNameR);
-        etMail = (EditText) findViewById(R.id.etMailLoginR);
-        etConfirmMail = (EditText) findViewById(R.id.etConfirmMailR);
-        etPassword = (EditText) findViewById(R.id.etPasswordR);
-        etConfirmPassword = (EditText) findViewById(R.id.etConfirmPasswordR);
         etPhoneNumber = (EditText) findViewById(R.id.etPhoneNumberR);
         etAcessCode = (EditText) findViewById(R.id.etAcessCodeR);
         bRegister = (Button) findViewById(R.id.bRegisterR);
+
+
+        etName.setText(extras.getString("name"));
+        etfName.setText(extras.getString("famName"));
 
         bRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                // Récuperation de l'arrayList passée en paramètre de l'intent pour eviter un appel serveur
-                Bundle extras = getIntent().getExtras();
-                ArrayList<User> users = (ArrayList<User>) extras.getSerializable("userArray");
-
                 //Save la couleur par defaut de la couleur du texte d'un champ pour set la couleur par défaut dans la gestion des erreurs à chaque clic
                 ColorStateList oldColors = etName.getTextColors();
                 etAcessCode.setTextColor(oldColors);
-                etMail.setTextColor(oldColors);
-                etConfirmMail.setTextColor(oldColors);
-                etPassword.setTextColor(oldColors);
-                etConfirmPassword.setTextColor(oldColors);
-
-                //Test si le user existe si oui passe un bool a true pour la vérification à l'inscription
-                for(int i = 0; i < users.size(); i++){
-                    if(users.get(i).getMail().equals(etMail.getText().toString()))
-                        userExists = true;
-                }
 
                 //Creation de l'objet JSON qui va servir a construire notre objet User
                 JSONObject jsonObject = new JSONObject();
                 try {
+                    jsonObject.put("Mail", extras.getString("mail"));
                     jsonObject.put("Nom", etName.getText().toString());
                     jsonObject.put("Prenom", etfName.getText().toString());
-                    jsonObject.put("Mail", etMail.getText().toString());
-                    jsonObject.put("Password", etPassword.getText().toString());
                     jsonObject.put("Telephone", etPhoneNumber.getText().toString());
-                    jsonObject.put("Type", false);
+                    jsonObject.put("type", false);
                     jsonObject.put("Formation", 0);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
-                if (etName.getText().toString().isEmpty() || etfName.getText().toString().isEmpty() || etPhoneNumber.getText().toString().isEmpty() || etAcessCode.getText().toString().isEmpty() || etMail.getText().toString().isEmpty() || etConfirmMail.getText().toString().isEmpty() || etPassword.getText().toString().isEmpty() || etConfirmPassword.getText().toString().isEmpty()) {
+                if (etName.getText().toString().isEmpty() || etfName.getText().toString().isEmpty() || etPhoneNumber.getText().toString().isEmpty() || etAcessCode.getText().toString().isEmpty()) {
                     Toast.makeText(RegisterResponsableActivity.this, getResources().getText(R.string.error_empty_fields), Toast.LENGTH_LONG).show();
                 }
-                else if(!etMail.getText().toString().equals(etConfirmMail.getText().toString())){
-                    Toast.makeText(RegisterResponsableActivity.this, getResources().getText(R.string.error_mail_not_equal), Toast.LENGTH_LONG).show();
-                    etMail.setTextColor(Color.RED);
-                    etConfirmMail.setTextColor(Color.RED);
-                }
-                else if(!etPassword.getText().toString().equals(etConfirmPassword.getText().toString())){
-                    Toast.makeText(RegisterResponsableActivity.this, getResources().getText(R.string.error_password_not_equal), Toast.LENGTH_LONG).show();
-                    etPassword.setTextColor(Color.RED);
-                    etConfirmPassword.setTextColor(Color.RED);
-                }
-                else if(!etMail.getText().toString().contains("@imerir.com")){
-                    Toast.makeText(RegisterResponsableActivity.this, getResources().getText(R.string.error_mail_not_imerir), Toast.LENGTH_LONG).show();
-                    etMail.setTextColor(Color.RED);
-                }
+
                 else if(!etAcessCode.getText().toString().equals("1234")){
                     Toast.makeText(RegisterResponsableActivity.this, getResources().getText(R.string.error_false_access_code), Toast.LENGTH_LONG).show();
                     etAcessCode.setTextColor(Color.RED);
-                }
-                else if(userExists == true){
-                    etMail.setTextColor(Color.RED);
-                    Toast.makeText(RegisterResponsableActivity.this, getResources().getText(R.string.error_account_already_exist), Toast.LENGTH_LONG).show();
-                    userExists = false;
                 }
                 else{
                     User user = new User(jsonObject);

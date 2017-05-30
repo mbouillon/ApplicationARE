@@ -21,8 +21,6 @@ public class User implements Serializable {
     private String etiquette;
     private String dashBoard;
     private int participations;
-    private String password;
-    private boolean isValid;
 
     public User(JSONObject json) {
         id              = json.optInt("id");
@@ -37,8 +35,6 @@ public class User implements Serializable {
         etiquette       = json.optString("Etiquette");
         dashBoard       = json.optString("DashBoard");
         participations  = json.optInt("Participations");
-        password        = json.optString("Password");
-        isValid         = json.optBoolean("IsValid");
     }
 
     public int getId() {
@@ -136,22 +132,4 @@ public class User implements Serializable {
     public void setParticipations(int participations) {
         this.participations = participations;
     }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public boolean isValid() {
-        return isValid;
-    }
-
-    public void setValid(boolean valid) {
-        isValid = valid;
-    }
-
-
 }

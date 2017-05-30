@@ -181,14 +181,6 @@ public class ProfilStudentFragment extends Fragment implements View.OnClickListe
         secondname.setText(user.getPrenom());
         mail.setText(user.getMail());
         phoneNumber.setText(user.getTelephone());
-        if(user.isValid() == true){
-            valide.setText("Compte validé");
-            valide.setTextColor(Color.GREEN);
-        }
-        else{
-            valide.setText("Compte non validé");
-            valide.setTextColor(Color.RED);
-        }
         switch (user.getFormation()) {
             case 1:
                 formation.setText("CDPIR");

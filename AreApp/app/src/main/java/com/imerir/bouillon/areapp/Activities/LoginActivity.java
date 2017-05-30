@@ -1,86 +1,84 @@
 package com.imerir.bouillon.areapp.Activities;
 
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Response;
-import com.github.clans.fab.FloatingActionMenu;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.imerir.bouillon.areapp.Clients.WebServiceUserClient;
 import com.imerir.bouillon.areapp.Models.User;
 import com.imerir.bouillon.areapp.R;
 
 import java.util.ArrayList;
 
-import static com.imerir.bouillon.areapp.Utils.App.md5;
-import static com.imerir.bouillon.areapp.Utils.App.sendMailIsValid;
-
 /**
  * Created by maxime on 07/03/2017.
  */
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener, WebServiceUserClient.OnUsersListListener {
+public class LoginActivity extends AppCompatActivity implements WebServiceUserClient.OnUsersListListener, GoogleApiClient.OnConnectionFailedListener {
 
-    private ArrayList<User> _user;
+    private static final int RC_SIGN_IN = 647;
+    GoogleApiClient mGoogleApiClient;
+    SignInButton signInButton;
+
+    ArrayList<User> _user;
+
     User user;
-    private boolean cr = false;
 
-    com.github.clans.fab.FloatingActionMenu floatingActionMenu;
-    com.github.clans.fab.FloatingActionButton fbaStudent, fbaResponsable;
-    EditText mail, password;
-    CardView accountNotValid;
-    Button connexion, sendMail;
-
-    //Gestion de la Progress Bar
-    ProgressDialog loadingDialog;
-    private int progressStatus = 0;
-    private Handler handler = new Handler();
-    private Response.Listener listener;
-    int internet;
-
-    //Gestion du Remenber Me Email
-    CheckBox cbRemember;
-    private String email;
-    private SharedPreferences loginPreferences;
-    private SharedPreferences.Editor loginPrefsEditor;
-    private Boolean saveLogin;
+    TextView mail;
 
     //Toolbar
     private Toolbar mToolbar;
-
-    //Swipe load
-    private SwipeRefreshLayout mSwipeRefreshLayoutLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        WebServiceUserClient.createInstance(this);
+
+        WebServiceUserClient.getInstance().requestUsers(this);
+        _user = WebServiceUserClient.getInstance().getUsers();
+
+
+        ////GOOGLE SIGN-IN////
+        // Configure sign-in to request the user's ID, email address, and basic
+        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().setHostedDomain("imerir.com").build();
+        // Build a GoogleApiClient with access to the Google Sign-In API and the
+        // options specified by gso.
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+
+
+        // Set the dimensions of the sign-in button.
+        SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
+        signInButton.setSize(SignInButton.SIZE_STANDARD);
+
+        findViewById(R.id.sign_in_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signIn();
+            }
+        });
+        /////////////////////////
+
 
         //Toolbar
         mToolbar = (Toolbar) findViewById(R.id.customToolbar);
@@ -88,179 +86,101 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         getSupportActionBar().setTitle(getResources().getText(R.string.app_name));
         mToolbar.setTitleTextColor(Color.WHITE);
 
-        //Si internet est activé alors on affiche un temps de chargement pour dl les données
-        if (checkConnectivity() == 1){
-            showLoadingDialogData();
-        }
-
-        WebServiceUserClient.createInstance(this);
-
-        mail = (EditText) findViewById(R.id.etMailLoginR);
-        password = (EditText) findViewById(R.id.etPasswordLogin);
-        cbRemember = (CheckBox) findViewById(R.id.cbRemember);
-        connexion = (Button) findViewById(R.id.bConnexionLogin);
-        floatingActionMenu = (FloatingActionMenu) findViewById(R.id.fbaMenu);
-        fbaResponsable = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.fbaResponsable);
-        fbaStudent = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.fbaEtudiant);
-        sendMail = (Button) findViewById(R.id.btnSendMail);
-        accountNotValid = (CardView) findViewById(R.id.compteNonValide);
 
 
-        WebServiceUserClient.getInstance().requestUsers(this);
-
-        //Associe le bouton connexion au click "onClick"
-        connexion.setOnClickListener(this);
-
-        //Quand le fab inscription etudiant est selectionné on lance le fragment.
-        fbaStudent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent loginActivityIntent = new Intent(LoginActivity.this, RegisterStudentActivity.class);
-                loginActivityIntent.putExtra("userArray", _user);
-                startActivity(loginActivityIntent);
-            }
-        });
-
-        //Quand le fab incription responsable est selectionné on lance le fragment correspondant.
-        fbaResponsable.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent loginActivityIntent = new Intent(LoginActivity.this, RegisterResponsableActivity.class);
-                loginActivityIntent.putExtra("userArray", _user);
-                startActivity(loginActivityIntent);
-            }
-        });
-
-
-
-        //Bouton de renvoi de mail de validation
-        sendMail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //gestion du cas ou l'email renseigné dans le champ est faux ou n'existe pas dans la BDD
-                for(int i=0; i < _user.size(); i++ ){
-                    if(mail.getText().toString().equals(_user.get(i).getMail())){
-                        sendMailIsValid(mail.getText().toString(), getBaseContext());
-                        accountNotValid.setVisibility(View.INVISIBLE);
-                        cr = true;
-                    }
-                    setupRefreshSwipe();
-                }
-                if(!cr)
-                    Toast.makeText(getBaseContext(), getString(R.string.ms_error_login), Toast.LENGTH_LONG).show();
-            }
-        });
-
-        //Swipe
-        mSwipeRefreshLayoutLogin = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout_login);
-        mSwipeRefreshLayoutLogin.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        setupRefreshSwipe();
-                        mSwipeRefreshLayoutLogin.setRefreshing(false);
-                    }
-                }, 2500);
-            }
-        });
-
-        //Création des préférences à sauvegarder
-        loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
-        loginPrefsEditor = loginPreferences.edit();
-        saveLogin = loginPreferences.getBoolean("saveLogin", false);
-        if (saveLogin == true) {
-            mail.setText(loginPreferences.getString("email", ""));
-            cbRemember.setChecked(true);
-        }
+        mail = (TextView) findViewById(R.id.etMailLoginR);
 
     }
 
     @Override
-    public void onClick(View v) {
-        String _mail = mail.getText().toString();
-        String _password = password.getText().toString();
-        if (checkUser(_mail, _password)) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN)
+        {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            handleResult(result);
+        }
+    }
 
-            //Sauvegarde la dernière adresse mail
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(mail.getWindowToken(), 0);
-            email = mail.getText().toString();
+    private void handleResult(GoogleSignInResult result)
+    {
+        User user;
+        boolean cr = false;
 
-            //Injecte la derniere adresse mail
-            if (cbRemember.isChecked()) {
-                loginPrefsEditor.putBoolean("saveLogin", true);
-                loginPrefsEditor.putString("email", email);
-                loginPrefsEditor.commit();
-            } else {
-                loginPrefsEditor.clear();
-                loginPrefsEditor.commit();
+        if (result.isSuccess()) {
+            // Signed in successfully, show authenticated UI.
+            final GoogleSignInAccount acct = result.getSignInAccount();
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+            mail.setText(acct.getDisplayName());
+
+            /*
+                Si l'utilisateur est enregistré dans la base de données on continue sur la main activity
+                Sinon il est redirigé vers les ecrans d'inscription pour indiquer leurs informations
+            */
+
+            for (int i = 0; i< _user.size(); i++){
+                if(_user.get(i).getMail().equals(acct.getEmail())){
+                    cr = true;
+                }
             }
 
-            if(user.isValid()) {
-                Intent mainActivityIntent = new Intent(this, MainActivity.class);
-                startActivity(mainActivityIntent);
-                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-                preferences.edit().putBoolean("isConnected", true).commit();
-                preferences.edit().putString("mail", _mail).commit();
-                preferences.edit().putString("password", _password).commit();
-                preferences.edit().putBoolean("type", user.getType()).commit();
-                preferences.edit().putInt("id", user.getId()).commit();
-                preferences.edit().putInt("formation", user.getFormation()).commit();
-                finish();
+            if(!cr){
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setTitle(R.string.account_not_registered);
+                // set dialog message
+                alertDialogBuilder
+                        .setCancelable(true)
+                        .setPositiveButton(getString(R.string.bt_login_register_responsable),new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                Intent intent = new Intent(getApplicationContext(), RegisterResponsableActivity.class);
+                                intent.putExtra("mail", acct.getEmail());
+                                intent.putExtra("famName", acct.getFamilyName());
+                                intent.putExtra("name", acct.getGivenName());
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton(getString(R.string.bt_login_register_student),new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                Intent intent = new Intent(getApplicationContext(), RegisterStudentActivity.class);
+                                intent.putExtra("mail", acct.getEmail());
+                                intent.putExtra("famName", acct.getFamilyName());
+                                intent.putExtra("name", acct.getGivenName());
+                                startActivity(intent);
+
+                            }
+                        })
+                        .setNeutralButton(getString(R.string.ms_callDialog_stop),new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                dialog.cancel();
+                            }
+                        });
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                // show it
+                alertDialog.show();
             }
             else{
-                accountNotValid.setVisibility(View.VISIBLE);
-            }
-
-        } else  {
-            //Vérifie la présence de réseau
-            if (checkConnectivity() == 0){
-
-            }else {
-                Toast.makeText(this, getString(R.string.ms_error_login_incorrect), Toast.LENGTH_SHORT).show();
+                user = WebServiceUserClient.getInstance().getUser(acct.getEmail());
+                preferences.edit().putBoolean("isConnected", true).apply();
+                preferences.edit().putString("mail", acct.getEmail()).apply();
+                preferences.edit().putBoolean("type", user.getType()).apply();
+                preferences.edit().putInt("id", user.getId()).apply();
+                preferences.edit().putInt("formation", user.getFormation()).apply();
+                Intent mainActivityIntent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(mainActivityIntent);
+                finish();
             }
         }
     }
 
-    //Méthode qui récupère les nouvelles données s'il y en a
-    private void setupRefreshSwipe(){
-        WebServiceUserClient.createInstance(this);
-        WebServiceUserClient.getInstance().requestUsers(this);
-    }
-
-    private boolean checkUser(String mail, String password) {
-        user = WebServiceUserClient.getInstance().getUser(mail);
-        boolean response = false;
-        try {
-            String sMail = user.getMail();
-            String sPassword = user.getPassword();
-            String pass = md5(password);
-
-            if (sMail.equals(mail)) {
-                if (sPassword.equals(pass)) {
-                    response = true;
-                }
-            } else
-                response = false;
-
-        } catch (Exception e) {
-            //Vérifie la présence de réseau
-            if (checkConnectivity() == 0){
-
-            }else{
-                Toast.makeText(this, getString(R.string.ms_error_login_compte), Toast.LENGTH_SHORT).show();
-            }
-        }
-        return response;
+    private void signIn() {
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
     @Override
     public void onUsersReceived(ArrayList<User> users) {
-        //Récuperation des USERS, puis on renvoi la boîte de dialogue de progression
         _user = users;
-        loadingDialog.dismiss();
     }
 
     @Override
@@ -268,86 +188,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-    //Création du menu menu_login
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_login, menu);
-        return true;
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
     }
 
-    //Assigne chaque item du menu a son action
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.restartButton:
-                //Permet de recharger les données
-                showLoadingDialogData();
-                WebServiceUserClient.createInstance(this);
-                WebServiceUserClient.getInstance().requestUsers(this);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-
-    //Gestion du Progress Dialog
-    public void showLoadingDialogData() {
-        try {
-            //Création d'un ProgressDialog et l'afficher
-            loadingDialog = ProgressDialog.show(this, getString(R.string.ms_loaddingDialog_one), getString(R.string.ms_loaddingDialog_two), true, false);
-            //Création d'un Thread
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    while (progressStatus < 100) {
-                        // Mise à jour l'état de progression
-                        progressStatus += 1;
-                        // Essayez de suspendre le Thread pendant x secondes
-                        try {
-                            Thread.sleep(100);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        // Mise à jour la barre de progression fictive
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                // Mise à jour de l'état de progression
-                                loadingDialog.setProgress(progressStatus);
-                                // Si l'exécution de la tâche est terminée
-                                if (progressStatus == 100) {
-                                    //Renvoi la boîte de dialogue de progression
-                                    loadingDialog.dismiss();
-                                }
-                            }
-                        });
-                    }
-                }
-            }).start(); // Démarrez l'opération
-        } catch (Exception e) {
-
-        }
-    }
-
-    //Verification de la connexion internet
-    private int checkConnectivity() {
-        boolean enabled = true;
-        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo info = connectivityManager.getActiveNetworkInfo();
-        //Vérification si le téléphone est connecté a un réseau mobile, wifi ou pas
-        if ((info == null || !info.isConnected() || !info.isAvailable())) {
-            //Aucune connexion internet
-            internet = 0;
-            Log.d("Internet", "OFF");
-            Toast.makeText(getApplicationContext(), getString(R.string.ms_error_network), Toast.LENGTH_SHORT).show();
-            enabled = false;
-        } else {
-            //Le réseau est connecté
-            Log.d("Internet", "ON");
-            internet = 1;
-        }
-        return internet;
-    }
 }

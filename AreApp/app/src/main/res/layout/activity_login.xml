@@ -13,10 +13,6 @@
         android:layout_height="wrap_content">
     </include>
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh_layout_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -31,142 +27,35 @@
         android:paddingTop="64dp"
         tools:context="com.imerir.bouillon.areapp.Activities.LoginActivity">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:id="@+id/etMailLoginR"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:hint="@string/et_login_mail" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/etPasswordLogin"
-        android:layout_below="@+id/etMailLoginR"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="14dp"
-        android:layout_alignParentEnd="true"
-        android:hint="@string/et_login_mdp" />
-
-    <Button
-        android:text="@string/bt_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:id="@+id/bConnexionLogin"
-        android:layout_below="@+id/etPasswordLogin"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:backgroundTint="@color/colorAccent"
-        android:textColor="#fff"/>
-
-    <CheckBox
-        android:text="@string/cb_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAlignment="textStart"
-        android:id="@+id/cbRemember"
-        android:layout_below="@+id/bConnexionLogin"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true" />
-
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/cbRemember"
-        android:layout_marginTop="4dp"
-        android:id="@+id/compteNonValide"
-        android:visibility="invisible">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="8dp">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:text="@string/tv_login_valid_mail"
-        android:gravity="center"
-        android:id="@+id/tvCompteNonValide"/>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/bt_login_valid_mail"
-            android:backgroundTint="@color/colorAccent"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:id="@+id/btnSendMail"/>
-
-        </LinearLayout>
-
-    </android.support.v7.widget.CardView>
-
-    <com.github.clans.fab.FloatingActionMenu
-        android:id="@+id/fbaMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="11dp"
-        android:layout_marginLeft="11dp"
-        android:layout_marginRight="11dp"
-        fab:menu_animationDelayPerItem="55"
-        fab:menu_backgroundColor="@android:color/transparent"
-        fab:menu_buttonSpacing="0dp"
-        fab:menu_colorNormal="#da3c2f"
-        fab:menu_colorPressed="#dc4b3f"
-        fab:menu_colorRipple="#99d4d4d4"
-        fab:menu_fab_size="normal"
-        fab:menu_icon="@drawable/fab_add"
-        fab:menu_labels_colorNormal="#333"
-        fab:menu_labels_colorPressed="#444"
-        fab:menu_labels_colorRipple="#66efecec"
-        fab:menu_labels_cornerRadius="3dp"
-        fab:menu_labels_ellipsize="none"
-        fab:menu_labels_hideAnimation="@anim/fab_slide_out_to_right"
-        fab:menu_labels_margin="0dp"
-        fab:menu_labels_maxLines="-1"
-        fab:menu_labels_padding="8dp"
-        fab:menu_labels_position="left"
-        fab:menu_labels_showAnimation="@anim/fab_slide_in_from_right"
-        fab:menu_labels_showShadow="true"
-        fab:menu_labels_singleLine="false"
-        fab:menu_labels_textColor="#f2f1f1"
-        fab:menu_labels_textSize="15sp"
-        fab:menu_openDirection="up"
-        fab:menu_shadowRadius="4dp"
-        fab:menu_shadowXOffset="1dp"
-        fab:menu_shadowYOffset="4dp"
-        fab:menu_showShadow="true">
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fbaEtudiant"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_school_white_24dp"
-            fab:fab_label="@string/bt_login_register_student"
-            fab:fab_size="mini" />
+            android:ems="10"
+            android:id="@+id/etMailLoginR"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:textAlignment="center"
+            android:textSize="24dp"/>
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fbaResponsable"
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_account_white_24dp"
-            fab:fab_label="@string/bt_login_register_responsable"
-            fab:fab_size="mini" />
+            android:layout_centerInParent="true"/>
 
-    </com.github.clans.fab.FloatingActionMenu>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/sign_in_button"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="32dp"
+            android:src="@mipmap/ic_launcher"/>
+
 
     </RelativeLayout>
 
-    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

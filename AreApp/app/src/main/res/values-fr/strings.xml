@@ -75,6 +75,8 @@
     <string name="ms_succes_offer_edit">a bien été modifiée</string>
 
     <!-- Login -->
+    <string name="account_not_registered">Compte non enregistré</string>
+    <string name="text_account_not_registered">Compte non enregistré, il faut d\'abord vous enregistrer pour utiliser l\'application</string>
     <string name="et_login_mail">Adresse Mail</string>
     <string name="et_login_mdp">Mot de passe</string>
     <string name="bt_login">Connexion</string>

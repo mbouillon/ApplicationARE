@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "664478255754",
+    "project_id": "imerirare"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:664478255754:android:cf457331b99a34cb",
+        "android_client_info": {
+          "package_name": "com.imerir.bouillon.areapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "664478255754-5esl6k4ug6bi1g6lsll17n6mgmcafpb2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.imerir.bouillon.areapp",
+            "certificate_hash": "8eac4059f5ffd1d60f10c12ffdf9962c67c6bf41"
+          }
+        },
+        {
+          "client_id": "664478255754-p456l56os5vs7574pk4tbnfslh4t3jk4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuOltRSSS-GbkShGtDHGXuZk16SLvWwpQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

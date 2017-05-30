@@ -7,7 +7,7 @@
         <item>Apprenticeship</item>
         <item>Type not known</item>
     </string-array>
-    
+
     <string-array name="liste_formations">
         <item>Formation</item>
         <item>CDPIR</item>
@@ -75,6 +75,8 @@
     <string name="ms_succes_offer_edit">has been edited</string>
 
     <!-- Login -->
+    <string name="account_not_registered">Account not registered</string>
+    <string name="text_account_not_registered">Account not registered, you must be registered for use application</string>
     <string name="et_login_mail">Mail address</string>
     <string name="et_login_mdp">Password</string>
     <string name="bt_login">Log in</string>
