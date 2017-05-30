@@ -39,5 +39,7 @@ public class AddOfferActivityTests {
         onView(withId(R.id.DetailsResponsables)).perform(typeText("Hello World ! "), closeSoftKeyboard());
 
         onView(withId(R.id.AjouterOffre)).perform(click());
+
+        //.....????
     }
 }
