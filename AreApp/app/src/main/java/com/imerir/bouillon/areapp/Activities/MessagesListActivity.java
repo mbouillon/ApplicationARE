@@ -74,7 +74,7 @@ public class MessagesListActivity extends AppCompatActivity implements WebServic
         _message = new ArrayList<WelcomeMessage>();
 
         //Assisgnation du recycler view + WebService
-        WebServiceMessageClient.getInstance().requestAllMessages(this);
+        WebServiceMessageClient.getInstance().requestAllMessages(this, getString(R.string.url_message));
         recyclerView = (RecyclerView) findViewById(R.id.messagesList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         WebServiceMessageClient.getInstance().getMessages();
@@ -133,7 +133,7 @@ public class MessagesListActivity extends AppCompatActivity implements WebServic
                     .setPositiveButton(getString(R.string.ms_offers_list_alert_remove),new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog,int id) {
                             //Envoie la requete de suppression + Destruction de l'activité + Rechargement de la main activity
-                            WebServiceMessageClient.getInstance().DELETEMessage(message.getId());
+                            WebServiceMessageClient.getInstance().DELETEMessage(message.getId(), getString(R.string.url_message));
                             Toast.makeText(getApplicationContext(), getString(R.string.iv_message_id) + " " + message.getId() + " " + getString(R.string.ms_offer_delete_delete), Toast.LENGTH_LONG).show();
                             setupRefreshSwipe();
                         }
@@ -177,7 +177,7 @@ public class MessagesListActivity extends AppCompatActivity implements WebServic
      * Méthode qui récupère les nouvelles données s'il y en a
      */
     private void setupRefreshSwipe(){
-        WebServiceMessageClient.getInstance().requestAllMessages(this);
+        WebServiceMessageClient.getInstance().requestAllMessages(this, getString(R.string.url_message));
     }
 
 

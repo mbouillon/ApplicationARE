@@ -75,9 +75,9 @@ public class WebServiceMessageClient {
      * Il recupère le dernier message sous forme de json
      * @param listener
      */
-    public void requestMessages(final OnMessagesListListener listener){
+    public void requestMessages(final OnMessagesListListener listener, String url){
         //String apiUrl = "https://desolate-hollows-18116.herokuapp.com/mobile/LastMessage/";
-        String apiUrl = "http://10.0.2.2:5000/mobile/LastMessage";
+        String apiUrl = url + "last/";
         JsonObjectRequest request = new JsonObjectRequest(
                 apiUrl, null,
                 new Response.Listener<JSONObject>() {
@@ -114,9 +114,9 @@ public class WebServiceMessageClient {
      * Il recupère le resultat sous forme de json et le convertit en un tableau d'objets Messages
      * @param listener
      */
-    public void requestAllMessages(final OnMessagesListListener listener){
+    public void requestAllMessages(final OnMessagesListListener listener, String url){
         //String apiUrl = "https://desolate-hollows-18116.herokuapp.com/mobile/MessagesList/";
-        String apiUrl = "http://10.0.2.2:5000/mobile/MessagesList";
+        String apiUrl = url;
         JsonObjectRequest request = new JsonObjectRequest(
                 apiUrl, null,
                 new Response.Listener<JSONObject>() {
@@ -153,10 +153,10 @@ public class WebServiceMessageClient {
      * @param message
      */
     //Methode de post de message
-    public void POSTMessage(WelcomeMessage message) {
+    public void POSTMessage(WelcomeMessage message, String url) {
         final HashMap<String, String> params = new HashMap<String, String>();
         //String apiUrl = "https://desolate-hollows-18116.herokuapp.com/mobile/Message/";
-        String apiUrl = "http://10.0.2.2:5000/mobile/Message/";
+        String apiUrl = url;
         Gson gson = new Gson();
         final String json = gson.toJson(message);
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -178,6 +178,7 @@ public class WebServiceMessageClient {
             protected Map<String, String> getParams() throws AuthFailureError {
                 return super.getParams();
             }
+
             public String getBodyContentType()
             {
                 return "application/json";
@@ -205,8 +206,8 @@ public class WebServiceMessageClient {
      * Methode envoyant une requete HTTP DELETE au serveur supprimant un message en fonction de son id
      * @param id
      */
-    public void DELETEMessage(int id) {
-        String apiUrl = "http://10.0.2.2:5000/mobile/Message/" + id;
+    public void DELETEMessage(int id, String url) {
+        String apiUrl = url + id;
         RequestQueue queue = Volley.newRequestQueue(context);
         StringRequest stringRequest = new StringRequest(Request.Method.DELETE, apiUrl,
                 new Response.Listener<String>() {

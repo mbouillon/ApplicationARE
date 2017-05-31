@@ -107,7 +107,7 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
         _document = new ArrayList<Document>();
 
         //Assisgnation du recycler view + Document Adapter + WebService
-        WebServiceDocumentClient.getInstance().requestDocuments(this);
+        WebServiceDocumentClient.getInstance().requestDocuments(this, getString(R.string.url_document));
         recyclerView = (RecyclerView) view.findViewById(R.id.documentList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         WebServiceDocumentClient.getInstance().getDocuments();
@@ -226,7 +226,7 @@ public class DocumentListFragment extends Fragment implements View.OnClickListen
      * Méthode qui récupère les nouvelles données s'il y en a
      */
     private void setupRefreshSwipe(){
-        WebServiceDocumentClient.getInstance().requestDocuments(this);
+        WebServiceDocumentClient.getInstance().requestDocuments(this, getString(R.string.url_document));
         WebServiceDocumentClient.getInstance().getDocuments();
     }
 

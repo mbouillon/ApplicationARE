@@ -26,7 +26,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class App extends Application {
 
-    /**
+     /**
      * Créée les instances des classes de client HTTP
      */
     public void onCreate() {

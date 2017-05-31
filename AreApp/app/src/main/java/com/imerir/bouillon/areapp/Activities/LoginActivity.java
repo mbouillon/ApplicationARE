@@ -23,6 +23,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.imerir.bouillon.areapp.Clients.WebServiceUserClient;
 import com.imerir.bouillon.areapp.Models.User;
 import com.imerir.bouillon.areapp.R;
+import com.imerir.bouillon.areapp.Utils.GoogleApiSingleton;
 
 import java.util.ArrayList;
 
@@ -39,7 +40,6 @@ import java.util.ArrayList;
 public class LoginActivity extends AppCompatActivity implements WebServiceUserClient.OnUsersListListener, GoogleApiClient.OnConnectionFailedListener {
 
     private static final int RC_SIGN_IN = 647;
-    GoogleApiClient mGoogleApiClient;
     SignInButton signInButton;
 
     ArrayList<User> _user;
@@ -50,6 +50,8 @@ public class LoginActivity extends AppCompatActivity implements WebServiceUserCl
 
     //Toolbar
     private Toolbar mToolbar;
+
+
 
     /**
      * @param savedInstanceState
@@ -68,13 +70,16 @@ public class LoginActivity extends AppCompatActivity implements WebServiceUserCl
         ////GOOGLE SIGN-IN////
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().setHostedDomain("imerir.com").build();
+        //GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().setHostedDomain("imerir.com").build();
         // Build a GoogleApiClient with access to the Google Sign-In API and the
         // options specified by gso.
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+        /*mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
+        */
+
+        GoogleApiSingleton.createInstance(this, this, this);
 
 
         // Set the dimensions of the sign-in button.
@@ -201,7 +206,7 @@ public class LoginActivity extends AppCompatActivity implements WebServiceUserCl
      * SignIn Google
      */
     private void signIn() {
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(GoogleApiSingleton.getInstance());
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 

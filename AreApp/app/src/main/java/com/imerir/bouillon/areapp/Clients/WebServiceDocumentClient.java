@@ -1,5 +1,6 @@
 package com.imerir.bouillon.areapp.Clients;
 
+import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
@@ -11,6 +12,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.imerir.bouillon.areapp.Models.Document;
+import com.imerir.bouillon.areapp.R;
+import com.imerir.bouillon.areapp.Utils.App;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,12 +22,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
 /**
  * @author Sire Rémy
  * @version 0.9
  * Classe gérant les appels serveurs pour la table documents de la BDD
  */
-public class WebServiceDocumentClient {
+public class WebServiceDocumentClient{
 
     private static WebServiceDocumentClient instance;
 
@@ -69,10 +73,10 @@ public class WebServiceDocumentClient {
      * Il recupère le resultat sous forme de json et le convertit en un tableau d'objets Documents
      * @param listener
      */
-    public void requestDocuments(final OnDocumentsListListener listener) {
+    public void requestDocuments(final OnDocumentsListListener listener, String url) {
 
         //String apiUrl = "https://desolate-hollows-18116.herokuapp.com/mobile/DocumentList/";
-        String apiUrl = "http://10.0.2.2:5000/mobile/DocumentList/";
+        String apiUrl = url;
         JsonObjectRequest request = new JsonObjectRequest(
                 apiUrl, null,
                 new Response.Listener<JSONObject>() {

@@ -80,7 +80,7 @@ public class WebServiceOfferClient {
      */
     public void requestOffers(final OnOffersListListener listener) {
         //String apiUrl = "https://desolate-hollows-18116.herokuapp.com/mobile/OffersListLinkedWithContact/";
-        String apiUrl = "http://10.0.2.2:5000/mobile/OffersListLinkedWithContact/";
+        String apiUrl = "http://10.0.2.2:5000/offers/linkedwithcontact/";
         JsonObjectRequest request = new JsonObjectRequest(
                 apiUrl, null,
                 new Response.Listener<JSONObject>() {
@@ -137,7 +137,7 @@ public class WebServiceOfferClient {
     public void POSTOffer(Offer offer) {
         final HashMap<String, String> params = new HashMap<String, String>();
         //String apiUrl = "https://desolate-hollows-18116.herokuapp.com/mobile/User/";
-        String apiUrl = "http://10.0.2.2:5000/mobile/OfferLinkedWithContact/";
+        String apiUrl = "http://10.0.2.2:5000/mobile/offers/linkedwithcontact/";
         Gson gson = new Gson();
         final String json = gson.toJson(offer);
 
@@ -182,7 +182,7 @@ public class WebServiceOfferClient {
     public void PUTOffer(Offer offer, int id) {
         final HashMap<String, String> params = new HashMap<String, String>();
         //String apiUrl = "https://desolate-hollows-18116.herokuapp.com/mobile/User/";
-        String apiUrl = "http://10.0.2.2:5000/mobile/Offre/" + id;
+        String apiUrl = "http://10.0.2.2:5000/mobile/offer/" + id;
         Gson gson = new Gson();
         final String json = gson.toJson(offer);
 

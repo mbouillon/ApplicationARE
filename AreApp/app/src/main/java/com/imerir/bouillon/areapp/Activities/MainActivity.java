@@ -12,10 +12,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.imerir.bouillon.areapp.Fragments.DocumentListFragment;
 import com.imerir.bouillon.areapp.Fragments.OffersListFragment;
 import com.imerir.bouillon.areapp.Fragments.ProfilStudentFragment;
 import com.imerir.bouillon.areapp.R;
+
+import com.imerir.bouillon.areapp.Utils.GoogleApiSingleton;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
@@ -26,6 +33,9 @@ import com.roughike.bottombar.OnTabSelectListener;
  */
 public class MainActivity extends AppCompatActivity {
 
+    GoogleApiClient googleApiClient;
+    GoogleSignInOptions signInOptions;
+
     private Toolbar mToolbar;
 
     /**
@@ -35,6 +45,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().setHostedDomain("imerir.com").build();
+        googleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, null)
+                .addApi(Auth.GOOGLE_SIGN_IN_API,signInOptions)
+                .build();
+
+
 
         //Si l'utilisateur n'a pas effectué de connexion on l'envoie vers l'activité connexion.
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -88,16 +106,22 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     /**
      * Methode deconnexion permettant de se deconnecter de l'application
+     * + Deconnexion de Google
      */
     private void deconnexion() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         preferences.edit().putBoolean("isConnected", false).commit();
-        Intent loginActivityIntent = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(loginActivityIntent);
-        finish();
+        Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
+                new ResultCallback<Status>() {
+                    @Override
+                    public void onResult(Status status) {
+                        Intent loginActivityIntent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(loginActivityIntent);
+                        finish();
+                    }
+                });
     }
 
     /**
@@ -127,5 +151,7 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
 
 }

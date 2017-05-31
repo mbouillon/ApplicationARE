@@ -78,7 +78,7 @@ public class WebServiceUserClient {
      */
     public void requestUsers(final OnUsersListListener listener) {
         //String apiUrl = "https://desolate-hollows-18116.herokuapp.com/mobile/UsersList/";
-        String apiUrl = "http://10.0.2.2:5000/mobile/UsersList/";
+        String apiUrl = "http://10.0.2.2:5000/user/";
         JsonObjectRequest request = new JsonObjectRequest(
                 apiUrl, null,
                 new Response.Listener<JSONObject>() {
@@ -118,7 +118,7 @@ public class WebServiceUserClient {
     public void POSTUser(User user) {
         final HashMap<String, String> params = new HashMap<String, String>();
         //String apiUrl = "https://desolate-hollows-18116.herokuapp.com/mobile/User/";
-        String apiUrl = "http://10.0.2.2:5000/mobile/User/";
+        String apiUrl = "http://10.0.2.2:5000/user/";
         Gson gson = new Gson();
         final String json = gson.toJson(user);
 

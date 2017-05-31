@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">A.R.E - IMERIR</string>
 
+    <string name="url_message">http://10.0.2.2:5000/message/</string>
+    <string name="url_offre">http://10.0.2.2:5000/offer/</string>
+    <string name="url_user">http://10.0.2.2:5000/user/</string>
+    <string name="url_document">http://10.0.2.2:5000/document/</string>
+
     <string-array name="liste_contrats">
         <item>Type of Contract</item>
         <item>Internship</item>
