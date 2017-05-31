@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:id="@+id/cardViewUser"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="0dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:paddingTop="6dp"
+                android:id="@+id/Image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_account_grey600_48dp"
+                android:paddingRight="4dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/NomUser"
+                android:textColor="@color/colorAccent"
+                tools:text="Sire"
+                android:layout_gravity="end"
+                android:textStyle="bold"
+                android:paddingEnd="5dp"
+                android:paddingTop="4dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/FormationUser"
+                android:textColor="@color/bb_darkBackgroundColor"
+                tools:text="CDSM"
+                android:paddingTop="4dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/validCV"
+                android:textColor="@color/bb_darkBackgroundColor"
+                tools:text="CV valid"
+                android:paddingTop="4dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:textColor="@color/colorAccent"
+
+                android:textStyle="bold"
+                android:paddingStart="5dp"
+                android:id="@+id/PrenomUser"
+                tools:text="Remy"
+                android:paddingRight="8dp"
+                android:paddingTop="4dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/offersCheck"
+                android:layout_gravity="center"
+                android:textColor="@color/darkgreen"
+                tools:text="5 offers checked"
+                android:paddingRight="8dp"
+                android:paddingTop="4dp"/>
+
+            <TextView
+                tools:text="LM Valid"
+                android:layout_gravity="center"
+                android:paddingRight="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/validLM"
+                android:textColor="@color/bb_darkBackgroundColor"
+                android:paddingTop="4dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:visibility="visible"
+        android:background="@android:color/darker_gray"
+        android:paddingBottom="4dp" />
+
+</android.support.v7.widget.CardView>

@@ -101,6 +101,9 @@
     <string name="type_Apprenticeship">Apprentissage</string>
     <string name="type_Type_not_known">Type non connu</string>
 
+    <!-- Student Detail -->
+    <string name="md_remove_student">Supprimer l\'étudiant</string>
+
     <!-- Register Responsable & Student-->
     <string name="et_register_fName">Prénom</string>
     <string name="et_register_Name">Nom</string>

@@ -19,6 +19,7 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.imerir.bouillon.areapp.Fragments.DocumentListFragment;
 import com.imerir.bouillon.areapp.Fragments.OffersListFragment;
+import com.imerir.bouillon.areapp.Fragments.ProfilResponsableFragment;
 import com.imerir.bouillon.areapp.Fragments.ProfilStudentFragment;
 import com.imerir.bouillon.areapp.R;
 
@@ -94,12 +95,20 @@ public class MainActivity extends AppCompatActivity {
                         mToolbar.setTitle(getResources().getText(R.string.title_document));
                     }
                     if (tabId == R.id.tab_profile) {
-
-                        //PROFIL ETUDIANT
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.fragmentOffers, new ProfilStudentFragment())
-                                .commit();
-                        mToolbar.setTitle(getResources().getText(R.string.tab_profil_student));
+                        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                        if(preferences.getBoolean("type", false) == false){
+                            //PROFIL RESPONSABLE
+                            getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.fragmentOffers,new ProfilResponsableFragment())
+                                    .commit();
+                            mToolbar.setTitle(getResources().getText(R.string.tab_profil_responsable));
+                        }else{
+                            //PROFIL ETUDIANT
+                            getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.fragmentOffers, new ProfilStudentFragment())
+                                    .commit();
+                            mToolbar.setTitle(getResources().getText(R.string.tab_profil_student));
+                        }
                     }
                 }
             });
