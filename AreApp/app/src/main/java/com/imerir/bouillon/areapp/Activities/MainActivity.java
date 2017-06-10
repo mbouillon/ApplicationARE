@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     if (tabId == R.id.tab_profile) {
                         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                        if(preferences.getBoolean("type", false) == false){
+                        if(!preferences.getBoolean("type", false)){
                             //PROFIL RESPONSABLE
                             getSupportFragmentManager().beginTransaction()
                                     .replace(R.id.fragmentOffers,new ProfilResponsableFragment())
@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Methode deconnexion permettant de se deconnecter de l'application
+     *   Methode deconnexion permettant de se deconnecter de l'application
      * + Deconnexion de Google
      */
     private void deconnexion() {

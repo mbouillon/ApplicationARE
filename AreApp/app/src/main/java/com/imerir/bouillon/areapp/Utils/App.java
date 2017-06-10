@@ -39,4 +39,23 @@ public class App extends Application {
         WebServiceDocumentClient.createInstance(this);
     }
 
+
+    /**
+     * Formate une chaîne en ajoutant un séparateur tous les <code>length</code> caractères.
+     *
+     * @param string Chaîne à formater
+     * @param separator Séparateur à ajouter
+     * @param length Taille des groupes de caractères à séparer
+     * @return La chaîne formatée
+     */
+    public static String addChar(String string, String separator, int length) {
+
+        if (string != null && string.length() > length) {
+
+            string = string.replaceAll("([^\\s]{" + length + "})", "$0" + separator);
+        }
+
+        return string;
+    }
+
 }

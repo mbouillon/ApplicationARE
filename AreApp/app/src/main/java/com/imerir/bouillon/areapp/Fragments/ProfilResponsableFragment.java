@@ -37,6 +37,7 @@ import java.util.Collections;
 public class ProfilResponsableFragment extends Fragment implements View.OnClickListener, WebServiceUserClient.OnUsersListListener, UsersListAdapter.OnUserClickListener  {
 
     ArrayList<User> _user;
+    ArrayList<User> _userCopy3;
     ArrayList<User> _userCopy2;
     ArrayList<User> _userCopy1;
     ArrayList<User> _userCopy;
@@ -83,17 +84,23 @@ public class ProfilResponsableFragment extends Fragment implements View.OnClickL
 
         //Assisgnation du recycler view + Document Adapter + WebService a l'arrayList
         WebServiceUserClient.getInstance().requestUsers(this);
+        _user = new ArrayList<>();
         _user = WebServiceUserClient.getInstance().getUsers();
         studentsList = (RecyclerView) view.findViewById(R.id.studentList);
         studentsList.setLayoutManager(new LinearLayoutManager(getContext()));
         studentsList.setAdapter(new UsersListAdapter(_user,this));
+
+        _userCopy2 = new ArrayList<>();
+        _userCopy1 = new ArrayList<>();
+        _userCopy = new ArrayList<>();
+        _userCopy3 = new ArrayList<>();
 
         //Bar de recherche
         searchView = (SearchView) view.findViewById(R.id.rechercheView);
         searchView.setQueryHint("Recherche");
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            //TODO SearchView : faire remonté l'item qui correspond a la demande ecrite
+            //TODO SearchView : faire remonter l'item qui correspond au texte
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Toast.makeText(getActivity(), query, Toast.LENGTH_LONG).show();
@@ -114,43 +121,49 @@ public class ProfilResponsableFragment extends Fragment implements View.OnClickL
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 switch (i){
                     case(R.id.radioButtonAll):
-                        studentsList.setAdapter(new UsersListAdapter(_user,null));
+                        for (int m =0; m<_user.size(); m++) {
+                            _userCopy3.add(_user.get(m));
+                        }
+                        studentsList.setAdapter(new UsersListAdapter(_userCopy3));
                         break;
                     case R.id.radioButtonCDPIR:
-                        _userCopy = _user;
-                        for (int j = 0; j < _userCopy.size(); j++ ){
-                            User user = _userCopy.get(j);
+                        for (int m =0; m<_user.size(); m++) {
+                            _userCopy.add(_user.get(m));
+                        }
+                        for (int l = _user.size() - 1; l >= 0; l-- ){
+                            User user = _userCopy.get(l);
                             if(user.getFormation() != 1){
-                                _userCopy.remove(j);
+                                _userCopy.remove(l);
                             }
                         }
-                        studentsList.clearOnChildAttachStateChangeListeners();
-                        studentsList.setAdapter(new UsersListAdapter(_userCopy,null));
+                        studentsList.setAdapter(new UsersListAdapter(_userCopy));
                         break;
                     case R.id.radioButtonCDSM:
-                        _userCopy1 = _user;
-                        for (int k = 0; k < _userCopy1.size(); k++ ){
-                            User user = _userCopy1.get(k);
+                        for (int m =0; m<_user.size(); m++) {
+                            _userCopy1.add(_user.get(m));
+                        }
+                        for (int l = _user.size() - 1; l >= 0; l-- ){
+                            User user = _userCopy1.get(l);
                             if(user.getFormation() != 2){
-                                _userCopy1.remove(k);
+                                _userCopy1.remove(l);
                             }
                         }
-                        studentsList.clearOnChildAttachStateChangeListeners();
-                        studentsList.setAdapter(new UsersListAdapter(_userCopy1,null));
+                        studentsList.setAdapter(new UsersListAdapter(_userCopy1));
                         break;
                     case R.id.radioButtonUPVD:
-                        _userCopy2 = _user;
-                        for (int l = 0; l < _userCopy2.size(); l++ ){
+                        for (int m =0; m<_user.size(); m++) {
+                            _userCopy2.add(_user.get(m));
+                        }
+                        for (int l = _user.size() - 1; l >= 0; l-- ){
                             User user = _userCopy2.get(l);
                             if(user.getFormation() != 3){
                                 _userCopy2.remove(l);
                             }
                         }
-                        studentsList.clearOnChildAttachStateChangeListeners();
-                        studentsList.setAdapter(new UsersListAdapter(_userCopy2,null));
+                        studentsList.setAdapter(new UsersListAdapter(_userCopy2));
                         break;
                     default:
-                        studentsList.setAdapter(new UsersListAdapter(_user,null));
+                        studentsList.setAdapter(new UsersListAdapter(_user));
                 }
             }
         });

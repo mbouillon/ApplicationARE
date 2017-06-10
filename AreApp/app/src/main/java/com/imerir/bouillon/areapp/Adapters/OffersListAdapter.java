@@ -32,10 +32,11 @@ public class OffersListAdapter extends RecyclerView.Adapter<OffersListAdapter.Of
      * @param offers
      * @param listener
      */
-    public OffersListAdapter(ArrayList<Offer> offers, OnOfferClickListener listener) {
+    public OffersListAdapter(ArrayList<Offer> offers, OnOfferClickListener listener ) {
         this.offres = offers;
         this.listener = listener;
     }
+
 
     /**
      *

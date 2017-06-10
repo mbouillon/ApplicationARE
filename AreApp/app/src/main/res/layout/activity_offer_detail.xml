@@ -7,16 +7,9 @@
     android:layout_height="match_parent">
 
     <include layout="@layout/custom_toolbar"
-        android:id="@+id/myCustomToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </include>
-
-    <include layout="@layout/custom_toolbar"
         android:id="@+id/customToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/myCustomToolbar"
         android:layout_alignParentStart="true">
     </include>
 

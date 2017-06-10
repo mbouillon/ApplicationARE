@@ -6,284 +6,182 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/custom_toolbar"
-        android:id="@+id/myCustomToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </include>
 
     <include layout="@layout/custom_toolbar"
         android:id="@+id/customToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/myCustomToolbar"
         android:layout_alignParentStart="true">
     </include>
 
-    <LinearLayout
-        android:layout_below="@+id/customToolbar"
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:weightSum="1">
+        android:layout_below="@id/customToolbar">
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/cardview"
-            android:layout_width="match_parent"
+
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp">
+            android:layout_below="@+id/profile_layout"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_margin="5dp"
+                android:background="#fff"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:padding="20dp"
+                android:text="CV"
+                android:id="@+id/cv"
+                android:textAlignment="center"
+                />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:id="@+id/firstname"
-                        android:textSize="17dp"
-                        android:textColor="@color/colorPrimary"
-                        android:textAlignment="center"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textStyle="bold"
-                        tools:text="First Name" />
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"
+                android:background="#fff"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:padding="20dp"
+                android:id="@+id/lm"
+                android:text="Lettre de motivation"
+                android:textAlignment="center"/>
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:id="@+id/secondname"
-                        android:textSize="17dp"
-                        android:textColor="@color/colorPrimary"
-                        android:textAlignment="center"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:textStyle="bold"
-                        tools:text="Second name"/>
-                </LinearLayout>
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="#fff"
+                android:id="@+id/etiquette"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:padding="20dp"
+                android:text="Etiquette"
+                android:textAlignment="center"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="8dp"
-                    android:weightSum="1">
-                    <TextView
-                        android:id="@+id/mail"
-                        android:textSize="17dp"
-                        android:textColor="@color/colorPrimary"
-                        android:textAlignment="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        tools:text="imerir@imerir.com" />
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:id="@+id/dashboard"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"
+                android:background="#fff"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:padding="20dp"
+                android:text="Tableau de bord"
+                android:textAlignment="center"/>
+        </LinearLayout>
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="8dp"
-                    android:weightSum="1">
-                    <TextView
-                        android:id="@+id/phoneNumber"
-                        android:textSize="17dp"
-                        android:textColor="@color/colorPrimary"
-                        android:textAlignment="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        tools:text="0600000000" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/cardview2"
+        <RelativeLayout
+            android:id="@+id/profile_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp">
+            android:background="@color/colorAccent"
+            android:elevation="4dp"
+            android:paddingBottom="24dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true">
 
-            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/firstname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="42dp"
+                tools:text="Maxime BOUILLON"
+                android:textColor="#fff"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content"
-                    android:weightSum="2"
-                    android:id="@+id/linearLayout1">
+            <TextView
+                android:id="@+id/formation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/firstname"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="12dp"
+                tools:text="CDSM"
+                android:textColor="#fff"
+                android:textSize="14sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/formation"
+                android:id="@+id/telephone"
+                android:layout_marginTop="6dp"
+                android:layout_centerHorizontal="true"
+                tools:text="06 00 00 00 00"
+                android:textColor="#fff"
+                />
 
-                    <TextView
-                        android:text="CV"
-                        android:textSize="18dp"
-                        android:textColor="@color/colorAccent"
-                        android:textStyle="bold"
-                        android:textAlignment="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:id="@+id/textView2" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_school_black_48dp"
+                android:id="@+id/imageView"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+    </RelativeLayout>
 
-                    <TextView
-                        android:textSize="18dp"
-                        android:textStyle="bold"
-                        android:textColor="@color/colorAccent"
-                        android:text="Lettre de motivation"
-                        android:textAlignment="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:id="@+id/textView"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linearLayout2"
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content"
-                    android:weightSum="2"
-                    android:layout_below="@+id/linearLayout1">
-
-                    <ImageButton
-                        android:textAlignment="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@mipmap/ic_launcher"
-                        android:id="@+id/ibCV" />
-
-                    <ImageButton
-                        android:textAlignment="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@mipmap/ic_launcher"
-                        android:id="@+id/ibLM" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_below="@+id/linearLayout2"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/linearLayout3">
-
-                    <TextView
-                        android:text="Etiquette"
-                        android:textSize="18dp"
-                        android:textColor="@color/colorAccent"
-                        android:textStyle="bold"
-                        android:textAlignment="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:id="@+id/textV" />
-
-                    <TextView
-                        android:textSize="18dp"
-                        android:text="DashBoard"
-                        android:textStyle="bold"
-                        android:textColor="@color/colorAccent"
-                        android:textAlignment="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:id="@+id/te" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content"
-                    android:weightSum="2"
-                    android:layout_below="@+id/linearLayout3">
-
-                    <ImageButton
-                        android:textAlignment="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:id="@+id/ibEtiquette"
-                        android:src="@mipmap/ic_launcher" />
-
-                    <ImageButton
-                        android:textAlignment="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@mipmap/ic_launcher"
-                        android:id="@+id/ibDB" />
-
-                </LinearLayout>
-
-            </RelativeLayout>
-
-        </android.support.v7.widget.CardView>
-
-    </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="bottom|right"
         android:orientation="horizontal"
         android:layout_marginTop="16dp">
 
-        <com.github.clans.fab.FloatingActionMenu
-            android:id="@+id/fbaMenuOffers"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:layout_marginBottom="12dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            fab:menu_animationDelayPerItem="55"
-            fab:menu_backgroundColor="@android:color/transparent"
-            fab:menu_buttonSpacing="0dp"
-            fab:menu_colorNormal="#da3c2f"
-            fab:menu_colorPressed="#dc4b3f"
-            fab:menu_colorRipple="#99d4d4d4"
-            fab:menu_fab_size="normal"
-            fab:menu_icon="@drawable/fab_add"
-            fab:menu_openDirection="up"
-            fab:menu_shadowRadius="4dp"
-            fab:menu_shadowXOffset="1dp"
-            fab:menu_shadowYOffset="4dp"
-            fab:menu_showShadow="true">
-
-            <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/callBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:layout_marginEnd="24dp"/>
-
-            <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/mailBtn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:gravity="end"/>
-        </com.github.clans.fab.FloatingActionMenu>
-
     </LinearLayout>
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/fbaMenuOffers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        fab:menu_animationDelayPerItem="55"
+        fab:menu_backgroundColor="@android:color/transparent"
+        fab:menu_buttonSpacing="0dp"
+        fab:menu_colorNormal="#da3c2f"
+        fab:menu_colorPressed="#dc4b3f"
+        fab:menu_colorRipple="#99d4d4d4"
+        fab:menu_fab_size="normal"
+        fab:menu_icon="@drawable/fab_add"
+        fab:menu_openDirection="up"
+        fab:menu_shadowRadius="4dp"
+        fab:menu_shadowXOffset="1dp"
+        fab:menu_shadowYOffset="4dp"
+        fab:menu_showShadow="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/callBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_marginEnd="24dp"/>
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/mailBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:gravity="end"/>
+    </com.github.clans.fab.FloatingActionMenu>
 
 </RelativeLayout>

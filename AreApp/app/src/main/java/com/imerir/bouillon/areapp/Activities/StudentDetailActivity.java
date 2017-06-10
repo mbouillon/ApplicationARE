@@ -27,6 +27,8 @@ import com.imerir.bouillon.areapp.R;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
 
+import static com.imerir.bouillon.areapp.Utils.App.addChar;
+
 /**
  * Created by SireRemy on 31/05/2017.
  */
@@ -39,10 +41,7 @@ public class StudentDetailActivity extends AppCompatActivity implements View.OnC
     //Declatation des widgets
     private Toolbar mToolbar;
 
-    TextView firstname, secondname, mail, phoneNumber;
-
-    TextView tvCV_load, tvLM_load, tvEtiquette_load, tvDB_load;
-    ImageButton ibCV, ibLM, ibEtiquette, ibDB;
+    TextView name, formation, cv, lm, etiquette, dashboard, telephone;
 
     com.github.clans.fab.FloatingActionButton callBtn, mailBtn;
 
@@ -70,27 +69,62 @@ public class StudentDetailActivity extends AppCompatActivity implements View.OnC
         });
 
         //Cast des widgets
-        firstname = (TextView) findViewById(R.id.firstname);
-        secondname = (TextView) findViewById(R.id.secondname);
-        mail = (TextView) findViewById(R.id.mail);
-        phoneNumber = (TextView) findViewById(R.id.phoneNumber);
+        name = (TextView) findViewById(R.id.firstname);
+        formation = (TextView) findViewById(R.id.formation);
+        cv = (TextView) findViewById(R.id.cv);
+        lm = (TextView) findViewById(R.id.lm) ;
+        etiquette = (TextView) findViewById(R.id.etiquette);
+        dashboard = (TextView) findViewById(R.id.dashboard);
+        telephone = (TextView) findViewById(R.id.telephone);
 
-        //Cast des image Button
-        ibCV = (ImageButton) findViewById(R.id.ibCV);
-        ibLM = (ImageButton) findViewById(R.id.ibLM);
-        ibEtiquette = (ImageButton) findViewById(R.id.ibEtiquette);
-        ibDB = (ImageButton) findViewById(R.id.ibDB);
 
-        ibCV.setOnClickListener(this);
-        ibLM.setOnClickListener(this);
-        ibEtiquette.setOnClickListener(this);
-        ibDB.setOnClickListener(this);
+        name.setText(user.getPrenom().toString() + " " + user.getNom().toString().toUpperCase());
+        String tel;
+        tel = addChar(user.getTelephone().toString(), " ", 2);
+        telephone.setText(tel);
+        switch (user.getFormation()) {
+            case 1:
+                formation.setText("CDPIR");
+                break;
+            case 2:
+                formation.setText("CDSM");
+                break;
+            case 3:
+                formation.setText("UPVD");
+                break;
+            default:
+                formation.setText("CDPIR");
+        }
 
-        //Recuperation des données de l'offre cliquée + Affichage sur le widget
-        firstname.setText(user.getNom());
-        secondname.setText(user.getPrenom());
-        mail.setText(user.getMail());
-        phoneNumber.setText(user.getTelephone());
+        cv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAlertNotImplemented();
+            }
+        });
+
+        lm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAlertNotImplemented();
+            }
+        });
+
+        etiquette.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAlertNotImplemented();
+            }
+        });
+
+        dashboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAlertNotImplemented();
+            }
+        });
+
+
 
         //Boutons flottats + Cast + Définition de l'icône.
         callBtn = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.callBtn);
@@ -127,22 +161,18 @@ public class StudentDetailActivity extends AppCompatActivity implements View.OnC
             Intent intent = getPackageManager().getLaunchIntentForPackage("com.android.email");
             startActivity(intent);
         }
-        if(v==ibCV){
-            Log.d("Ok", "Pdf open");
-            Toast.makeText(getApplication(), "OK : PDF CV", Toast.LENGTH_SHORT).show();
-        }
-        if(v==ibLM){
-            Log.d("Ok", "Pdf open");
-            Toast.makeText(getApplication(), "OK : PDF LM", Toast.LENGTH_SHORT).show();
-        }
-        if(v==ibEtiquette){
-            Log.d("Ok", "Pdf open");
-            Toast.makeText(getApplication(), "OK : PDF Etiquette", Toast.LENGTH_SHORT).show();
-        }
-        if(v==ibDB){
-            Log.d("Ok", "Pdf open");
-            Toast.makeText(getApplication(), "OK : PDF DB", Toast.LENGTH_SHORT).show();
-        }
+    }
+
+    private void showAlertNotImplemented(){
+        new android.app.AlertDialog.Builder(this)
+                .setTitle(getString(R.string.ms_warning))
+                .setMessage(getString(R.string.alert))
+                .setPositiveButton(getString(R.string.ms_yes), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .show();
     }
 
     /**

@@ -33,6 +33,9 @@ public class UsersListAdapter extends RecyclerView.Adapter<UsersListAdapter.User
         this.users = users;
         this.listener = listener;
     }
+    public UsersListAdapter(ArrayList<User> users) {
+        this.users = users;
+    }
 
     /**
      *

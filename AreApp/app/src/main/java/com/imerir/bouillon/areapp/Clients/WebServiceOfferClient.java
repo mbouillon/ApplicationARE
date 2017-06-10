@@ -137,7 +137,7 @@ public class WebServiceOfferClient {
     public void POSTOffer(Offer offer) {
         final HashMap<String, String> params = new HashMap<String, String>();
         //String apiUrl = "https://desolate-hollows-18116.herokuapp.com/mobile/User/";
-        String apiUrl = "http://10.0.2.2:5000/mobile/offers/linkedwithcontact/";
+        String apiUrl = "http://10.0.2.2:5000/offers/linkedwithcontact/";
         Gson gson = new Gson();
         final String json = gson.toJson(offer);
 
@@ -182,7 +182,7 @@ public class WebServiceOfferClient {
     public void PUTOffer(Offer offer, int id) {
         final HashMap<String, String> params = new HashMap<String, String>();
         //String apiUrl = "https://desolate-hollows-18116.herokuapp.com/mobile/User/";
-        String apiUrl = "http://10.0.2.2:5000/mobile/offer/" + id;
+        String apiUrl = "http://10.0.2.2:5000/offers/" + id;
         Gson gson = new Gson();
         final String json = gson.toJson(offer);
 
@@ -225,7 +225,7 @@ public class WebServiceOfferClient {
      * @param id
      */
     public void DELETEOffer(int id) {
-        String apiUrl = "http://10.0.2.2:5000/mobile/Offre/" + id;
+        String apiUrl = "http://10.0.2.2:5000/offers/" + id;
         RequestQueue queue = Volley.newRequestQueue(context);
         StringRequest stringRequest = new StringRequest(Request.Method.DELETE, apiUrl,
                 new Response.Listener<String>() {
